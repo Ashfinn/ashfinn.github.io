@@ -3,8 +3,9 @@
     padding: 0;
     font-size: 14px;
     color: black;
-    font-family: Avenir;
+    font-family: 'Avenir';
 }
+
 @font-face {
     font-family: Avenir;
     src: url(fonts/Metropolis-Medium.otf);
@@ -14,20 +15,37 @@
     font-family: creation;
     src: url(fonts/creattion-demo/Creattion\ Demo.otf);
 }
+
 header {
     padding: 4rem;
     display: flex;
     justify-content: space-between;    
     z-index: 100;
 }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+ul li {
+    padding: 0.5rem;
+}
+
+ul li i {
+    font-size: 20px;
+}
+
 body {
     background-color: #f1f6fa;
 }
+
 .head {
     margin-right: 5rem;
 }
 
-.contacts {
+#contacts {
     margin-left: auto;
 }
 
@@ -59,8 +77,27 @@ article {
 }
 
 article .name {
-    font-family: creation;
+    font-family: 'creation';
     font-size: 70px;
     text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; /* Add an outline around the text */
     font-weight: 700;
+}
+
+section {
+    display: flex;
+    justify-content: space-between;
+    margin: 5rem;
+}
+
+section a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: black;
+    font-family: Avenir;
+}
+
+section a:hover {
+    padding: 1rem;
+    background-color: black;
+    color: #f1f6fa;
 }
