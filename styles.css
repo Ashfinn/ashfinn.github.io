@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: black;
+    font-family: Avenir;
+}
+@font-face {
+    font-family: Avenir;
+    src: url(fonts/Metropolis-Medium.otf);
+}
+
+@font-face {
+    font-family: creation;
+    src: url(fonts/creattion-demo/Creattion\ Demo.otf);
+}
+header {
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;    
+    z-index: 100;
+}
+body {
+    background-color: #f1f6fa;
+}
+.head {
+    margin-right: 5rem;
+}
+
+.contacts {
+    margin-left: auto;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -99;
+}
+
+main > img {
+    width: 100%; /* Set the width to 100% of the container */
+    height: auto; /* Maintain the aspect ratio */
+    max-width: 700px; /* Set a maximum width if needed */
+    max-height: 700px; /* Set a maximum height if needed */
+}
+
+article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+}
+
+article .name {
+    font-family: creation;
+    font-size: 70px;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; /* Add an outline around the text */
+    font-weight: 700;
+}
