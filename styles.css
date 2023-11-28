@@ -15,7 +15,9 @@
     font-family: creation;
     src: url(fonts/creattion-demo/Creattion\ Demo.otf);
 }
-
+a {
+    text-decoration: none;
+}
 header {
     padding: 4rem;
     display: flex;
@@ -23,17 +25,17 @@ header {
     z-index: 100;
 }
 
-nav ul {
+#contacts ul {
     list-style: none;
     display: flex;
     flex-direction: row;
 }
 
-ul li {
+#contacts ul li {
     padding: 0.5rem;
 }
 
-ul li i {
+#contacts ul li i {
     font-size: 20px;
 }
 
@@ -49,54 +51,59 @@ body {
     margin-left: auto;
 }
 
-main {
+#bg-image {
     display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
-    flex-direction: column;
     top: 0;
     right: 0;
     left: 0;
-    bottom: 0;
     z-index: -99;
 }
 
-main > img {
+#bg-image > img {
     width: 100%; /* Set the width to 100% of the container */
     height: auto; /* Maintain the aspect ratio */
-    max-width: 700px; /* Set a maximum width if needed */
-    max-height: 700px; /* Set a maximum height if needed */
+    max-width: 600px; /* Set a maximum width if needed */
+    max-height: 600px; /* Set a maximum height if needed */
 }
 
-article {
+#bg-image {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
+}
+#name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 60vh;
 }
-
-article .name {
+#name .name {
     font-family: 'creation';
-    font-size: 70px;
+    font-size: 5rem;
     text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; /* Add an outline around the text */
     font-weight: 700;
 }
-
-section {
+.name:hover {
+    color: grey;
+}
+#bottom-nav {
     display: flex;
     justify-content: space-between;
     margin: 5rem;
 }
 
-section a {
+#bottom-nav a {
     text-decoration: none;
     font-size: 1.1rem;
     color: black;
     font-family: Avenir;
 }
 
-section a:hover {
+#bottom-nav a:hover {
     padding: 1rem;
     background-color: black;
     color: #f1f6fa;
