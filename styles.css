@@ -1,110 +1,89 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    color: black;
-    font-family: 'Avenir';
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: black;
+  font-family: Avenir;
 }
 
 @font-face {
-    font-family: Avenir;
-    src: url(fonts/Metropolis-Medium.otf);
+  font-family: Avenir;
+  src: url(fonts/Metropolis-MediumItalic.otf);
 }
 
 @font-face {
-    font-family: creation;
-    src: url(fonts/creattion-demo/Creattion\ Demo.otf);
+  font-family: creation;
+  src: url(fonts/creattion-demo/Creattion\ Demo.otf);
 }
+
+@font-face {
+  font-family: kiren;
+  src: url(fonts/kirens\ brush\ demo.otf);
+}
+
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
+
 header {
-    padding: 4rem;
-    display: flex;
-    justify-content: space-between;    
-    z-index: 100;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  font-family: kiren;
+  font-weight: 100;
+  font-size: 2rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  padding: 0.5rem;
 }
 
 #contacts ul {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
 }
 
 #contacts ul li {
-    padding: 0.5rem;
+  padding: 0.5rem;
 }
 
 #contacts ul li i {
-    font-size: 20px;
-}
-
-body {
-    background-color: #f1f6fa;
+  font-size: 20px;
 }
 
 .head {
-    margin-right: 5rem;
+  margin-right: 5rem;
 }
 
 #contacts {
-    margin-left: auto;
+  margin-left: auto;
 }
 
-#bg-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: -99;
+#about {
+  margin-top: 8rem;
+  margin-left: 3rem;
+  margin-right: 20rem;
 }
 
-#bg-image > img {
-    width: 100%; /* Set the width to 100% of the container */
-    height: auto; /* Maintain the aspect ratio */
-    max-width: 600px; /* Set a maximum width if needed */
-    max-height: 600px; /* Set a maximum height if needed */
+#about h1 {
+  font-size: 6rem;
+  font-family: kiren;
+  font-weight: 500;
 }
 
-#bg-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-#name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-}
-#name .name {
-    font-family: 'creation';
-    font-size: 5rem;
-    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white; /* Add an outline around the text */
-    font-weight: 700;
-}
-.name:hover {
-    color: grey;
-}
-#bottom-nav {
-    display: flex;
-    justify-content: space-between;
-    margin: 5rem;
-}
-
-#bottom-nav a {
-    text-decoration: none;
-    font-size: 1.1rem;
-    color: black;
-    font-family: Avenir;
-}
-
-#bottom-nav a:hover {
-    padding: 1rem;
-    background-color: black;
-    color: #f1f6fa;
+#about p {
+  font-size: 1.5rem;
+  padding: 1rem 0rem 1rem 0;
 }
