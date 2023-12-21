@@ -3,12 +3,18 @@
   padding: 0;
   font-size: 14px;
   color: black;
-  font-family: Avenir;
+  font-family: Avenir-Italic;
+  background-color: #FFF5C2;
+}
+
+@font-face {
+  font-family: Avenir-Italic;
+  src: url(fonts/Metropolis-MediumItalic.otf);
 }
 
 @font-face {
   font-family: Avenir;
-  src: url(fonts/Metropolis-MediumItalic.otf);
+  src: url(fonts/Metropolis-Bold.otf);
 }
 
 @font-face {
@@ -35,6 +41,7 @@ header {
   font-family: kiren;
   font-weight: 100;
   font-size: 2rem;
+  color: #3081D0;
 }
 
 nav {
@@ -47,6 +54,11 @@ nav a {
   text-decoration: none;
   color: black;
   padding: 0.5rem;
+}
+
+#links {
+  display: flex;
+  align-items: center;
 }
 
 #contacts ul {
@@ -74,16 +86,44 @@ nav a {
 #about {
   margin-top: 8rem;
   margin-left: 3rem;
-  margin-right: 20rem;
+  margin-right: 25rem;
 }
 
 #about h1 {
   font-size: 6rem;
   font-family: kiren;
   font-weight: 500;
+  color: #3081D0;
 }
 
 #about p {
   font-size: 1.5rem;
   padding: 1rem 0rem 1rem 0;
+  color: rgb(80, 77, 77);
+}
+
+.project-title {
+  margin: 14rem 0 4rem 5rem;
+  font-size: 1.5rem;
+  font-family: Avenir;
+  color: #3081D0;
+}
+
+#project {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  padding: 2rem;
+}
+
+#project img {
+  max-width: 40rem;
+}
+
+#project > :nth-child(odd) {
+  grid-column: 2;
+}
+
+
+#project > :nth-child(even) {
+  grid-column: 1;
 }
