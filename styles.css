@@ -17,3 +17,31 @@
   font-family: kiren;
   src: url(fonts/kirens\ brush\ demo.otf);
 }
+
+/* Navbar styles */
+.navbar {
+  background-color: #343a40;
+}
+
+.navbar a {
+  font-family: 'creation', sans-serif;
+  color: #F4CE14;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+/* Font Awesome icons */
+i.fab {
+  transition: color 0.3s ease-in-out;
+}
+
+i.fab:hover {
+  color: #F4CE14;
+}
