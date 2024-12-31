@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obidur Rahman</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #FF6B6B;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--primary);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            padding: 80px 0;
+        }
+
+        .project-card {
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .typewriter::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .skill-badge {
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-mono text-[#1a1a1a]">OR</a>
+            <div class="space-x-8 hidden md:flex">
+                <a href="#about" class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/about</a>
+                <a href="#work" class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/work</a>
+                <a href="#contact" class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/contact</a>
+                <a href="path/to/resume.pdf" target="_blank"
+                    class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home -->
+    <section id="home" class="scroll-section flex items-center justify-center relative bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-[#1a1a1a] typewriter" id="typewriter"></h1>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                Software Developer & Machine Learning Engineer
+            </p>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="scroll-section bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">About Me</h2>
+                    <p class="text-gray-600 mb-8">
+                        I'm a Mathematics student who fell in love with coding along the way. When I'm not diving
+                        into calculus at University of Chittagong, you'll find me building stuff with Python and
+                        Next.js, or geeking out over machine learning algorithms.
+                    </p>
+                    <p class="text-gray-600 mb-8">
+                        My journey in tech started with a deep curiosity for AI and has evolved into a career where I
+                        combine technical expertise with creative problem-solving. I specialize in developing machine
+                        learning models and creating intuitive user interfaces.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Python</span>
+                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Machine
+                            Learning</span>
+                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Next.js</span>
+                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">React</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="img/me2.jpg" alt="Profile" class="rounded-lg shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="scroll-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Featured Work</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Diarrhea Prediction Model</h3>
+                    <p class="text-gray-600 mb-4">Machine learning model analyzing environmental factors using Random
+                        Forest and SVR</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">scikit-learn</span>
+                    </div>
+                </div>
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">IMDB Sentiment Analysis</h3>
+                    <p class="text-gray-600 mb-4">NLP-based sentiment analyzer with interactive Streamlit interface</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">NLTK</span>
+                    </div>
+                </div>
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Diarrhea Prediction Model</h3>
+                    <p class="text-gray-600 mb-4">Machine learning model analyzing environmental factors using Random
+                        Forest and SVR</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">scikit-learn</span>
+                    </div>
+                </div>
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">IMDB Sentiment Analysis</h3>
+                    <p class="text-gray-600 mb-4">NLP-based sentiment analyzer with interactive Streamlit interface</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">NLTK</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Certifications -->
+    <section id="cert" class="scroll-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">My Certifications</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Diarrhea Prediction Model</h3>
+                    <p class="text-gray-600 mb-4">Machine learning model analyzing environmental factors using Random
+                        Forest and SVR</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">scikit-learn</span>
+                    </div>
+                </div>
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">IMDB Sentiment Analysis</h3>
+                    <p class="text-gray-600 mb-4">NLP-based sentiment analyzer with interactive Streamlit interface</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">NLTK</span>
+                    </div>
+                </div>
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">Diarrhea Prediction Model</h3>
+                    <p class="text-gray-600 mb-4">Machine learning model analyzing environmental factors using Random
+                        Forest and SVR</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">scikit-learn</span>
+                    </div>
+                </div>
+                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4">IMDB Sentiment Analysis</h3>
+                    <p class="text-gray-600 mb-4">NLP-based sentiment analyzer with interactive Streamlit interface</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">NLTK</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact" class="scroll-section bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Let's Connect</h2>
+            <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <p class="text-gray-600 mb-6">Open to new opportunities and collaborations</p>
+                <a href="mailto:obidur.shawal@gmail.com"
+                    class="inline-block bg-[#FF6B6B] text-white px-8 py-3 rounded-lg hover:bg-[#ff5252] transition-colors">
+                    obidur.shawal@gmail.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const text = "Hi, I'm Obidur Rahman";
+        let i = 0;
+        const typewriter = document.getElementById('typewriter');
+
+        function type() {
+            if (i < text.length) {
+                typewriter.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, 100);
+            }
+        }
+
+        type();
+    </script>
+</body>
+
+</html>

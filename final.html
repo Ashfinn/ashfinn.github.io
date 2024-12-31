@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obidur Rahman - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Cloud Animation */
+        .cloud {
+            position: absolute;
+            opacity: 0.8;
+            animation: float linear infinite;
+        }
+
+        .cloud-1 {
+            top: 20%;
+            animation-duration: 80s;
+            animation-delay: -20s;
+        }
+
+        .cloud-2 {
+            top: 40%;
+            animation-duration: 60s;
+            animation-delay: -15s;
+        }
+
+        .cloud-3 {
+            top: 60%;
+            animation-duration: 70s;
+            animation-delay: -30s;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateX(-100%);
+                left: -100%;
+            }
+
+            to {
+                transform: translateX(100vw);
+                left: 100%;
+            }
+        }
+
+        /* Responsive hover effects */
+        @media (hover: hover) {
+            .hover-card {
+                transition: all 0.3s ease;
+            }
+
+            .hover-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        @media (hover: hover) {
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: #2563eb;
+                transition: width 0.3s ease;
+            }
+
+            .nav-link:hover::after {
+                width: 100%;
+            }
+        }
+
+        /* Glassmorphic Navbar */
+        .navbar-blur {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Skill tag animations */
+        @media (hover: hover) {
+            .skill-tag {
+                transition: all 0.3s ease;
+            }
+
+            .skill-tag:hover {
+                transform: scale(1.1);
+                box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+            }
+        }
+
+        /* Hide scrollbar but allow scrolling */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu fixed inset-y-0 left-0 w-64 bg-white shadow-lg z-50 lg:hidden">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <a href="#" class="text-2xl font-bold text-blue-600">O.R</a>
+                <button id="closeMenu" class="text-gray-600 hover:text-blue-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <a href="#about" class="block text-gray-600 hover:text-blue-600 transition-colors">About</a>
+                <a href="#certifications"
+                    class="block text-gray-600 hover:text-blue-600 transition-colors">Certifications</a>
+                <a href="#projects" class="block text-gray-600 hover:text-blue-600 transition-colors">Projects</a>
+                <a href="#skills" class="block text-gray-600 hover:text-blue-600 transition-colors">Skills</a>
+                <a href="#contact" class="block text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full navbar-blur z-40 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-2 py-2">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-blue-600 hover:scale-105 transition-transform">O.R</a>
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-8">
+                    <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">About</a>
+                    <a href="#certifications"
+                        class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Certifications</a>
+                    <a href="#projects"
+                        class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Projects</a>
+                    <a href="#skills" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Skills</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button id="openMenu" class="lg:hidden text-gray-600 hover:text-blue-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-16 6h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Clouds -->
+    <section
+        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
+        <!-- Animated Clouds (hidden on mobile) -->
+        <div class="hidden md:block">
+            <div class="cloud cloud-1">
+                <svg width="200" height="60" viewBox="0 0 200 60" fill="white" opacity="0.8">
+                    <path
+                        d="M47.2,35.5c0-4.6-3.7-8.2-8.2-8.2c-1,0-1.9,0.2-2.8,0.5c-0.3-3.4-3.1-6.2-6.6-6.2c-3.7,0-6.7,3-6.7,6.7c0,0.8,0.2,1.6,0.4,2.3c-0.3-0.1-0.7-0.1-1-0.1c-3.7,0-6.7,3-6.7,6.7c0,3.6,2.9,6.6,6.5,6.7h17.2C44.2,43.3,47.2,39.8,47.2,35.5z" />
+                </svg>
+            </div>
+            <div class="cloud cloud-2">
+                <svg width="200" height="60" viewBox="0 0 200 60" fill="white" opacity="0.6">
+                    <path
+                        d="M47.2,35.5c0-4.6-3.7-8.2-8.2-8.2c-1,0-1.9,0.2-2.8,0.5c-0.3-3.4-3.1-6.2-6.6-6.2c-3.7,0-6.7,3-6.7,6.7c0,0.8,0.2,1.6,0.4,2.3c-0.3-0.1-0.7-0.1-1-0.1c-3.7,0-6.7,3-6.7,6.7c0,3.6,2.9,6.6,6.5,6.7h17.2C44.2,43.3,47.2,39.8,47.2,35.5z" />
+                </svg>
+            </div>
+            <div class="cloud cloud-3">
+                <svg width="200" height="60" viewBox="0 0 200 60" fill="white" opacity="0.7">
+                    <path
+                        d="M47.2,35.5c0-4.6-3.7-8.2-8.2-8.2c-1,0-1.9,0.2-2.8,0.5c-0.3-3.4-3.1-6.2-6.6-6.2c-3.7,0-6.7,3-6.7,6.7c0,0.8,0.2,1.6,0.4,2.3c-0.3-0.1-0.7-0.1-1-0.1c-3.7,0-6.7,3-6.7,6.7c0,3.6,2.9,6.6,6.5,6.7h17.2C44.2,43.3,47.2,39.8,47.2,35.5z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 py-32 text-center relative z-10" data-aos="fade-up">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                Hi, I'm <span class="text-blue-600 hover:text-blue-700 transition-colors cursor-default">Obidur
+                    Rahman</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-8">Software Developer & Machine Learning Engineer</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <a href="mailto:obidur.shawal@gmail.com"
+                    class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all hover:shadow-lg">
+                    Get in Touch
+                </a>
+                <a href="#projects"
+                    class="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transform hover:scale-105 transition-all hover:shadow-lg">
+                    View Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" class="hover-card rounded-lg overflow-hidden">
+                    <img src="img/me.jpg" alt="Obidur Rahman"
+                        class="w-full transition-transform hover:scale-105 duration-700" />
+                </div>
+                <div data-aos="fade-left">
+                    <h2 class="text-4xl font-bold mb-6 hover:text-blue-600 transition-colors">About Me</h2>
+                    <p class="text-gray-600 mb-6 hover:text-gray-800 transition-colors">
+                        I'm a Mathematics student who fell in love with coding along the way. When I'm not diving
+                        into calculus at University of Chittagong, you'll find me building stuff with Python and
+                        Next.js, or geeking out over machine learning algorithms.
+                    </p>
+                    <p class="text-gray-600 mb-6 hover:text-gray-800 transition-colors">
+                        My journey in tech started with a deep curiosity for AI and has evolved into a career where I
+                        combine technical expertise with creative problem-solving. I specialize in developing machine
+                        learning models and creating intuitive user interfaces.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="text-center hover-card p-4 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-600">3+</h3>
+                            <p class="text-gray-600">Years Experience</p>
+                        </div>
+                        <div class="text-center hover-card p-4 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-600">20+</h3>
+                            <p class="text-gray-600">Projects Completed</p>
+                        </div>
+                        <div class="text-center hover-card p-4 rounded-lg">
+                            <h3 class="text-2xl font-bold text-blue-600">10+</h3>
+                            <p class="text-gray-600">Happy Clients</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center hover:text-blue-600 transition-colors" data-aos="fade-up">
+                Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/api/placeholder/300/200" alt="IBM Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Introduction to Cloud
+                        Computing</h3>
+                    <p class="text-gray-600">IBM</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <img src="/api/placeholder/300/200" alt="Meta Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">HTML and CSS in depth</h3>
+                    <p class="text-gray-600">Meta</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+                    <img src="/api/placeholder/300/200" alt="Programming Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Programming in C++: A
+                        Hands-on Introduction</h3>
+                    <p class="text-gray-600">Codio</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="400">
+                    <img src="/api/placeholder/300/200" alt="IBM AI Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Python for Data Science, AI
+                        & Development</h3>
+                    <p class="text-gray-600">IBM</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="500">
+                    <img src="/api/placeholder/300/200" alt="Web Development Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Web Application
+                        Technologies and Django</h3>
+                    <p class="text-gray-600">University of Michigan</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="600">
+                    <img src="/api/placeholder/300/200" alt="MATLAB Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Introduction to Programming
+                        with MATLAB</h3>
+                    <p class="text-gray-600">Vanderbilt University</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="700">
+                    <img src="/api/placeholder/300/200" alt="JavaScript Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Animation with JavaScript
+                        and jQuery</h3>
+                    <p class="text-gray-600">University of California, Davis</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="800">
+                    <img src="/api/placeholder/300/200" alt="JavaScript Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Interactivity with
+                        JavaScript and jQuery</h3>
+                    <p class="text-gray-600">University of California, Davis</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="900">
+                    <img src="/api/placeholder/300/200" alt="Python Certification"
+                        class="w-full mb-4 rounded transition-transform hover:scale-105 duration-500" />
+                    <h3 class="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">Developing AI Applications
+                        with Python and Flask</h3>
+                    <p class="text-gray-600">IBM</p>
+                    <p class="text-sm text-gray-500">Issued: 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center hover:text-blue-600 transition-colors" data-aos="fade-up">
+                Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="hover-card p-6 bg-gray-50 rounded-lg" data-aos="fade-right">
+                    <h3 class="text-xl font-bold mb-4 hover:text-blue-600 transition-colors">Core Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">Python</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">C++</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">JavaScript</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">Machine Learning</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">React.js</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">Next.js</span>
+                    </div>
+                </div>
+                <div class="hover-card p-6 bg-gray-50 rounded-lg" data-aos="fade-left">
+                    <h3 class="text-xl font-bold mb-4 hover:text-blue-600 transition-colors">Libraries</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">scikit-learn</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">Pandas</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">NumPy</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">Plotly</span>
+                        <span class="skill-tag px-3 py-1 bg-blue-100 text-blue-800 rounded">MATLAB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center hover:text-blue-600 transition-colors" data-aos="fade-up">
+                Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-4 hover:text-blue-600 transition-colors">Diarrhea Prediction Model
+                    </h3>
+                    <p class="text-gray-600 mb-4">Analyzed correlation between environmental factors and diarrhea cases
+                        using Random Forest, SVR, and Gradient Boosting.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">Python</span>
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">scikit-learn</span>
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">Pandas</span>
+                    </div>
+                </div>
+
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-4 hover:text-blue-600 transition-colors">IMDB Sentiment Analysis
+                    </h3>
+                    <p class="text-gray-600 mb-4">Implemented text preprocessing and feature extraction using NLP
+                        techniques with an interactive Streamlit interface.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">Python</span>
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">NLTK</span>
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">Pandas</span>
+                    </div>
+                </div>
+
+                <div class="hover-card bg-white p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold mb-4 hover:text-blue-600 transition-colors">Matlab Hero
+                    </h3>
+                    <p class="text-gray-600 mb-4">Educational platform for MATLAB programming practice with modern UI
+                        features using Next.js and Nextra.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">Next.js</span>
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">React</span>
+                        <span class="skill-tag text-sm px-2 py-1 bg-gray-100 rounded">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Additional project cards... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8 hover:text-blue-600 transition-colors" data-aos="fade-up">Let's Connect
+            </h2>
+            <p class="text-xl text-gray-600 mb-8" data-aos="fade-up" data-aos-delay="100">I'm always open to new
+                opportunities and collaborations</p>
+            <div class="flex justify-center space-x-6" data-aos="fade-up" data-aos-delay="200">
+                <a href="mailto:obidur.shawal@gmail.com" class="hover-card p-4 rounded-full">
+                    <svg class="h-6 w-6 text-gray-600 hover:text-blue-600 transition-colors" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                    </svg>
+                </a>
+                <!-- Social media icons... -->
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+    </script>
+</body>
+
+</html>
