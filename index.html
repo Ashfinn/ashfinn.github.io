@@ -67,29 +67,71 @@
             transform: scale(1.05);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            animation: fadeIn 1s;
+        }
+
+        .mobile-menu {
+            display: none;
+            transform: translateY(-100%);
+            transition: 0.3s;
+        }
+
+        .mobile-menu.active {
+            display: block;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
     </style>
 </head>
 
-<body>
-    <!-- Navigation -->
+
+<body class="overflow-x-hidden">
+    <canvas id="canvas"></canvas>
     <nav class="fixed w-full z-50 glass">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#home" class="text-xl font-mono text-[#1a1a1a]">OR</a>
-            <div class="space-x-8 hidden md:flex">
-                <a href="#about" class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/about</a>
-                <a href="#work" class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/work</a>
-                <a href="#contact" class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/contact</a>
-                <a href="resume.pdf" target="_blank"
-                    class="text-[#1a1a1a] hover:text-[#FF6B6B] transition-colors">/resume</a>
+            <a href="#home" class="text-xl font-mono">OR</a>
+            <button id="menu-toggle" class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16m-16 6h16" />
+                </svg>
+            </button>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-[#FF6B6B] transition-colors">/about</a>
+                <a href="#work" class="hover:text-[#FF6B6B] transition-colors">/work</a>
+                <a href="#contact" class="hover:text-[#FF6B6B] transition-colors">/contact</a>
+                <a href="resume.pdf" class="hover:text-[#FF6B6B] transition-colors">/resume</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu bg-white w-full absolute top-full left-0 py-4 shadow-lg">
+            <div class="container mx-auto px-4 flex flex-col space-y-4">
+                <a href="#about" class="hover:text-[#FF6B6B] transition-colors">/about</a>
+                <a href="#work" class="hover:text-[#FF6B6B] transition-colors">/work</a>
+                <a href="#contact" class="hover:text-[#FF6B6B] transition-colors">/contact</a>
+                <a href="resume.pdf" class="hover:text-[#FF6B6B] transition-colors">/resume</a>
             </div>
         </div>
     </nav>
 
-    <!-- Home -->
-    <section id="home" class="scroll-section flex items-center justify-center relative bg-white">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-[#1a1a1a] typewriter" id="typewriter"></h1>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+    <section id="home" class="scroll-section flex items-center justify-center relative">
+        <div class="container mx-auto px-4 text-center relative z-10 hero-content">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 typewriter" id="typewriter"></h1>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto text-lg">
                 Software Developer & Machine Learning Engineer
             </p>
         </div>
@@ -231,20 +273,109 @@
     </section>
 
     <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let w, h, particles;
+        const particleCount = 25;
+        const particleColor = '#FF6B6B';
+        let mx = 0;
+        let my = 0;
+        let toggle = 0;
+
+        function init() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            particles = Array(particleCount).fill().map(() => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: Math.random() * 2 - 1,
+                vy: Math.random() * 2 - 1,
+                size: Math.random() * 2 + 2
+            }));
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(255,255,255,0.1)';
+            ctx.fillRect(0, 0, w, h);
+
+            particles.forEach((p, i) => {
+                // Calculate new position first
+                let newX = p.x + p.vx + (mx - w / 2) * 0.01;
+                let newY = p.y + p.vy + (my - h / 2) * 0.01;
+
+                // Check boundaries before updating position
+                if (newX < 0 || newX > w) {
+                    p.vx *= -1;
+                    newX = p.x; // Keep old position
+                }
+                if (newY < 0 || newY > h) {
+                    p.vy *= -1;
+                    newY = p.y; // Keep old position
+                }
+
+                // Update position
+                p.x = newX;
+                p.y = newY;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = particleColor;
+                ctx.fill();
+
+                particles.slice(i + 1).forEach(p2 => {
+                    let dx = p2.x - p.x;
+                    let dy = p2.y - p.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(255,107,107,${0.2 * (1 - dist / 150)})`;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+
+        window.addEventListener('resize', init);
+        window.addEventListener('mousemove', e => {
+            mx = e.clientX;
+            my = e.clientY;
+        });
+
+        // Typewriter
         const text = "Hi, I'm Obidur Rahman";
         let i = 0;
         const typewriter = document.getElementById('typewriter');
 
         function type() {
             if (i < text.length) {
-                typewriter.textContent += text.charAt(i);
-                i++;
+                typewriter.textContent += text.charAt(i++);
                 setTimeout(type, 100);
             }
         }
-
         type();
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', e => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
     </script>
+
 </body>
 
 </html>
