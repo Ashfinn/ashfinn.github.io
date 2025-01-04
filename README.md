@@ -1,58 +1,46 @@
-# ashfinn.github.io
+# Obidur Rahman - Portfolio Website
 
-A modern, responsive portfolio website built with HTML, TailwindCSS, and vanilla JavaScript, featuring interactive particle animations and smooth scroll effects.
+Welcome to my personal portfolio website! This website serves as a digital space where I showcase my projects, skills, and achievements in mathematics, software development, and technology.
 
-## Features
+## 🚀 Features
+- **Modern UI/UX:** Clean and minimalistic design with smooth transitions.
+- **Dark/Light Mode:** Switch themes for a personalized experience.
+- **Interactive Components:** Animated cursor, scroll indicators, and hover effects.
+- **Responsive Design:** Fully optimized for desktop and mobile devices.
+- **Portfolio Showcase:** Featured projects with descriptions and technologies used.
+- **Achievements & Certifications:** Highlighting my key accomplishments.
+- **Contact Section:** Easy ways to reach out and collaborate.
 
-- Animated particle background with mouse interaction
-- Smooth scroll-snap navigation
-- Responsive design with mobile menu
-- Typewriter effect on hero section
-- Project showcase with hover effects
-- Skills display with interactive badges
-- Contact section with email integration
+## 🛠️ Technologies Used
+- **Frontend:** HTML, CSS, Tailwind CSS, JavaScript
+- **Fonts:** Space Mono, DM Sans
+- **Icons:** FontAwesome
 
-## Tech Stack
+## 📁 Project Structure
+```
+|-- index.html   # Main HTML file
+|-- files/
+|   |-- resume.pdf
+|-- img/   # Image assets
+|-- README.md
+```
 
-- HTML5
-- TailwindCSS
-- Vanilla JavaScript
-- Canvas API for animations
 
-## Setup
-
+## 📌 How to Use
 1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/portfolio-website.git
-```
+   ```sh
+   git clone https://github.com/yourgithubusername/portfolio.git
+   ```
+2. Open `index.html` in a browser to view the portfolio.
+3. Customize content by editing the HTML, CSS, or JavaScript files as needed.
 
-2. Open `index.html` in your browser or use a local server:
-```bash
-npx serve
-```
+## 📬 Contact
+Feel free to connect with me via:
+- **Email:** obidurrahman@example.com
+- **LinkedIn:** [linkedin.com/in/obidurrahman](https://linkedin.com/in/obidurrahman)
+- **GitHub:** [github.com/obidurrahman](https://github.com/obidurrahman)
 
-## Project Structure
+---
 
-```
-portfolio-website/
-├── index.html
-├── img/
-│   └── me2.jpg
-├── resume.pdf
-└── README.md
-```
+Thank you for visiting my portfolio! 🚀
 
-## Customization
-
-- Update personal information in `index.html`
-- Modify particle animation settings in the `animate()` function
-- Adjust color scheme in `:root` CSS variables
-- Add/remove project cards in the work section
-
-## License
-
-MIT
-
-## Contact
-
-obidur.shawal@gmail.com
