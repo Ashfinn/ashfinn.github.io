@@ -1,500 +1,535 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 
 <head>
+    <!-- Previous head content remains the same -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obidur Rahman</title>
+    <title>Obidur Rahman | Mathematics & Code</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Previous styles remain the same -->
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500&display=swap');
+
         :root {
-            --primary: #1a1a1a;
-            --accent: #FF6B6B;
+            --ink: #2c2c2c;
+            --paper: #faf6f1;
+            --accent: #e45d50;
+            --secondary: #6b7280;
+        }
+
+        html.dark {
+            --ink: #faf6f1;
+            --paper: #1a1a1a;
+            --accent: #ff7b6b;
+            --secondary: #9ca3af;
         }
 
         body {
-            background-color: #ffffff;
-            color: var(--primary);
+            background-color: var(--paper);
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        h1,
+        h2,
+        h3,
+        .mono {
+            font-family: 'Space Mono', monospace;
         }
 
-        .scroll-section {
-            scroll-snap-align: start;
-            min-height: 100vh;
-            padding: 80px 0;
+        .section-border {
+            border-left: 1px solid var(--ink);
+            opacity: 0.2;
+            margin-left: 1rem;
+            padding-left: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .section-border {
+                margin-left: 2rem;
+                padding-left: 2rem;
+            }
+        }
+
+        .section-border:hover {
+            opacity: 0.4;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border: 1px solid var(--ink);
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.875rem;
+        }
+
+        .skill-tag:hover {
+            background: var(--ink);
+            color: var(--paper);
+            transform: translateY(-2px);
         }
 
         .project-card {
-            transition: transform 0.3s ease;
+            position: relative;
+            padding: 1.5rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
+            border-color: var(--ink);
+            transform: translateX(10px);
         }
 
-        html {
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-        }
-
-        .typewriter::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-        }
-
-        .skill-badge {
+        .project-card::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            opacity: 0;
             transition: all 0.3s ease;
         }
 
-        .skill-badge:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .project-card:hover::before {
+            opacity: 1;
+            left: -1rem;
         }
 
-        canvas {
+        .nav-link {
+            position: relative;
+            padding-bottom: 2px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .nav-link::after {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        .hero-content {
-            animation: fadeIn 1s;
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.5rem;
+            border: 1px solid var(--ink);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 50;
+            background: var(--paper);
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: auto;
+                bottom: 2rem;
+                left: 2rem;
+            }
+        }
+
+        .theme-toggle:hover {
+            opacity: 1;
         }
 
         .mobile-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--paper);
+            border-top: 1px solid var(--ink);
+            padding: 1rem;
             display: none;
-            transform: translateY(-100%);
-            transition: 0.3s;
+            z-index: 40;
         }
 
-        .mobile-menu.active {
-            display: block;
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            z-index: 100;
+        }
+
+        .status {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.5rem 1rem;
+            background: var(--ink);
+            color: var(--paper);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            opacity: 0.8;
+            z-index: 50;
+        }
+
+        @media (max-width: 768px) {
+            .status {
+                display: none;
+            }
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--ink);
+            color: var(--paper);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 40;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 0.5;
+        }
+
+        .scroll-to-top:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .achievement {
+            position: relative;
+            padding: 1rem;
+            border: 1px solid var(--ink);
+            margin: 1rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .achievement.visible {
+            opacity: 1;
             transform: translateY(0);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            z-index: 100;
         }
     </style>
 </head>
 
+<body class="py-12">
+    <!-- Add cursor elements -->
+    <div id="cursor-dot" class="fixed w-2 h-2 bg-accent rounded-full pointer-events-none z-50"></div>
+    <div id="cursor-outline" class="fixed w-8 h-8 border border-accent rounded-full pointer-events-none z-50"></div>
 
-<body class="overflow-x-hidden">
-    <canvas id="canvas"></canvas>
-    <nav class="fixed w-full z-50 glass">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#home" class="text-xl font-mono">OR</a>
-            <button id="menu-toggle" class="md:hidden">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 6h16M4 12h16m-16 6h16" />
-                </svg>
-            </button>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-[#FF6B6B] transition-colors">/about</a>
-                <a href="#work" class="hover:text-[#FF6B6B] transition-colors">/work</a>
-                <a href="#contact" class="hover:text-[#FF6B6B] transition-colors">/contact</a>
-                <a href="resume.pdf" class="hover:text-[#FF6B6B] transition-colors">/resume</a>
-            </div>
-        </div>
-        <div id="mobile-menu" class="mobile-menu bg-white w-full absolute top-full left-0 py-4 shadow-lg">
-            <div class="container mx-auto px-4 flex flex-col space-y-4">
-                <a href="#about" class="hover:text-[#FF6B6B] transition-colors">/about</a>
-                <a href="#work" class="hover:text-[#FF6B6B] transition-colors">/work</a>
-                <a href="#contact" class="hover:text-[#FF6B6B] transition-colors">/contact</a>
-                <a href="resume.pdf" class="hover:text-[#FF6B6B] transition-colors">/resume</a>
-            </div>
+    <div class="loading-bar" id="loading-bar"></div>
+    <div class="scroll-indicator" id="scroll-indicator"></div>
+
+    <button class="theme-toggle" id="theme-toggle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+    </button>
+
+    <div class="status" id="status">Available for Projects</div>
+
+    <button class="scroll-to-top" id="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <nav class="hidden md:block fixed top-0 right-0 p-8 text-right">
+        <div class="space-x-8">
+            <a href="#work" class="nav-link">/work</a>
+            <a href="#about" class="nav-link">/about</a>
+            <a href="#achievements" class="nav-link">/achievements</a>
+            <a href="#contact" class="nav-link">/contact</a>
         </div>
     </nav>
 
-    <section id="home" class="scroll-section flex items-center justify-center relative">
-        <div class="container mx-auto px-4 text-center relative z-10 hero-content">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 typewriter" id="typewriter"></h1>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto text-lg">
-                Software Developer & Machine Learning Engineer
-            </p>
-        </div>
-    </section>
+    <div class="mobile-menu">
+        <a href="#work" class="nav-link"><i class="fas fa-code"></i></a>
+        <a href="#about" class="nav-link"><i class="fas fa-user"></i></a>
+        <a href="#achievements" class="nav-link"><i class="fas fa-trophy"></i></a>
+        <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i></a>
+    </div>
 
-    <!-- About -->
-    <section id="about" class="scroll-section bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">About Me</h2>
-                    <p class="text-gray-600 mb-8">
-                        I'm a Mathematics student who fell in love with coding along the way. When I'm not diving
-                        into calculus at University of Chittagong, you'll find me building stuff with Python and
-                        Next.js, or geeking out over machine learning algorithms.
-                    </p>
-                    <p class="text-gray-600 mb-8">
-                        My journey in tech started with a deep curiosity for AI and has evolved into a career where I
-                        combine technical expertise with creative problem-solving. I specialize in developing machine
-                        learning models and creating intuitive user interfaces.
-                    </p>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Python</span>
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Machine
-                            Learning</span>
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">Next.js</span>
-                        <span class="skill-badge bg-white px-4 py-2 rounded-full text-sm shadow-sm">React</span>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img src="img/me2.jpg" alt="Profile" class="rounded-lg shadow-lg">
-                </div>
+    <main class="container mx-auto px-4 max-w-4xl">
+        <header class="mb-24">
+            <div class="inline-block mb-2 text-sm mono">Hello, I'm</div>
+            <h1 class="text-4xl md:text-6xl mb-6">Obidur Rahman</h1>
+            <p class="text-lg text-secondary">Mathematics Student & Software Developer</p>
+            <div class="mt-8 p-4 bg-opacity-10 bg-black dark:bg-white rounded-lg">
+                <p class="italic text-secondary">
+                    "At the intersection of mathematics and code, I find poetry in patterns and beauty in algorithms."
+                </p>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- Work -->
-    <section id="work" class="scroll-section">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">Featured Work</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Diarrhea Prediction Model</h3>
-                    <p class="text-gray-600 mb-4">Machine learning model analyzing environmental factors using Random
-                        Forest and SVR</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">scikit-learn</span>
+        <section id="work" class="mb-24">
+            <h2 class="text-2xl mb-12">Featured Work</h2>
+            <div class="section-border">
+                <div class="project-card">
+                    <h3 class="text-xl font-bold">Diarrhea Prediction Model</h3>
+                    <p class="text-secondary mt-2">A fusion of environmental data analysis and machine learning to
+                        predict and prevent health risks across regions.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">scikit-learn</span>
                     </div>
                 </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">IMDB Sentiment Analysis</h3>
-                    <p class="text-gray-600 mb-4">NLP-based sentiment analyzer with interactive Streamlit interface</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">NLTK</span>
+
+                <div class="project-card">
+                    <h3 class="text-xl font-bold">MATLAB Hero</h3>
+                    <p class="text-secondary mt-2">An educational platform born from my passion for helping fellow
+                        students master MATLAB programming.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">React</span>
                     </div>
                 </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">httPY</h3>
-                    <p class="text-gray-600 mb-4">A simple HTTP server implemented in Python that handles basic HTTP
+
+                <div class="project-card">
+                    <h3 class="text-xl font-bold">IMDB Sentiment Analysis</h3>
+                    <p class="text-secondary mt-2">Exploring the emotional landscape of film reviews through natural
+                        language processing.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">NLTK</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="text-xl font-bold">httPY</h3>
+                    <p class="text-secondary mt-2">A simple HTTP server implemented in Python that handles basic HTTP
                         requests and responds according to specified endpoints.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Python</span>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="skill-tag">Python</span>
                     </div>
                 </div>
 
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">HelpBot</h3>
-                    <p class="text-gray-600 mb-4">HelpBot is a cutting-edge AI customer support chatbot built using
-                        Next.js and Material-UI (MUI), providing a user-friendly and engaging experience for customers
-                        seeking assistance.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">Next.js</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">MUI</span>
-                        <span class="text-sm bg-gray-100 px-3 py-1 rounded-full">JavaScript</span>
+                <div class="project-card">
+                    <h3 class="text-xl font-bold">Modern Portfolio Website</h3>
+                    <p class="text-secondary mt-2">A modern, responsive portfolio website built with HTML, Tailwind, and
+                        JavaScript, featuring interactive particle animations and smooth scroll effects.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="skill-tag">Html</span>
+                        <span class="skill-tag">tailwindcss</span>
+                        <span class="skill-tag">JavaScript</span>
                     </div>
                 </div>
 
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="skills" class="scroll-section bg-white">
-        <div class="container mx-auto px-4 py-20">
-            <h2 class="text-3xl font-bold mb-12 text-center">Technical Skills</h2>
-
-            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Languages -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Languages</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Python</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">JavaScript</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">TypeScript</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">SQL</span>
-                    </div>
+        <section id="about" class="mb-24">
+            <h2 class="text-2xl mb-12">About Me</h2>
+            <div class="section-border">
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold">The Journey</h3>
+                    <p class="text-secondary mt-2">
+                        As a Mathematics student at the University of Chittagong, I've discovered that the elegance of
+                        mathematical
+                        thinking perfectly complements the art of coding. My journey began with a curiosity about
+                        patterns and evolved
+                        into a passion for creating intelligent systems.
+                    </p>
                 </div>
 
-                <!-- Frameworks -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Frameworks</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">React</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Next.js</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">TensorFlow</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">PyTorch</span>
-                    </div>
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold">Community Leadership</h3>
+                    <p class="text-secondary mt-2">
+                        Currently serving as the Research and Development Secretary at the Chittagong University Math
+                        Club,
+                        where I bridge the gap between theoretical mathematics and practical programming through
+                        workshops and mentoring.
+                    </p>
                 </div>
 
-                <!-- Tools -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Tools & Tech</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Git</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Docker</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">AWS</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Linux</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div>
+                        <h3 class="text-xl mb-4">Technical Expertise</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Next.js</span>
+                            <span class="skill-tag">React</span>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Machine Learning -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Machine Learning</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Deep
-                            Learning</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">NLP</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Computer
-                            Vision</span>
-                    </div>
-                </div>
-
-                <!-- Web Development -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Web Development</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">HTML/CSS</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">TailwindCSS</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Node.js</span>
-                    </div>
-                </div>
-
-                <!-- Databases -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-bold mb-4 text-[#FF6B6B]">Databases</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">PostgreSQL</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">MongoDB</span>
-                        <span
-                            class="bg-white px-4 py-2 rounded-full text-sm shadow-sm hover:transform hover:scale-105 transition-transform duration-200">Redis</span>
+                    <div>
+                        <h3 class="text-xl mb-4">Current Focus</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">Teaching</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Certifications -->
-    <section id="cert" class="scroll-section">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">My Certifications</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Programming in C++: A Hands-on Introduction</h3>
-                    <p class="text-gray-600 mb-4">Codio (2024)</p>
-
+        <section id="achievements" class="mb-24">
+            <h2 class="text-2xl mb-12">Achievements & Certifications</h2>
+            <div class="section-border">
+                <div class="achievement">
+                    <h3 class="text-xl font-bold">IBM Data Science Specialization</h3>
+                    <p class="text-secondary mt-2">Completed comprehensive training in Python, AI, and Data Science</p>
                 </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Python for Data Science, AI & Development</h3>
-                    <p class="text-gray-600 mb-4">IBM (2024)</p>
 
+                <div class="achievement">
+                    <h3 class="text-xl font-bold">Community Impact</h3>
+                    <p class="text-secondary mt-2">Founded The Code Forum, growing it to an active community of learners
+                    </p>
                 </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Web Application Technologies and Django</h3>
-                    <p class="text-gray-600 mb-4">University of Michigan (2024)</p>
 
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Introduction to Programming with MATLAB</h3>
-                    <p class="text-gray-600 mb-4">anderbilt University (2024)</p>
-
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Developing AI Applications with Python and Flask</h3>
-                    <p class="text-gray-600 mb-4">IBM (2024)</p>
-
-                </div>
-                <div class="project-card bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold mb-4">Introduction to Cloud Computing</h3>
-                    <p class="text-gray-600 mb-4">IBM (2024)</p>
-
+                <div class="achievement">
+                    <h3 class="text-xl font-bold">Headstarter AI Fellowship</h3>
+                    <p class="text-secondary mt-2">Developed full-stack applications with AI integration</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-
-    <section id="contact" class="scroll-section bg-gray-50 flex items-center justify-center min-h-screen">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-8">Let's Connect</h2>
-            <div class="max-w-xl mx-auto bg-white p-10 rounded-xl shadow-xl">
-                <p class="text-gray-700 text-lg mb-8">Open to new opportunities and collaborations</p>
-                <div class="flex flex-col items-center gap-6">
+        <!-- Fix contact section closing tags -->
+        <section id="contact" class="mb-24">
+            <h2 class="text-2xl mb-12">Let's Connect</h2>
+            <div class="section-border">
+                <p class="mb-8 text-secondary">Always excited to collaborate on projects that combine mathematics, code,
+                    and
+                    creativity.</p>
+                <div class="section-border">
                     <a href="mailto:obidur.shawal@gmail.com"
-                        class="group inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-lg hover:bg-[#ff5252] transition-all transform hover:-translate-y-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        <span class="font-medium">obidur.shawal@gmail.com</span>
-                    </a>
-                    <div class="flex gap-6 mt-4">
-                        <a href="https://github.com/yourusername"
-                            class="text-gray-600 hover:text-[#FF6B6B] transition-colors">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        </a>
-                        <a href="https://linkedin.com/in/yourusername"
-                            class="text-gray-600 hover:text-[#FF6B6B] transition-colors">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                        </a>
-                        <a href="https://twitter.com/yourusername"
-                            class="text-gray-600 hover:text-[#FF6B6B] transition-colors">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                            </svg>
-                        </a>
+                        class="block mb-4 hover:text-accent">obidur.shawal@gmail.com</a>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/yourusername" class="opacity-75 hover:opacity-100">GitHub</a>
+                        <a href="https://linkedin.com/in/yourusername" class="opacity-75 hover:opacity-100">LinkedIn</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        let w, h, particles;
-        const particleCount = 25;
-        const particleColor = '#FF6B6B';
-        let mx = 0;
-        let my = 0;
-        let toggle = 0;
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
 
-        function init() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-            particles = Array(particleCount).fill().map(() => ({
-                x: Math.random() * w,
-                y: Math.random() * h,
-                vx: Math.random() * 2 - 1,
-                vy: Math.random() * 2 - 1,
-                size: Math.random() * 2 + 2
-            }));
-        }
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+        });
 
-        function animate() {
-            ctx.fillStyle = 'rgba(255,255,255,0.1)';
-            ctx.fillRect(0, 0, w, h);
+        // Custom cursor
+        const cursorDot = document.querySelector("#cursor-dot");
+        const cursorOutline = document.querySelector("#cursor-outline");
 
-            particles.forEach((p, i) => {
-                // Calculate new position first
-                let newX = p.x + p.vx + (mx - w / 2) * 0.01;
-                let newY = p.y + p.vy + (my - h / 2) * 0.01;
+        window.addEventListener("mousemove", function (e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
 
-                // Check boundaries before updating position
-                if (newX < 0 || newX > w) {
-                    p.vx *= -1;
-                    newX = p.x; // Keep old position
-                }
-                if (newY < 0 || newY > h) {
-                    p.vy *= -1;
-                    newY = p.y; // Keep old position
-                }
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
 
-                // Update position
-                p.x = newX;
-                p.y = newY;
+            cursorOutline.style.left = `${posX - 15}px`;
+            cursorOutline.style.top = `${posY - 15}px`;
+        });
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = particleColor;
-                ctx.fill();
+        // Scroll indicator
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollIndicator.style.width = `${scrolled}%`;
+        });
 
-                particles.slice(i + 1).forEach(p2 => {
-                    let dx = p2.x - p.x;
-                    let dy = p2.y - p.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
+        // Loading bar
+        window.addEventListener('load', () => {
+            const loadingBar = document.getElementById('loading-bar');
+            loadingBar.style.width = '100%';
+            setTimeout(() => {
+                loadingBar.style.opacity = '0';
+            }, 1000);
+        });
 
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(255,107,107,${0.2 * (1 - dist / 150)})`;
-                        ctx.stroke();
-                    }
-                });
+        // Scroll to top button
+        const scrollToTopButton = document.getElementById('scroll-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollToTopButton.classList.add('visible');
+            } else {
+                scrollToTopButton.classList.remove('visible');
+            }
+        });
+
+        scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-
-            requestAnimationFrame(animate);
-        }
-        init();
-        animate();
-
-        window.addEventListener('resize', init);
-        window.addEventListener('mousemove', e => {
-            mx = e.clientX;
-            my = e.clientY;
         });
 
-        // Typewriter
-        const text = "Hi, I'm Obidur Rahman";
-        let i = 0;
-        const typewriter = document.getElementById('typewriter');
+        // Achievement animations
+        const achievements = document.querySelectorAll('.achievement');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
 
-        function type() {
-            if (i < text.length) {
-                typewriter.textContent += text.charAt(i++);
-                setTimeout(type, 100);
-            }
-        }
-        type();
-
-        // Mobile menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
-
-        document.addEventListener('click', e => {
-            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-            }
+        achievements.forEach(achievement => {
+            observer.observe(achievement);
         });
     </script>
-
 </body>
 
 </html>
