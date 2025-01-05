@@ -2,272 +2,16 @@
 <html lang="en" class="light">
 
 <head>
-    <!-- Previous head content remains the same -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obidur Rahman | Mathematics & Code</title>
+    <title>Obidur Rahman</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Previous styles remain the same -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500&display=swap');
-
-        :root {
-            --ink: #2c2c2c;
-            --paper: #faf6f1;
-            --accent: #e45d50;
-            --secondary: #6b7280;
-        }
-
-        html.dark {
-            --ink: #faf6f1;
-            --paper: #1a1a1a;
-            --accent: #ff7b6b;
-            --secondary: #9ca3af;
-        }
-
-        body {
-            background-color: var(--paper);
-            color: var(--ink);
-            font-family: 'DM Sans', sans-serif;
-            line-height: 1.7;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        h1,
-        h2,
-        h3,
-        .mono {
-            font-family: 'Space Mono', monospace;
-        }
-
-        .section-border {
-            border-left: 1px solid var(--ink);
-            opacity: 0.2;
-            margin-left: 1rem;
-            padding-left: 1rem;
-            transition: opacity 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .section-border {
-                margin-left: 2rem;
-                padding-left: 2rem;
-            }
-        }
-
-        .section-border:hover {
-            opacity: 0.4;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            padding: 0.25rem 1rem;
-            border: 1px solid var(--ink);
-            margin: 0.25rem;
-            transition: all 0.3s ease;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.875rem;
-        }
-
-        .skill-tag:hover {
-            background: var(--ink);
-            color: var(--paper);
-            transform: translateY(-2px);
-        }
-
-        .project-card {
-            position: relative;
-            padding: 1.5rem;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            border-color: var(--ink);
-            transform: translateX(10px);
-        }
-
-        .project-card::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-            left: -1rem;
-        }
-
-        .nav-link {
-            position: relative;
-            padding-bottom: 2px;
-            font-family: 'Space Mono', monospace;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            padding: 0.5rem;
-            border: 1px solid var(--ink);
-            opacity: 0.5;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            z-index: 50;
-            background: var(--paper);
-        }
-
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: auto;
-                bottom: 2rem;
-                left: 2rem;
-            }
-        }
-
-        .theme-toggle:hover {
-            opacity: 1;
-        }
-
-        .mobile-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--paper);
-            border-top: 1px solid var(--ink);
-            padding: 1rem;
-            display: none;
-            z-index: 40;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: flex;
-                justify-content: space-around;
-            }
-        }
-
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            background: var(--accent);
-            z-index: 100;
-        }
-
-        .status {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            padding: 0.5rem 1rem;
-            background: var(--ink);
-            color: var(--paper);
-            border-radius: 20px;
-            font-size: 0.875rem;
-            opacity: 0.8;
-            z-index: 50;
-        }
-
-        @media (max-width: 768px) {
-            .status {
-                display: none;
-            }
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-
-        .scroll-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--ink);
-            color: var(--paper);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            z-index: 40;
-        }
-
-        .scroll-to-top.visible {
-            opacity: 0.5;
-        }
-
-        .scroll-to-top:hover {
-            opacity: 1;
-            transform: translateY(-2px);
-        }
-
-        .achievement {
-            position: relative;
-            padding: 1rem;
-            border: 1px solid var(--ink);
-            margin: 1rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .achievement.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .loading-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-            z-index: 100;
-        }
-    </style>
+    <link href="styles.css" rel="stylesheet">
 </head>
 
 <body class="py-12">
-    <!-- Add cursor elements -->
+    <!-- cursor elements -->
     <div id="cursor-dot" class="fixed w-2 h-2 bg-accent rounded-full pointer-events-none z-50"></div>
     <div id="cursor-outline" class="fixed w-8 h-8 border border-accent rounded-full pointer-events-none z-50"></div>
 
@@ -294,6 +38,7 @@
             <a href="#about" class="nav-link">/about</a>
             <a href="#achievements" class="nav-link">/achievements</a>
             <a href="#contact" class="nav-link">/contact</a>
+            <a href="files/resume.pdf" class="nav-link">/resume</a>
         </div>
     </nav>
 
@@ -439,7 +184,6 @@
             </div>
         </section>
 
-        <!-- Fix contact section closing tags -->
         <section id="contact" class="mb-24">
             <h2 class="text-2xl mb-12">Let's Connect</h2>
             <div class="section-border">
@@ -450,8 +194,8 @@
                     <a href="mailto:obidur.shawal@gmail.com"
                         class="block mb-4 hover:text-accent">obidur.shawal@gmail.com</a>
                     <div class="flex space-x-4">
-                        <a href="https://github.com/yourusername" class="opacity-75 hover:opacity-100">GitHub</a>
-                        <a href="https://linkedin.com/in/yourusername" class="opacity-75 hover:opacity-100">LinkedIn</a>
+                        <a href="https://github.com/yourusername" class="opacity-80 hover:opacity-100">GitHub</a>
+                        <a href="https://linkedin.com/in/yourusername" class="opacity-80 hover:opacity-100">LinkedIn</a>
                     </div>
                 </div>
             </div>
