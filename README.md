@@ -37,8 +37,8 @@ Welcome to my personal portfolio website! This website serves as a digital space
 ## 📬 Contact
 Feel free to connect with me via:
 - **Email:** obidurrahman@example.com
-- **LinkedIn:** [linkedin.com/in/obidurrahman](https://linkedin.com/in/obidurrahman)
-- **GitHub:** [github.com/obidurrahman](https://github.com/obidurrahman)
+- **LinkedIn:** [linkedin.com/in/obidur-rahman-shawal](https://linkedin.com/in/obidur-rahman-shawal)
+- **GitHub:** [github.com/Ashfinn](https://github.com/Ashfinn)
 
 ---
 
