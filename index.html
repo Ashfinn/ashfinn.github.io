@@ -1,384 +1,509 @@
 <!DOCTYPE html>
-<html lang="en" class="light scroll-smooth">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obidur Rahman</title>
+    <title>Obidur Rahman - Mathematics & Software Development</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        paper: '#faf6f1',
-                        ink: '#2c2c2c',
-                        accent: '#e45d50',
+                        primary: '#1a237e',  // Deep Blue
+                        secondary: '#4a148c', // Deep Purple
+                        accent: '#00bfa5',    // Teal
+                        surface: '#fafafa',   // Light Gray
+                        dark: '#121212',      // Almost Black
                     },
                     fontFamily: {
-                        mono: ['Space Mono', 'monospace'],
-                        sans: ['DM Sans', 'sans-serif'],
-                    },
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
 
-        .dark {
-            --tw-bg-opacity: 1;
-            background-color: rgb(26 26 26 / var(--tw-bg-opacity));
-            color: #faf6f1;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .scroll-fade-in {
+        ::-webkit-scrollbar-track {
+            background: #fafafa;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1a237e;
+            border-radius: 4px;
+        }
+
+        body {
+            background-color: #fafafa;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a237e 0%, #4a148c 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+            animation: pulse 8s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.5);
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+
+        .project-card {
+            background: white;
+            border: 1px solid rgba(26, 35, 126, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.05) 0%, rgba(0, 191, 165, 0.05) 100%);
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.3s ease;
         }
 
-        .scroll-fade-in.visible {
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(26, 35, 126, 0.15);
+        }
+
+        .project-card:hover::before {
             opacity: 1;
-            transform: translateY(0);
         }
 
-        .scroll-slide-left {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        .skill-tag {
+            background: rgba(26, 35, 126, 0.1);
+            border: 1px solid rgba(26, 35, 126, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .scroll-slide-left.visible {
-            opacity: 1;
-            transform: translateX(0);
+        .skill-tag:hover {
+            background: #1a237e;
+            color: white;
+            transform: translateY(-2px);
         }
 
-        .scroll-slide-right {
-            opacity: 0;
-            transform: translateX(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        .mobile-nav {
+            backdrop-filter: blur(8px);
         }
 
-        .scroll-slide-right.visible {
-            opacity: 1;
-            transform: translateX(0);
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header::before {
+            content: '';
+            width: 32px;
+            height: 2px;
+            background: #00bfa5;
+            margin-right: 1rem;
+        }
+
+        .section-header::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(26, 35, 126, 0.1);
+            margin-left: 1rem;
         }
     </style>
 </head>
 
-<body class="py-12 bg-paper dark:bg-ink text-ink dark:text-paper font-sans transition-colors duration-300">
-    <div class="scroll-indicator fixed top-0 left-0 h-1 bg-accent z-50"></div>
-
-    <button
-        class="theme-toggle fixed top-8 left-8 p-3 border border-ink dark:border-paper rounded-full transition-all duration-300 hover:rotate-45 md:top-8 md:left-8 z-50">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5" />
-            <path
-                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-        </svg>
-    </button>
-
-    <a id="status" href="files/resume.pdf"
-        class="fixed bottom-8 right-8 py-2 px-4 bg-accent text-paper rounded-full text-sm z-50 hidden md:block">
-        My Resume
-    </div>
-
-    <nav class="hidden md:block fixed top-0 right-0 p-8 text-right z-40">
-        <div class="space-x-8 font-mono">
-            <a href="#work"
-                class="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent hover:after:w-full after:transition-all after:duration-300">/work</a>
-            <a href="#about"
-                class="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent hover:after:w-full after:transition-all after:duration-300">/about</a>
-            <a href="#achievements"
-                class="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent hover:after:w-full after:transition-all after:duration-300">/achievements</a>
-            <a href="#contact"
-                class="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent hover:after:w-full after:transition-all after:duration-300">/contact</a>
+<body class="min-h-screen">
+    <!-- Mobile Navigation -->
+    <nav
+        class="fixed bottom-0 left-0 right-0 bg-white bg-opacity-80 mobile-nav p-4 md:hidden z-50 border-t border-gray-200">
+        <div class="flex justify-around items-center">
+            <a href="#work" class="text-primary hover:text-accent transition-colors">
+                <i class="fas fa-code text-lg"></i>
+            </a>
+            <a href="#about" class="text-primary hover:text-accent transition-colors">
+                <i class="fas fa-user text-lg"></i>
+            </a>
+            <a href="#experience" class="text-primary hover:text-accent transition-colors">
+                <i class="fas fa-briefcase text-lg"></i>
+            </a>
+            <a href="#contact" class="text-primary hover:text-accent transition-colors">
+                <i class="fas fa-envelope text-lg"></i>
+            </a>
         </div>
     </nav>
 
-    <div
-        class="fixed bottom-0 left-0 right-0 bg-paper dark:bg-ink border-t border-ink dark:border-paper p-4 flex justify-around md:hidden z-40">
-        <a href="#work" class="text-xl"><i class="fas fa-code"></i></a>
-        <a href="#about" class="text-xl"><i class="fas fa-user"></i></a>
-        <a href="#achievements" class="text-xl"><i class="fas fa-trophy"></i></a>
-        <a href="#contact" class="text-xl"><i class="fas fa-envelope"></i></a>
-    </div>
+    <!-- Desktop Navigation -->
+    <nav class="fixed top-0 right-0 p-8 text-primary z-40 hidden md:block">
+        <div class="space-x-8 font-display">
+            <a href="#work" class="hover:text-accent transition-colors">/work</a>
+            <a href="#about" class="hover:text-accent transition-colors">/about</a>
+            <a href="#experience" class="hover:text-accent transition-colors">/experience</a>
+            <a href="#contact" class="hover:text-accent transition-colors">/contact</a>
+        </div>
+    </nav>
 
-    <main class="container mx-auto px-4 max-w-4xl">
-        <!-- Header Section -->
-        <header class="mb-24 scroll-fade-in">
-            <div class="inline-block mb-2 text-sm font-mono">Hello, I'm</div>
-            <h1 class="text-4xl md:text-6xl mb-6 font-mono">Obidur Rahman</h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300">Mathematics Student & Software Developer</p>
-            <div class="mt-8 p-4 bg-black bg-opacity-5 dark:bg-white dark:bg-opacity-5 rounded-lg">
-                <p class="italic text-gray-600 dark:text-gray-300">
-                    "At the intersection of mathematics and code, I find poetry in patterns and beauty in algorithms."
-                </p>
+    <main class="container mx-auto px-4 max-w-6xl pb-20 md:pb-0">
+        <!-- Hero Section -->
+        <header class="mb-24 mt-8">
+            <div class="hero-gradient rounded-2xl p-12 text-white relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="font-display text-sm mb-2 text-accent">Hello, I'm</div>
+                    <h1 class="text-5xl md:text-7xl font-display mb-6">Obidur Rahman</h1>
+                    <p class="text-xl opacity-90 mb-6">Mathematics Student & Software Developer</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="tel:+8801603683121"
+                            class="flex items-center gap-2 bg-white bg-opacity-10 px-4 py-2 rounded-lg hover:bg-opacity-20 transition-all">
+                            <i class="fas fa-phone"></i>
+                            +880 1603683121
+                        </a>
+                        <a href="mailto:obidur.shawal@gmail.com"
+                            class="flex items-center gap-2 bg-white bg-opacity-10 px-4 py-2 rounded-lg hover:bg-opacity-20 transition-all">
+                            <i class="fas fa-envelope"></i>
+                            obidur.shawal@gmail.com
+                        </a>
+                    </div>
+                    <div class="mt-8 p-6 bg-white bg-opacity-10 backdrop-blur-sm rounded-lg">
+                        <p class="italic text-lg">
+                            "At the intersection of mathematics and code, I find poetry in patterns and beauty in
+                            algorithms."
+                        </p>
+                    </div>
+                </div>
             </div>
         </header>
 
-        <!-- Projects Section -->
+        <!-- Projects -->
         <section id="work" class="mb-24">
-            <h2 class="text-2xl mb-12 font-mono scroll-fade-in">Featured Work</h2>
-
-            <!-- Border container with left line -->
-            <div
-                class="border-l border-ink dark:border-paper ml-4 md:ml-8 pl-4 md:pl-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
-
-                <div class="space-y-8">
-                    <!-- Diarrhea Prediction Model -->
-                    <div
-                        class="scroll-slide-right relative p-6 border border-transparent hover:border-ink dark:hover:border-paper transition-all duration-300 cursor-pointer group">
-                        <span
-                            class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:-left-4 transition-all duration-300 text-accent">→</span>
-                        <h3 class="text-xl font-bold font-mono">Diarrhea Prediction Model</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">A fusion of environmental data analysis and
-                            machine
-                            learning to predict and prevent health risks across regions.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Python</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">scikit-learn</span>
-                        </div>
-                    </div>
-
-                    <!-- MATLAB Hero -->
-                    <div
-                        class="scroll-slide-right relative p-6 border border-transparent hover:border-ink dark:hover:border-paper transition-all duration-300 cursor-pointer group delay-100">
-                        <span
-                            class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:-left-4 transition-all duration-300 text-accent">→</span>
-                        <h3 class="text-xl font-bold font-mono">MATLAB Hero</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">An educational platform born from my passion
-                            for
-                            helping fellow students master MATLAB programming.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Next.js</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">React</span>
-                        </div>
-                    </div>
-
-                    <!-- IMDB Sentiment Analysis -->
-                    <div
-                        class="scroll-slide-right relative p-6 border border-transparent hover:border-ink dark:hover:border-paper transition-all duration-300 cursor-pointer group delay-200">
-                        <span
-                            class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:-left-4 transition-all duration-300 text-accent">→</span>
-                        <h3 class="text-xl font-bold font-mono">IMDB Sentiment Analysis</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">Exploring the emotional landscape of film
-                            reviews
-                            through natural language processing.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Python</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">NLTK</span>
-                        </div>
-                    </div>
-
-                    <!-- httPY -->
-                    <div
-                        class="scroll-slide-right relative p-6 border border-transparent hover:border-ink dark:hover:border-paper transition-all duration-300 cursor-pointer group delay-300">
-                        <span
-                            class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:-left-4 transition-all duration-300 text-accent">→</span>
-                        <h3 class="text-xl font-bold font-mono">httPY</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">A simple HTTP server implemented in Python that
-                            handles basic HTTP requests and responds according to specified endpoints.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Python</span>
-                        </div>
-                    </div>
-
-                    <!-- Modern Portfolio Website -->
-                    <div
-                        class="scroll-slide-right relative p-6 border border-transparent hover:border-ink dark:hover:border-paper transition-all duration-300 cursor-pointer group delay-400">
-                        <span
-                            class="absolute left-0 opacity-0 group-hover:opacity-100 group-hover:-left-4 transition-all duration-300 text-accent">→</span>
-                        <h3 class="text-xl font-bold font-mono">Modern Portfolio Website</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">A modern, responsive portfolio website built
-                            with
-                            HTML, Tailwind, and JavaScript, featuring interactive particle animations and smooth scroll
-                            effects.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">HTML</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Tailwind
-                                CSS</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="section-header">
+                <h2 class="text-2xl font-display text-primary">Featured Work</h2>
             </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="mb-24">
-            <h2 class="text-2xl mb-12 font-mono scroll-fade-in">About Me</h2>
-
-            <div
-                class="border-l border-ink dark:border-paper ml-4 md:ml-8 pl-4 md:pl-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
-                <!-- Journey -->
-                <div class="scroll-slide-right relative p-6 mb-8">
-                    <span class="absolute -left-[27px] top-8 w-3 h-3 bg-accent rounded-full"></span>
-                    <h3 class="text-xl font-bold font-mono">The Journey</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mt-2">
-                        As a Mathematics student at the University of Chittagong, I've discovered that the elegance of
-                        mathematical thinking perfectly complements the art of coding. My journey began with a curiosity
-                        about patterns and evolved into a passion for creating intelligent systems.
-                    </p>
-                </div>
-
-                <!-- Community Leadership -->
-                <div class="scroll-slide-right relative p-6 mb-8 delay-100">
-                    <span class="absolute -left-[27px] top-8 w-3 h-3 bg-accent rounded-full"></span>
-                    <h3 class="text-xl font-bold font-mono">Community Leadership</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mt-2">
-                        Currently serving as the Research and Development Secretary at the Chittagong University Math
-                        Club, where I bridge the gap between theoretical mathematics and practical programming through
-                        workshops and mentoring.
-                    </p>
-                </div>
-
-                <!-- Skills Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                    <div class="scroll-slide-right delay-200">
-                        <h3 class="text-xl mb-4 font-mono">Technical Expertise</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Python</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Machine
-                                Learning</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Next.js</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">React</span>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Environmental Disease Analysis -->
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary">Environmental Determinants of Diarrheal Disease: A
+                        Multi-Regional Analysis in Bangladesh</h3>
+                    <p class="text-gray-600 mt-4">Developed machine learning models to analyze environmental factors
+                        affecting disease patterns across four major divisions. Created interactive dashboard for
+                        visualizing correlations.</p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Python</span>
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">scikit-learn</span>
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Pandas</span>
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Plotly</span>
                     </div>
-                    <div class="scroll-slide-right delay-300">
-                        <h3 class="text-xl mb-4 font-mono">Current Focus</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Deep
-                                Learning</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">NLP</span>
-                            <span
-                                class="px-4 py-1 text-sm border border-ink dark:border-paper font-mono transition-all duration-300 hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink">Teaching</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Achievements Section -->
-        <section id="achievements" class="mb-24">
-            <h2 class="text-2xl mb-12 font-mono scroll-fade-in">Achievements & Certifications</h2>
-
-            <div
-                class="border-l border-ink dark:border-paper ml-4 md:ml-8 pl-4 md:pl-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
-                <!-- Achievement Cards -->
-                <div class="space-y-6">
-                    <div
-                        class="scroll-slide-right p-6 border border-ink dark:border-paper transition-all duration-300 hover:translate-x-2">
-                        <h3 class="text-xl font-bold font-mono">IBM Data Science Specialization</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">Completed comprehensive training in Python, AI,
-                            and Data Science</p>
-                    </div>
-
-                    <div
-                        class="scroll-slide-right p-6 border border-ink dark:border-paper transition-all duration-300 hover:translate-x-2 delay-100">
-                        <h3 class="text-xl font-bold font-mono">Community Impact</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">Founded The Code Forum, growing it to an active
-                            community of learners</p>
-                    </div>
-
-                    <div
-                        class="scroll-slide-right p-6 border border-ink dark:border-paper transition-all duration-300 hover:translate-x-2 delay-200">
-                        <h3 class="text-xl font-bold font-mono">Headstarter AI Fellowship</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mt-2">Developed full-stack applications with AI
-                            integration</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="mb-24">
-            <h2 class="text-2xl mb-12 font-mono scroll-fade-in">Let's Connect</h2>
-
-            <div
-                class="border-l border-ink dark:border-paper ml-4 md:ml-8 pl-4 md:pl-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
-                <div class="scroll-slide-right">
-                    <p class="mb-8 text-gray-600 dark:text-gray-300">
-                        Always excited to collaborate on projects that combine mathematics, code, and creativity.
-                    </p>
-
-                    <div class="space-y-4">
-                        <a href="mailto:obidur.shawal@gmail.com"
-                            class="block text-ink dark:text-paper hover:text-accent dark:hover:text-accent transition-colors duration-300">
-                            obidur.shawal@gmail.com
+                    <div class="mt-6 flex gap-4">
+                        <a href="#" class="text-accent hover:text-primary transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                         </a>
+                        <a href="#" class="text-accent hover:text-primary transition-colors">
+                            <i class="fab fa-github mr-2"></i>Source Code
+                        </a>
+                    </div>
+                </div>
 
-                        <div class="flex space-x-6">
-                            <a href="https://github.com/yourusername"
-                                class="text-ink dark:text-paper opacity-80 hover:opacity-100 hover:text-accent dark:hover:text-accent transition-all duration-300">
-                                GitHub
-                            </a>
-                            <a href="https://linkedin.com/in/yourusername"
-                                class="text-ink dark:text-paper opacity-80 hover:opacity-100 hover:text-accent dark:hover:text-accent transition-all duration-300">
-                                LinkedIn
-                            </a>
+                <!-- Shell Client -->
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary">Shell Client (Fish)</h3>
+                    <p class="text-gray-600 mt-4">Implemented a lightweight shell client in C++ with support for
+                        multiple shell commands and robust process management system.</p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">C++</span>
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Systems Programming</span>
+                    </div>
+                    <div class="mt-6">
+                        <a href="#" class="text-accent hover:text-primary transition-colors">
+                            <i class="fab fa-github mr-2"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- IMDB Sentiment Analysis -->
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary">IMDB Sentiment Analysis</h3>
+                    <p class="text-gray-600 mt-4">Built machine learning model for sentiment analysis of movie reviews
+                        with NLP pipeline and real-time prediction interface.</p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Python</span>
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">NLTK</span>
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Streamlit</span>
+                    </div>
+                    <div class="mt-6 flex gap-4">
+                        <a href="#" class="text-accent hover:text-primary transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                        </a>
+                        <a href="#" class="text-accent hover:text-primary transition-colors">
+                            <i class="fab fa-github mr-2"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- MATLAB Hero -->
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary">MATLAB Hero</h3>
+                    <p class="text-gray-600 mt-4">An educational platform born from my passion
+                        for
+                        helping fellow students master MATLAB programming.</p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">React</span>
+                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Next.js</span>
+                    </div>
+                    <div class="mt-6 flex gap-4">
+                        <a href="#" class="text-accent hover:text-primary transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                        </a>
+                        <a href="#" class="text-accent hover:text-primary transition-colors">
+                            <i class="fab fa-github mr-2"></i>Source Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="mb-24">
+            <div class="section-header">
+                <h2 class="text-2xl font-display text-primary">About Me</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary mb-6">Education & Background</h3>
+                    <div class="space-y-4">
+                        <p class="text-gray-600">
+                            Currently pursuing BSc in Mathematics at the University of Chittagong (2023-2027), where I
+                            blend mathematical thinking with practical programming applications.
+                        </p>
+                        <p class="text-gray-600">
+                            As the Research and Development Secretary at the Chittagong University Math Club, I bridge
+                            theoretical mathematics with programming through workshops and mentoring.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary mb-6">Technical Skills</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-primary mb-3">Programming Languages</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Python</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">C++</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">JavaScript</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">MATLAB</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-3">Technologies & Tools</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Firebase</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Git</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">scikit-learn</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Next.js</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Experience -->
+        <section id="experience" class="mb-24">
+            <div class="section-header">
+                <h2 class="text-2xl font-display text-primary">Experience & Achievements</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Professional Experience -->
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary mb-6">Professional Experience</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-display text-lg text-primary">Software Engineering Fellowship</h4>
+                            <p class="text-accent">Headstarter AI • Aug 2024</p>
+                            <ul class="mt-3 space-y-2 text-gray-600">
+                                <li>• Led development team in creating multiple full-stack applications</li>
+                                <li>• Developed "Rate My Professor" platform and AI-integrated customer support system
+                                </li>
+                                <li>• Built comprehensive inventory management and flashcard applications</li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 mt-4">
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Next.js</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">FastAPI</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Firebase</span>
+                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">React</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leadership -->
+                <div class="project-card p-8 rounded-xl">
+                    <h3 class="text-xl font-display text-primary mb-6">Leadership & Community</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-display text-lg text-primary">Community Lead</h4>
+                            <p class="text-accent">The Code Forum • 2023–Present</p>
+                            <ul class="mt-3 space-y-2 text-gray-600">
+                                <li>• Founded and lead a thriving programming community with 100+ active members</li>
+                                <li>• Conduct weekly programming workshops and peer learning sessions</li>
+                                <li>• Created comprehensive learning roadmaps and resources for beginners</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-display text-lg text-primary">R&D Secretary</h4>
+                            <p class="text-accent">Chittagong University Math Club • 2023–Present</p>
+                            <ul class="mt-3 space-y-2 text-gray-600">
+                                <li>• Lead weekly Python programming sessions focusing on mathematical applications</li>
+                                <li>• Created learning materials bridging mathematics concepts with programming</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="mt-8 project-card p-8 rounded-xl">
+                <h3 class="text-xl font-display text-primary mb-6">Certifications & Awards</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-display text-lg text-primary">First Place</h4>
+                        <p class="text-accent">Digital Innovation Fair 2020</p>
+                        <p class="mt-2 text-gray-600">Developed Drug Addiction Recovery System targeting youth
+                            rehabilitation</p>
+                    </div>
+                    <div>
+                        <h4 class="font-display text-lg text-primary">Machine Learning</h4>
+                        <p class="text-accent">Stanford University</p>
+                        <p class="mt-2 text-gray-600">Completed Machine Learning Specialization with hands-on projects
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-display text-lg text-primary">Deep Learning</h4>
+                        <p class="text-accent">DeepLearning.AI</p>
+                        <p class="mt-2 text-gray-600">Mastered neural networks and deep learning architectures</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="mb-24">
+            <div class="section-header">
+                <h2 class="text-2xl font-display text-primary">Let's Connect</h2>
+            </div>
+
+            <div class="project-card p-8 rounded-xl">
+                <div class="max-w-2xl mx-auto text-center">
+                    <p class="text-gray-600 text-lg mb-8">
+                        Always excited to collaborate on projects that combine mathematics, code, and creativity. Let's
+                        build something amazing together!
+                    </p>
+
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                        <a href="mailto:obidur.shawal@gmail.com"
+                            class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg hover:bg-accent transition-all">
+                            <i class="fas fa-envelope"></i>
+                            Email Me
+                        </a>
+                        <a href="https://github.com/Ashfinn"
+                            class="flex items-center gap-2 bg-dark text-white px-6 py-3 rounded-lg hover:bg-accent transition-all">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/obidur-rahman-shawal"
+                            class="flex items-center gap-2 bg-[#0077b5] text-white px-6 py-3 rounded-lg hover:bg-accent transition-all">
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
-        // Theme toggle
-        const themeToggle = document.querySelector('.theme-toggle');
-        const html = document.documentElement;
-
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // Scroll indicator
+        const updateScroll = () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white', 'bg-opacity-80', 'backdrop-blur-sm', 'shadow-sm');
+            } else {
+                nav.classList.remove('bg-white', 'bg-opacity-80', 'backdrop-blur-sm', 'shadow-sm');
+            }
         };
 
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        window.addEventListener('scroll', updateScroll);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
-        }, observerOptions);
-
-        // Observe all elements with scroll animation classes
-        document.querySelectorAll('.scroll-fade-in, .scroll-slide-left, .scroll-slide-right').forEach(element => {
-            scrollObserver.observe(element);
         });
 
-        // Scroll indicator
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        window.addEventListener('scroll', () => {
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (window.scrollY / windowHeight) * 100;
-            scrollIndicator.style.width = `${scrolled}%`;
-        });
+        // Add animation to cards on scroll
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700');
+                observer.observe(card);
+            });
+        };
+
+        observeElements();
     </script>
 </body>
 
