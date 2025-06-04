@@ -1,694 +1,823 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obidur Rahman - Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <title>Obidur Rahman - Data Scientist // Access Log</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e3a8a',  // Deep Blue
-                        secondary: '#5b21b6', // Vibrant Purple
-                        accent: '#14b8a6',   // Teal
-                        surface: '#f8fafc',  // Light Gray
-                        dark: '#0f172a',     // Slate
-                        muted: '#64748b',   // Neutral Gray
-                        highlight: '#facc15', // Warm Yellow
-                        darkBg: '#1e293b',   // Darker Slate for Dark Mode
-                        darkAccent: '#2dd4bf' // Brighter Teal for Dark Mode
-                    },
-                    fontFamily: {
-                        display: ['Space Grotesk', 'sans-serif'],
-                        body: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f8fafc;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #1e3a8a;
-            border-radius: 5px;
+        /* Neo-Brutalist inspired color palette */
+        :root {
+            --primary-bg: #FFFFFF;
+            /* Stark White */
+            --secondary-bg: #E0E0E0;
+            /* Light Gray */
+            --tertiary-bg: #1A1A1A;
+            /* Near Black for contrast elements */
+            --text-primary: #1A1A1A;
+            /* Dark Text */
+            --text-secondary: #4A4A4A;
+            /* Slightly lighter dark text */
+            --border-color: #000000;
+            /* Solid Black Borders */
+            --accent-color: #FF00FF;
+            /* Vibrant Magenta (or choose #00FFFF for Cyan, #FFFF00 for Yellow) */
+            --glow-accent: rgba(255, 0, 255, 0.3);
+            /* Subtle glow for accent */
         }
 
         body {
-            background-color: #f8fafc;
-            font-family: 'Inter', sans-serif;
-            color: #0f172a;
-            transition: background-color 0.3s, color 0.3s;
-            position: relative;
+            font-family: 'Space Mono', monospace;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.5;
+            /* Standard line height */
             overflow-x: hidden;
+            border: 4px solid var(--border-color);
+            /* Overall body border */
+            min-height: 100vh;
+            /* Ensure border shows */
+            padding: 4px;
+            /* Space for the border */
+            box-sizing: border-box;
+            position: relative;
+            /* For absolute positioning of mobile menu */
         }
 
-        /* Background Effect */
-        body::before {
-            content: '';
+        /* Animated background grid - adapted for neo-brutalism */
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(30, 58, 138, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                /* Lighter, subtle black grid */
+                linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            /* Slightly tighter grid */
             z-index: -1;
-            animation: bgShift 20s infinite ease-in-out;
+            /* No animation to keep it more static/raw */
         }
 
-        @keyframes bgShift {
-            0% {
-                transform: translate(-10%, -10%) scale(1);
-            }
-
-            50% {
-                transform: translate(10%, 10%) scale(1.1);
-            }
-
-            100% {
-                transform: translate(-10%, -10%) scale(1);
-            }
+        /* Stronger, bolder gradient for text/elements */
+        .logo-gradient,
+        .hero-title-main-gradient,
+        .section-title-gradient,
+        .btn-primary-gradient,
+        .icon-gradient {
+            background: linear-gradient(135deg, var(--accent-color), #8B5CF6);
+            /* Blend accent with a complementary color */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .dark-mode {
-            background-color: #0f172a;
-            color: #e2e8f0;
-        }
-
-        .dark-mode::before {
-            background: radial-gradient(circle at 70% 70%, rgba(45, 212, 191, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
-        }
-
-        .dark-mode .surface-bg {
-            background-color: #1e293b;
-        }
-
-        .dark-mode .text-muted {
-            color: #94a3b8;
-        }
-
-        .dark-mode .hero-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #5b21b6 70%, #0f172a 100%);
-        }
-
-        .dark-mode .btn-gradient {
-            background: linear-gradient(90deg, #2dd4bf 0%, #5b21b6 100%);
-        }
-
-        .hero-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #5b21b6 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-gradient::before {
+        .project-card::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-            animation: pulse 10s infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            /* Distinct top border */
+            background: var(--accent-color);
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.4;
-            }
-
-            50% {
-                transform: scale(1.2);
-                opacity: 0.2;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 0.4;
-            }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            /* More separation */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            /* Longer line */
+            height: 4px;
+            /* Thicker line */
+            background: var(--accent-color);
+            /* Solid accent color */
+            border-radius: 0;
+            /* Sharp corners */
         }
 
-        .project-card {
-            background: white;
-            border: 1px solid rgba(30, 58, 138, 0.1);
-            border-radius: 12px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Elements with harsh borders and distinct look */
+        .brutal-box {
+            border: 2px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--border-color);
+            /* Distinct box shadow */
+        }
+
+        .brutal-button {
+            border: 3px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--border-color);
+            transition: all 0.1s ease-out;
+            /* Snapier transition */
+            color: var(--primary-bg);
+            /* Default text color for buttons */
+        }
+
+        .brutal-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--border-color);
+        }
+
+        /* Primary button specific brutalist styles */
+        .btn-primary-gradient {
+            background: var(--accent-color);
+            /* Solid accent color */
+            color: var(--primary-bg);
+            /* White text on accent */
+        }
+
+        .btn-primary-gradient:hover {
+            background: var(--tertiary-bg);
+            /* Darker on hover */
+            color: var(--accent-color);
+            /* Accent text on hover */
+            box-shadow: 2px 2px 0px var(--accent-color);
+            /* Accent shadow on hover */
+        }
+
+        /* Secondary button specific brutalist styles */
+        .btn-secondary-brutal {
+            background: var(--tertiary-bg);
+            color: var(--primary-bg);
+        }
+
+        .btn-secondary-brutal:hover {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            box-shadow: 2px 2px 0px var(--border-color);
+        }
+
+
+        /* Scroll animations - kept for functionality, but less 'smooth' visually */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease-out;
+            /* Quicker fade in */
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero dynamic background - still subtle but changed color */
+        .hero-dynamic-bg {
+            transition: background 0.3s ease-out;
+        }
+
+        /* Specific Arknights-like UI elements adaptations */
+        .segmented-panel {
+            border: 2px solid var(--border-color);
+            /* Prominent borders */
+            background-color: var(--secondary-bg);
+            box-shadow: 4px 4px 0px var(--border-color);
+            /* Harsh shadow */
+        }
+
+        .tech-tag {
+            border: 1px solid var(--text-secondary);
+            /* Clear, simple borders */
+            background-color: var(--secondary-bg);
+            /* Muted background */
+            transition: all 0.1s ease-out;
+        }
+
+        .tech-tag:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: scale(1.05);
+            box-shadow: 2px 2px 0px var(--border-color);
+        }
+
+        .metric {
+            border: 2px solid var(--border-color);
+            /* Strong borders for metrics */
+            background-color: var(--secondary-bg);
+            box-shadow: 2px 2px 0px var(--border-color);
+        }
+
+        /* Specific hover effects for the neo-brutalist style */
+        .nav-link-hover {
             position: relative;
-            overflow: hidden;
+            display: inline-block;
         }
 
-        .dark-mode .project-card {
-            background: #1e293b;
-            border-color: rgba(255, 255, 255, 0.15);
+        .nav-link-hover:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            /* Stronger underline */
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.2s ease-out;
+        }
+
+        .nav-link-hover:hover::after {
+            width: 100%;
         }
 
         .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(30, 58, 138, 0.15);
+            transform: translate(-4px, -4px);
+            /* Larger "lift" on hover */
+            box-shadow: 8px 8px 0px var(--border-color);
+            /* Exaggerated shadow on hover */
         }
 
-        .dark-mode .project-card:hover {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        .achievement-item {
+            border: 2px solid var(--border-color);
+            box-shadow: 3px 3px 0px var(--border-color);
+            background-color: var(--secondary-bg);
+            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
         }
 
-        .skill-tag {
-            background: rgba(30, 58, 138, 0.08);
-            border: 1px solid rgba(30, 58, 138, 0.15);
-            transition: all 0.3s ease;
+        .achievement-item:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--border-color);
         }
 
-        .dark-mode .skill-tag {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
+        .contact-link-brutal {
+            border: 2px solid var(--border-color);
+            box-shadow: 3px 3px 0px var(--border-color);
+            background-color: var(--secondary-bg);
+            transition: all 0.1s ease-out;
         }
 
-        .skill-tag:hover {
-            background: #14b8a6;
-            color: white;
-            transform: translateY(-2px);
-            border-color: #14b8a6;
+        .contact-link-brutal:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            /* Text becomes white on hover */
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--border-color);
         }
 
-        .dark-mode .skill-tag:hover {
-            background: #2dd4bf;
-            border-color: #2dd4bf;
+        .contact-link-brutal:hover .contact-icon {
+            filter: invert(1);
+            /* Invert icon color on hover */
         }
 
-        .btn-gradient {
-            background: linear-gradient(90deg, #14b8a6 0%, #1e3a8a 100%);
+        /* Ensure images are sharp */
+        img {
+            image-rendering: pixelated;
+            /* Optional: for a sharper image look */
         }
 
-        .mobile-nav {
-            backdrop-filter: blur(10px);
+        /* Mobile Menu Specific Styles */
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            /* Position below the nav bar */
+            left: 0;
+            right: 0;
+            background-color: var(--tertiary-bg);
+            color: var(--primary-bg);
+            border-top: 4px solid var(--border-color);
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s;
+            z-index: 999;
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2.5rem;
+        .mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
         }
 
-        .section-header::before {
-            content: '';
-            width: 40px;
-            height: 3px;
-            background: #14b8a6;
-            margin-right: 1rem;
+        .mobile-menu a {
+            display: block;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--text-secondary);
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-bg);
+            text-align: center;
         }
 
-        .dark-mode .section-header::before {
-            background: #2dd4bf;
+        .mobile-menu a:last-child {
+            border-bottom: none;
         }
 
-        .section-header::after {
-            content: '';
-            flex-grow: 1;
-            height: 1px;
-            background: rgba(30, 58, 138, 0.1);
-            margin-left: 1rem;
-        }
-
-        .dark-mode .section-header::after {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        #theme-toggle {
-            background: #1e3a8a;
-            padding: 0.75rem;
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        #theme-toggle:hover {
-            background: #14b8a6;
-            transform: rotate(20deg) scale(1.1);
-        }
-
-        .dark-mode #theme-toggle {
-            background: #2dd4bf;
-        }
-
-        .dark-mode #theme-toggle:hover {
-            background: #facc15;
+        .mobile-menu a:hover {
+            background-color: var(--accent-color);
+            color: var(--tertiary-bg);
         }
     </style>
 </head>
 
-<body class="min-h-screen antialiased">
-    <!-- Theme Toggle -->
-    <button id="theme-toggle" class="fixed top-4 left-4 z-50 text-white">
-        <i class="fas fa-moon"></i>
-    </button>
+<body class="p-0 m-0">
+    <div class="bg-grid"></div>
 
-    <!-- Mobile Navigation -->
-    <nav
-        class="fixed bottom-0 left-0 right-0 bg-white bg-opacity-90 mobile-nav p-4 md:hidden z-50 border-t border-gray-100 shadow-lg surface-bg">
-        <div class="flex justify-around items-center">
-            <a href="#work" class="text-primary hover:text-accent transition-colors p-2"><i
-                    class="fas fa-code text-xl"></i></a>
-            <a href="#about" class="text-primary hover:text-accent transition-colors p-2"><i
-                    class="fas fa-user text-xl"></i></a>
-            <a href="#experience" class="text-primary hover:text-accent transition-colors p-2"><i
-                    class="fas fa-briefcase text-xl"></i></a>
-            <a href="#contact" class="text-primary hover:text-accent transition-colors p-2"><i
-                    class="fas fa-envelope text-xl"></i></a>
-            <a href="files/resume.pdf" class="text-primary hover:text-accent transition-colors p-2"><i
-                    class="fas fa-file text-xl"></i></a>
+    <nav class="fixed top-0 left-0 right-0 bg-primary-bg/90 backdrop-blur-sm border-b-4 border-black z-[1000] py-4">
+        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center">
+            <div class="text-4xl font-black logo-gradient font-orbitron brutal-box p-2">OR.SYS</div>
+            <ul class="hidden md:flex space-x-10 list-none">
+                <li><a href="#home"
+                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">ACCESS
+                        LOG</a></li>
+                <li><a href="#projects"
+                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">PROJECTS
+                        // STACK</a></li>
+                <li><a href="#about"
+                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">ABOUT
+                        // PROFILE</a></li>
+                <li><a href="#contact"
+                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">CONTACT
+                        // COMMS</a></li>
+            </ul>
+            <button id="mobile-menu-button"
+                class="md:hidden text-tertiary-bg text-2xl brutal-button p-3 bg-secondary-bg">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="mobile-menu">
+            <a href="#home" class="block">ACCESS LOG</a>
+            <a href="#projects" class="block">PROJECTS // STACK</a>
+            <a href="#about" class="block">ABOUT // PROFILE</a>
+            <a href="#contact" class="block">CONTACT // COMMS</a>
         </div>
     </nav>
 
-    <!-- Desktop Navigation -->
-    <nav class="fixed top-0 right-0 p-6 text-primary z-40 hidden md:block transition-all duration-300">
-        <div class="space-x-10 font-display font-medium">
-            <a href="#work" class="hover:text-accent transition-colors">Work</a>
-            <a href="#about" class="hover:text-accent transition-colors">About</a>
-            <a href="#experience" class="hover:text-accent transition-colors">Experience</a>
-            <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
-            <a href="files/resume.pdf" class="hover:text-accent transition-colors">Resume</a>
+    <section id="home"
+        class="hero min-h-screen flex items-center relative overflow-hidden bg-primary-bg hero-dynamic-bg">
+        <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+            <div class="hero-content text-center md:text-left brutal-box p-8 bg-secondary-bg animate-on-scroll">
+                <h1 class="text-7xl lg:text-8xl font-extrabold leading-tight mb-6 font-orbitron">
+                    <span class="hero-title-main-gradient">OBIDUR RAHMAN</span>
+                    <span
+                        class="block text-accent-color -skew-x-3 ml-0 md:ml-8 border-b-4 border-l-4 border-black inline-block p-2 text-5xl lg:text-6xl mt-4">DATA
+                        SCIENTIST</span>
+                </h1>
+                <p class="text-2xl text-tertiary-bg mb-4 font-bold">INITIATING DATA TRANSFORMATION PROTOCOL...</p>
+                <p class="text-xl text-text-secondary mb-12 max-w-lg mx-auto md:mx-0">
+                    Mathematics student passionate about building intelligent systems that solve real-world problems.
+                    This interface provides an overview of operations.
+                </p>
+                <div class="flex gap-6 justify-center md:justify-start flex-wrap">
+                    <a href="#projects"
+                        class="brutal-button px-8 py-4 font-semibold relative overflow-hidden transform -skew-x-3"
+                        style="background: var(--accent-color); color: var(--primary-bg);">
+                        VIEW PROJECT LOG
+                    </a>
+                    <a href="#contact"
+                        class="brutal-button btn-secondary-brutal px-8 py-4 font-semibold relative overflow-hidden transform -skew-x-3">
+                        ESTABLISH COMMS
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual relative h-[500px] hidden md:block">
+                <div class="floating-card absolute brutal-box p-6 bg-secondary-bg"
+                    style="top: 50px; right: 100px; --rotate: 5deg;">
+                    <div class="text-4xl font-extrabold text-accent-color mb-2">83.87%</div>
+                    <div class="sm text-text-secondary font-medium">ACCURACY RATING</div>
+                </div>
+                <div class="floating-card absolute brutal-box p-6 bg-secondary-bg"
+                    style="bottom: 100px; right: 50px; --rotate: -8deg; animation-delay: 2s;">
+                    <div class="text-4xl font-extrabold text-accent-color mb-2">0.86</div>
+                    <div class="sm text-text-secondary font-medium">AUC SCORE</div>
+                </div>
+                <div class="floating-card absolute brutal-box p-6 bg-secondary-bg"
+                    style="top: 200px; left: 50px; --rotate: 3deg; animation-delay: 4s;">
+                    <div class="text-4xl font-extrabold text-accent-color mb-2">100+</div>
+                    <div class="sm text-text-secondary font-medium">COMMUNITY MEMBERS</div>
+                </div>
+            </div>
         </div>
-    </nav>
+    </section>
 
-    <main class="container mx-auto px-4 max-w-6xl pt-20 pb-24">
-        <!-- Hero Section -->
-        <header class="mb-32 mt-8">
-            <div class="hero-gradient rounded-2xl p-12 md:p-16 text-white relative overflow-hidden">
-                <div class="relative z-10 max-w-3xl">
-                    <div class="font-display text-sm mb-3 text-accent tracking-wider dark:text-darkAccent">Hello, I'm
+    <section id="projects" class="projects py-32 bg-secondary-bg text-tertiary-bg border-t-4 border-b-4 border-black">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="section-header text-center mb-24 animate-on-scroll">
+                <h2
+                    class="section-title text-6xl lg:text-7xl font-extrabold mb-4 relative inline-block text-tertiary-bg font-orbitron section-title-gradient">
+                    PROJECT LOG // TECH STACK</h2>
+                <p class="text-xl text-text-secondary mt-8 max-w-2xl mx-auto brutal-box p-4 bg-primary-bg">
+                    OPERATIONAL PROJECTS & CORE TECHNOLOGIES UTILIZED. DATA PROCESSING & MODELING REPORTS.
+                </p>
+            </div>
+            <div class="grid gap-16">
+                <div
+                    class="project-card brutal-box p-12 relative overflow-hidden transition-all duration-300 animate-on-scroll bg-primary-bg">
+                    <div class="flex justify-between items-start mb-8 flex-wrap gap-4">
+                        <div>
+                            <h3 class="text-4xl lg:text-5xl font-bold text-accent-color mb-4 font-orbitron">A
+                                Comparative Analysis of Deep and Traditional Learning Models for Tomato Leaf Disease
+                                Classification</h3>
+                            <p class="text-lg text-text-secondary mb-4 leading-relaxed">
+                                A comparisonal analysis of the performance between traditional Machine Learning (ML)
+                                models and modern Deep Learning (DL) architectures in classifying tomato leaf diseases.
+                                With a focus on agricultural AI, this work explores how different models behave on
+                                real-world data, including the impact of background removal on performance.
+                            </p>
+                        </div>
                     </div>
-                    <h1 class="text-4xl md:text-6xl font-display mb-6 font-bold leading-tight">Obidur Rahman</h1>
-                    <p class="text-xl md:text-2xl muted-90 mb-8 font-light">Mathematics Student & Software Developer</p>
-                    <div class="flex flex-wrap gap-4 mb-8">
-                        <a href="mailto:obidur.shawal@gmail.com"
-                            class="flex items-center gap-2 bg-white bg-opacity-15 px-4 py-2 rounded-lg hover:bg-opacity-25 transition-all">
-                            <i class="fas fa-envelope text-accent dark:text-darkAccent"></i> obidur.shawal@gmail.com
-                        </a>
-                        <a href="https://linkedin.com/in/obidur-rahman-shawal"
-                            class="flex items-center gap-2 bg-white bg-opacity-15 px-4 py-2 rounded-lg hover:bg-opacity-25 transition-all">
-                            <i class="fab fa-linkedin text-accent dark:text-darkAccent"></i> LinkedIn
-                        </a>
-                        <a href="https://github.com/Ashfinn"
-                            class="flex items-center gap-2 bg-white bg-opacity-15 px-4 py-2 rounded-lg hover:bg-opacity-25 transition-all">
-                            <i class="fab fa-github text-accent dark:text-darkAccent"></i> GitHub
-                        </a>
-                        <a href="https://www.ashfinn.github.io"
-                            class="flex items-center gap-2 bg-white bg-opacity-15 px-4 py-2 rounded-lg hover:bg-opacity-25 transition-all">
-                            <i class="fas fa-globe text-accent dark:text-darkAccent"></i> Portfolio
-                        </a>
+                    <div class="mb-8 brutal-box p-4 bg-secondary-bg">
+                        <h4
+                            class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
+                            SYSTEM MODULES & DATA PROTOCOLS:</h4>
+                        <div class="flex flex-wrap gap-3 mt-4">
+                            <span
+                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PYTHON</span>
+                            <span
+                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SCIKIT-LEARN</span>
+                            <span
+                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">XGBOOST</span>
+                            <span
+                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SHAP</span>
+                            <span
+                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PREDICTIVE
+                                MODELING</span>
+                        </div>
                     </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="metric text-center p-5 bg-secondary-bg">
+                            <div class="text-3xl font-extrabold text-accent-color mb-1">97.00</div>
+                            <div class="text-md text-text-secondary">Xception</div>
+                        </div>
+                        <div class="metric text-center p-5 bg-secondary-bg">
+                            <div class="text-3xl font-extrabold text-accent-color mb-1">94.26</div>
+                            <div class="text-md text-text-secondary">EfficientNetB0</div>
+                        </div>
+                        <div class="metric text-center p-5 bg-secondary-bg">
+                            <div class="text-3xl font-extrabold text-accent-color mb-1">92.79</div>
+                            <div class="text-md text-text-secondary">MobileNetV2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid gap-16">
                     <div
-                        class="p-6 bg-white bg-opacity-15 backdrop-blur-md rounded-xl border border-accent/20 dark:border-darkAccent/30">
-                        <p class="italic text-lg md:text-xl font-light">"Crafting elegant solutions at the intersection
-                            of mathematics and code."</p>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Projects -->
-        <section id="work" class="mb-32">
-            <div class="section-header">
-                <h2 class="text-3xl font-display text-primary font-semibold">Featured Work</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-4">Predicting Undergraduate Admission
-                        Outcomes in Bangladesh</h3>
-                    <p class="text-muted mb-6 leading-relaxed">Developed and deployed a machine learning model to
-                        predict undergraduate admission outcomes in Bangladesh. Achieved 83.87% accuracy and 0.8633
-                        ROC-AUC by optimizing feature selection and hyperparameter tuning. Conducted SHAP analysis to
-                        identify key predictors (e.g., family support, GPA), providing actionable insights.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Python</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">scikit-learn</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">XGBoost</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">SHAP</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Pandas</span>
-                    </div>
-                    <div class="flex gap-6">
-                        <a href="https://u-admission.streamlit.app"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fas fa-external-link-alt mr-2"></i>Live Demo</a>
-                        <a href="https://github.com/Ashfinn/undergraduate-admission-research"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fab fa-github mr-2"></i>Source</a>
-                    </div>
-                </div>
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-4">Environmental Determinants of
-                        Diarrheal Disease</h3>
-                    <p class="text-muted mb-6 leading-relaxed">Built and compared multiple regression models (Linear
-                        Regression, Random Forest, SVR, Decision Tree, Gradient Boost) for disease trend prediction.
-                        Incorporated lagged features 0-7 days to achieve best performance with Linear Regression RMSE:
-                        7.40, MSE: 54.82. Analyzed time-series data across four major divisions to identify key
-                        environmental correlations. Designed an interactive dashboard with real-time visualizations for
-                        insights.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Python</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">SARIMA</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">XGBoost</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Linear Regression</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Plotly</span>
-                    </div>
-                    <div class="flex gap-6">
-                        <a href="https://diarrhea-pm.streamlit.app/"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fas fa-external-link-alt mr-2"></i>Live Demo</a>
-                        <a href="https://github.com/Ashfinn/Diarrhea-Prediction-Model"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fab fa-github mr-2"></i>Source</a>
-                    </div>
-                </div>
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-4">Shell Client (Fish)</h3>
-                    <p class="text-muted mb-6 leading-relaxed">Lightweight shell client in C++ with robust command
-                        support and process management.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">C++</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Systems</span>
-                    </div>
-                    <div class="flex gap-6">
-                        <a href="https://github.com/Ashfinn"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fab fa-github mr-2"></i>Source</a>
-                    </div>
-                </div>
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-4">IMDB Sentiment Analysis</h3>
-                    <p class="text-muted mb-6 leading-relaxed">NLP-based sentiment analysis of movie reviews with
-                        real-time prediction interface using Streamlit.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Python</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">NLTK</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Streamlit</span>
-                    </div>
-                    <div class="flex gap-6">
-                        <a href="#"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fas fa-external-link-alt mr-2"></i>Live Demo</a>
-                        <a href="https://github.com/Ashfinn"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fab fa-github mr-2"></i>Source</a>
-                    </div>
-                </div>
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-4">MATLAB Hero</h3>
-                    <p class="text-muted mb-6 leading-relaxed">Educational platform helping students master MATLAB
-                        programming with interactive tutorials.</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">React</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">Next.js</span>
-                        <span class="skill-tag px-3 py-1 rounded-lg text-sm">MATLAB</span>
-                    </div>
-                    <div class="flex gap-6">
-                        <a href="#"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fas fa-external-link-alt mr-2"></i>Live Demo</a>
-                        <a href="https://github.com/Ashfinn"
-                            class="text-accent hover:text-primary font-medium transition-colors dark:text-darkAccent"><i
-                                class="fab fa-github mr-2"></i>Source</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section id="about" class="mb-32">
-            <div class="section-header">
-                <h2 class="text-3xl font-display text-primary font-semibold">About Me</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-6">Education & Background</h3>
-                    <div class="space-y-5 text-muted leading-relaxed">
-                        <p><strong>University of Chittagong</strong> - BSc in Mathematics (Expected Dec 2026),
-                            Chittagong, Bangladesh</p>
-                        <p><strong>Relevant Coursework:</strong> Complex Analysis, Numerical Analysis, Differential
-                            Equations, Vector & Tensor Analysis, Linear Programming, Linear Algebra, Calculus, Real
-                            Analysis, Geometry, Trigonometry, Mathematical Programming</p>
-                        <p>Content creator with 10+ educational videos on ML, Mathematics, and Programming on YouTube,
-                            and 13 articles with 1000+ reads on Python and ML topics on Hashnode.</p>
-                    </div>
-                </div>
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-6">Technical Skills</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="text-primary font-medium mb-3">Programming Languages</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Python</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">C++</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">JavaScript</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">HTML</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">CSS</span>
+                        class="project-card brutal-box p-12 relative overflow-hidden transition-all duration-300 animate-on-scroll bg-primary-bg">
+                        <div class="flex justify-between items-start mb-8 flex-wrap gap-4">
+                            <div>
+                                <h3 class="text-4xl lg:text-5xl font-bold text-accent-color mb-4 font-orbitron">
+                                    Comprehensive Study of Undergraduate Admission Outcomes in Bangladesh</h3>
+                                <p class="text-lg text-text-secondary mb-4 leading-relaxed">
+                                    Developed and deployed a comprehensive machine learning model to predict
+                                    undergraduate admission outcomes in Bangladesh. The project involved extensive
+                                    feature engineering, hyperparameter optimization, and explainable AI techniques to
+                                    provide actionable insights for educational institutions and students.
+                                </p>
                             </div>
                         </div>
-                        <div>
-                            <h4 class="text-primary font-medium mb-3">Machine Learning & Data Science</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">scikit-learn</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Pandas</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">NumPy</span>
+                        <div class="mb-8 brutal-box p-4 bg-secondary-bg">
+                            <h4
+                                class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
+                                SYSTEM MODULES & DATA PROTOCOLS:</h4>
+                            <div class="flex flex-wrap gap-3 mt-4">
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PYTHON</span>
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SCIKIT-LEARN</span>
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">XGBOOST</span>
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SHAP</span>
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PREDICTIVE
+                                    MODELING</span>
                             </div>
                         </div>
-                        <div>
-                            <h4 class="text-primary font-medium mb-3">Tools & Technologies</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Git</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Streamlit</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Matplotlib</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Plotly</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Firebase</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">LaTeX</span>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="metric text-center p-5 bg-secondary-bg">
+                                <div class="text-3xl font-extrabold text-accent-color mb-1">83.87%</div>
+                                <div class="text-md text-text-secondary">ACCURACY</div>
+                            </div>
+                            <div class="metric text-center p-5 bg-secondary-bg">
+                                <div class="text-3xl font-extrabold text-accent-color mb-1">0.8633</div>
+                                <div class="text-md text-text-secondary">ROC-AUC</div>
+                            </div>
+                            <div class="metric text-center p-5 bg-secondary-bg">
+                                <div class="text-3xl font-extrabold text-accent-color mb-1">SHAP</div>
+                                <div class="text-md text-text-secondary">EXPLAINABILITY</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="project-card brutal-box p-12 relative overflow-hidden transition-all duration-300 animate-on-scroll bg-primary-bg">
+                        <div class="flex justify-between items-start mb-8 flex-wrap gap-4">
+                            <div>
+                                <h3 class="text-4xl lg:text-5xl font-bold text-accent-color mb-4 font-orbitron">
+                                    Environmental Determinants of Diarrheal Disease: A Multi-Regional Analysis in
+                                    Bangladesh</h3>
+                                <p class="text-lg text-text-secondary mb-4 leading-relaxed">
+                                    Built and compared multiple regression models for disease trend prediction,
+                                    incorporating time-series analysis with lagged features. Created an interactive
+                                    dashboard with real-time visualizations to help public health officials understand
+                                    environmental correlations with disease outbreaks.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mb-8 brutal-box p-4 bg-secondary-bg">
+                            <h4
+                                class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
+                                OPERATIONAL FRAMEWORK & DATA SOURCES:</h4>
+                            <div class="flex flex-wrap gap-3 mt-4">
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PYTHON</span>
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SARIMA</span>
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">XGBOOST</span>
+                                <span
+                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PLOTLY</span>
+                                <span class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">TIME
+                                    SERIES ANALYSIS</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="metric text-center p-5 bg-secondary-bg">
+                                <div class="text-3xl font-extrabold text-accent-color mb-1">7.40</div>
+                                <div class="text-md text-text-secondary">RMSE VALUE</div>
+                            </div>
+                            <div class="metric text-center p-5 bg-secondary-bg">
+                                <div class="text-3xl font-extrabold text-accent-color mb-1">4</div>
+                                <div class="text-md text-text-secondary">DATA DIVISIONS</div>
+                            </div>
+                            <div class="metric text-center p-5 bg-secondary-bg">
+                                <div class="text-3xl font-extrabold text-accent-color mb-1">7 DAYS</div>
+                                <div class="text-md text-text-secondary">LAG FEATURES</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </section>
 
-        <!-- Experience -->
-        <section id="experience" class="mb-32">
-            <div class="section-header">
-                <h2 class="text-3xl font-display text-primary font-semibold">Experience & Achievements</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-6">Professional Experience</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-display text-lg text-primary">Software Engineering Fellowship</h4>
-                            <p class="text-accent font-medium dark:text-darkAccent">Headstarter • Aug 2024</p>
-                            <ul class="mt-3 space-y-2 text-muted leading-relaxed">
-                                <li>• Developed five full-stack web applications using Firebase, Git, and JavaScript.
-                                </li>
-                                <li>• Worked collaboratively in a team of four developers, following agile methodologies
-                                    to deliver projects on time.</li>
-                                <li>• Built features including user authentication, real-time data updates, and
-                                    responsive UI.</li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 mt-4">
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Firebase</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">Git</span>
-                                <span class="skill-tag px-3 py-1 rounded-lg text-sm">JavaScript</span>
-                            </div>
+    <section id="about" class="about py-32 bg-primary-bg border-b-4 border-black">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="about-content animate-on-scroll brutal-box p-8 bg-secondary-bg">
+                    <h2 class="text-5xl lg:text-6xl font-extrabold mb-8 section-title-gradient font-orbitron">PROFILE //
+                        STATUS LOG</h2>
+                    <p class="text-lg text-text-primary mb-6 leading-relaxed">
+                        Currently pursuing a BSc in Mathematics at the University of Chittagong, I'm passionate about
+                        the intersection of mathematical theory and practical application. My journey spans from
+                        building predictive models to fostering tech communities and mentoring aspiring developers.
+                    </p>
+                    <p class="text-lg text-text-primary mb-6 leading-relaxed">
+                        As the founder of The Code Forum, I've built a thriving community of 100+ tech enthusiasts while
+                        simultaneously serving as Research and Development Secretary at the Chittagong University Math
+                        Club. My work extends beyond personal projects—I'm committed to knowledge sharing through
+                        educational content and mentorship.
+                    </p>
+                </div>
+                <div class="achievements grid gap-8 animate-on-scroll">
+                    <div class="achievement-item flex items-center gap-4 p-5">
+                        <div
+                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
+                            🏆</div>
+                        <div class="font-semibold text-tertiary-bg text-lg">FIRST PLACE - DIGITAL INNOVATION FAIR 2018
                         </div>
                     </div>
-                </div>
-                <div class="project-card p-8 surface-bg">
-                    <h3 class="text-xl font-display text-primary font-medium mb-6">Social Engagements</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-display text-lg text-primary">Founder & Community Lead</h4>
-                            <p class="text-accent font-medium dark:text-darkAccent">The Code Forum • 2023-Present</p>
-                            <ul class="mt-3 space-y-2 text-muted leading-relaxed">
-                                <li>• Built a tech community with 100+ members and established 5 learning paths.</li>
-                                <li>• Organized workshops and coding challenges to foster skill development.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-display text-lg text-primary">Research and Development Secretary</h4>
-                            <p class="text-accent font-medium dark:text-darkAccent">Chittagong University Math Club •
-                                2023-Present</p>
-                            <ul class="mt-3 space-y-2 text-muted leading-relaxed">
-                                <li>• Led research initiatives and organized knowledge-sharing events.</li>
-                                <li>• Facilitated workshops bridging mathematics and programming.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-display text-lg text-primary">Educator</h4>
-                            <p class="text-accent font-medium dark:text-darkAccent">All Students in One Platform •
-                                2023-Present</p>
-                            <ul class="mt-3 space-y-2 text-muted leading-relaxed">
-                                <li>• Mentored admission candidates in an educational initiative by Universityевер
-                                    Chittagong students.</li>
-                            </ul>
+                    <div class="achievement-item flex items-center gap-4 p-5">
+                        <div
+                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
+                            👥</div>
+                        <div class="font-semibold text-tertiary-bg text-lg">FOUNDER & COMMUNITY LEAD - 100+ MEMBERS
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="project-card p-8 surface-bg">
-                <h3 class="text-xl font-display text-primary font-medium mb-6">Achievements, Training & Certifications
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                        <h4 class="font-display text-lg text-primary">First Place</h4>
-                        <p class="text-accent font-medium dark:text-darkAccent">Digital Innovation Fair 2018</p>
-                        <p class="mt-2 text-muted">Won 1st place for developing a Drug Addiction Recovery System,
-                            featured in a national newspaper.</p>
+                    <div class="achievement-item flex items-center gap-4 p-5">
+                        <div
+                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
+                            📚</div>
+                        <div class="font-semibold text-tertiary-bg text-lg">13 TECHNICAL ARTICLES - 1000+ READS</div>
                     </div>
-                    <div>
-                        <h4 class="font-display text-lg text-primary">Software Engineering Fellowship</h4>
-                        <p class="text-accent font-medium dark:text-darkAccent">Headstarter • Aug 2024</p>
-                        <p class="mt-2 text-muted">Completed fellowship with hands-on full-stack development experience.
-                        </p>
+                    <div class="achievement-item flex items-center gap-4 p-5">
+                        <div
+                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
+                            🎥</div>
+                        <div class="font-semibold text-tertiary-bg text-lg">10+ EDUCATIONAL VIDEOS PUBLISHED</div>
                     </div>
-                    <div>
-                        <h4 class="font-display text-lg text-primary">Introduction to Programming with MATLAB</h4>
-                        <p class="text-accent font-medium dark:text-darkAccent">Vanderbilt University • Jun 2024</p>
-                        <p class="mt-2 text-muted">Credential ID: Z6HMC9DS5LSM - <a href="#"
-                                class="text-accent hover:underline dark:text-darkAccent">View Credential</a></p>
-                    </div>
-                    <div>
-                        <h4 class="font-display text-lg text-primary">Developing AI Applications with Python and Flask
-                        </h4>
-                        <p class="text-accent font-medium dark:text-darkAccent">IBM • Jan 2024</p>
-                        <p class="mt-2 text-muted">Credential ID: HV6QNTGU2KHY - <a href="#"
-                                class="text-accent hover:underline dark:text-darkAccent">View Credential</a></p>
-                    </div>
-                    <div>
-                        <h4 class="font-display text-lg text-primary">Programming in C++ Specialization</h4>
-                        <p class="text-accent font-medium dark:text-darkAccent">Codio • Dec 2023</p>
-                        <p class="mt-2 text-muted">Credential ID: MNYQFWD4JX4P - <a href="#"
-                                class="text-accent hover:underline dark:text-darkAccent">View Credential</a></p>
-                    </div>
-                    <div>
-                        <h4 class="font-display text-lg text-primary">Python for Data Science, AI & Development</h4>
-                        <p class="text-accent font-medium dark:text-darkAccent">IBM • Nov 2023</p>
-                        <p class="mt-2 text-muted">Credential ID: 4LK9Y375MAQ7 - <a href="#"
-                                class="text-accent hover:underline dark:text-darkAccent">View Credential</a></p>
+                    <div class="achievement-item flex items-center gap-4 p-5">
+                        <div
+                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
+                            🎓</div>
+                        <div class="font-semibold text-tertiary-bg text-lg">MULTIPLE PROFESSIONAL CERTIFICATIONS</div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="mb-32">
-            <div class="section-header">
-                <h2 class="text-3xl font-display text-primary font-semibold">Let's Connect</h2>
-            </div>
-            <div class="project-card p-8 md:p-12 surface-bg">
-                <div class="max-w-2xl mx-auto text-center">
-                    <p class="text-muted text-lg mb-8 leading-relaxed">Passionate about collaborating on projects
-                        blending mathematics and code. Reach out to discuss ideas, opportunities, or just to chat about
-                        tech!</p>
-                    <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-                        <a href="mailto:obidur.shawal@gmail.com"
-                            class="btn-gradient text-white px-6 py-3 rounded-lg hover:opacity-90 transition-all shadow-md">
-                            <i class="fas fa-envelope mr-2"></i>Email Me
-                        </a>
-                        <a href="https://github.com/Ashfinn"
-                            class="bg-dark text-white px-6 py-3 rounded-lg hover:bg-accent transition-all shadow-md dark:bg-darkBg dark:hover:bg-darkAccent">
-                            <i class="fab fa-github mr-2"></i>GitHub
-                        </a>
-                        <a href="https://linkedin.com/in/obidur-rahman-shawal"
-                            class="bg-[#0077b5] text-white px-6 py-3 rounded-lg hover:bg-accent transition-all shadow-md dark:hover:bg-darkAccent">
-                            <i class="fab fa-linkedin mr-2"></i>LinkedIn
-                        </a>
-                        <a href="https://www.ashfinn.github.io"
-                            class="bg-secondary text-white px-6 py-3 rounded-lg hover:bg-accent transition-all shadow-md dark:hover:bg-darkAccent">
-                            <i class="fas fa-globe mr-2"></i>Portfolio
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-8 surface-bg">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-muted-400 mb-4">© 2025 Obidur Rahman. All rights reserved.</p>
-            <div class="flex justify-center gap-6">
-                <a href="https://github.com/Ashfinn"
-                    class="hover:text-accent transition-colors dark:hover:text-darkAccent"><i
-                        class="fab fa-github text-xl"></i></a>
-                <a href="https://linkedin.com/in/obidur-rahman-shawal"
-                    class="hover:text-accent transition-colors dark:hover:text-darkAccent"><i
-                        class="fab fa-linkedin text-xl"></i></a>
-                <a href="https://www.ashfinn.github.io"
-                    class="hover:text-accent transition-colors dark:hover:text-darkAccent"><i
-                        class="fas fa-globe text-xl"></i></a>
             </div>
         </div>
+    </section>
+
+    <section id="contact" class="contact py-32 bg-secondary-bg text-tertiary-bg text-center border-b-4 border-black">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="section-header animate-on-scroll">
+                <h2
+                    class="section-title text-5xl lg:text-6xl font-extrabold mb-8 text-tertiary-bg font-orbitron section-title-gradient">
+                    INITIATE CONTACT // COMMS</h2>
+                <p class="text-xl text-text-secondary mb-12 max-w-2xl mx-auto brutal-box p-4 bg-primary-bg">
+                    READY TO ESTABLISH A NEW DATA STREAM? CONNECT WITH ME VIA SECURE CHANNELS.
+                </p>
+            </div>
+            <div class="flex justify-center gap-10 flex-wrap animate-on-scroll">
+                <a href="mailto:obidur.shawal@gmail.com"
+                    class="flex items-center gap-3 px-10 py-5 contact-link-brutal no-underline">
+                    <span class="text-3xl contact-icon"><i class="fas fa-envelope"></i></span>
+                    <span class="font-semibold text-xl">EMAIL PROTOCOL</span>
+                </a>
+                <a href="https://github.com/Ashfinn"
+                    class="flex items-center gap-3 px-10 py-5 contact-link-brutal no-underline" target="_blank">
+                    <span class="text-3xl contact-icon"><i class="fab fa-github"></i></span>
+                    <span class="font-semibold text-xl">GITHUB REPO</span>
+                </a>
+                <a href="https://linkedin.com/in/obidur-rahman-shawal"
+                    class="flex items-center gap-3 px-10 py-5 contact-link-brutal no-underline" target="_blank">
+                    <span class="text-3xl contact-icon"><i class="fab fa-linkedin-in"></i></span>
+                    <span class="font-semibold text-xl">LINKEDIN NETWORK</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-tertiary-bg py-8 text-center text-white border-t-4 border-black">
+        <p class="text-lg">&copy; 2025 OBIDUR RAHMAN // DATA SEGMENT_A. ALL RIGHTS RESERVED. // OPERATIONAL SINCE [DATE]
+        </p>
     </footer>
 
     <script>
-        // Theme Toggle
-        const toggleButton = document.getElementById('theme-toggle');
-        const body = document.body;
-        toggleButton.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            toggleButton.innerHTML = body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-        });
-
-        // Load saved theme
-        if (localStorage.getItem('theme') === 'dark') {
-            body.classList.add('dark-mode');
-            toggleButton.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-
-        // Navigation effects
-        const updateScroll = () => {
-            const nav = document.querySelector('nav.hidden.md\\:block');
-            if (window.scrollY > 100) {
-                nav.classList.add('bg-white', 'bg-opacity-90', 'backdrop-blur-md', 'shadow-md', 'py-4');
-                if (body.classList.contains('dark-mode')) {
-                    nav.classList.remove('bg-white');
-                    nav.classList.add('bg-darkBg');
-                }
-            } else {
-                nav.classList.remove('bg-white', 'bg-opacity-90', 'backdrop-blur-md', 'shadow-md', 'py-4', 'bg-darkBg');
-            }
-        };
-        window.addEventListener('scroll', updateScroll);
-
-        // Smooth scroll
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                }
             });
         });
 
-        // Card animations
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    entry.target.classList.add('animated');
+                } else {
+                    // Optional: remove animated class if element scrolls out of view
+                    // entry.target.classList.remove('animated');
                 }
             });
-        }, { threshold: 0.2 });
+        }, observerOptions);
 
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-500', 'ease-out');
-            observer.observe(card);
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for floating cards - slightly reduced movement
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.floating-card');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            cards.forEach((card, index) => {
+                const intensity = (index + 1) * 0.3; /* Reduced intensity */
+                const xOffset = (mouseX - 0.5) * intensity * 10;
+                const yOffset = (mouseY - 0.5) * intensity * 10;
+
+                card.style.transform = `translate(${xOffset}px, ${yOffset}px) rotate(var(--rotate, 0deg))`;
+            });
+        });
+
+        // Subtle typing effect to hero title
+        function typeWriter(element, text, speed = 80) {
+            let i = 0;
+            element.innerHTML = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', () => {
+            const heroTitleSpan = document.querySelector('.hero-title-main-gradient');
+            if (heroTitleSpan) {
+                typeWriter(heroTitleSpan, 'OBIDUR RAHMAN', 80);
+            }
+        });
+
+        // Dynamic gradient background to hero section (subtle, high-contrast version)
+        document.addEventListener('mousemove', (e) => {
+            const hero = document.querySelector('.hero'); /* Targeting hero section directly */
+            if (hero) {
+                const rect = hero.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                hero.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(0, 0, 0, 0.05) 0%, var(--primary-bg) 50%)`;
+            }
+        });
+
+        // Add loading animation (brutal style)
+        window.addEventListener('load', function () {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.2s ease-out'; /* Quick fade */
+                document.body.style.opacity = '1';
+            }, 50);
+        });
+
+        // Easter egg: Konami code for special effect - adjusted for brutalist palette
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // Up Up Down Down Left Right Left Right B A
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                // Special effect: Change accent color temporarily to a stark warning red
+                document.documentElement.style.setProperty('--accent-color', '#FF0000');
+
+                // Show a fun message
+                const message = document.createElement('div');
+                message.innerHTML = 'ALERT: ANOMALY DETECTED // PROTOCOL ACTIVATED // COLORS MUTATED';
+                message.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: var(--tertiary-bg);
+                    color: #FF0000; /* Red text on black */
+                    border: 4px solid #FF0000;
+                    padding: 2.5rem;
+                    font-size: 2rem;
+                    font-weight: bold;
+                    text-align: center;
+                    z-index: 10000;
+                    box-shadow: 8px 8px 0px #FF0000;
+                    animation: glitchEffect 0.1s infinite alternate;
+                `;
+                document.body.appendChild(message);
+
+                const glitchEffect = `
+                    @keyframes glitchEffect {
+                        0% { transform: translate(-50%, -50%) skewX(0deg); }
+                        25% { transform: translate(-52%, -48%) skewX(-5deg); }
+                        50% { transform: translate(-48%, -51%) skewX(0deg); }
+                        75% { transform: translate(-51%, -49%) skewX(5deg); }
+                        100% { transform: translate(-50%, -50%) skewX(0deg); }
+                    }
+                `;
+                const styleSheet = document.createElement("style");
+                styleSheet.type = "text/css";
+                styleSheet.innerText = glitchEffect;
+                document.head.appendChild(styleSheet);
+
+                setTimeout(() => {
+                    // Reset colors
+                    document.documentElement.style.setProperty('--accent-color', '#FF00FF'); /* Reset to original magenta */
+                    document.body.removeChild(message);
+                    document.head.removeChild(styleSheet); /* Clean up dynamic style */
+                    konamiCode = [];
+                }, 5000);
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
         });
     </script>
 </body>
