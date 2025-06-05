@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OR.SYS - Obidur Rahman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brutal-black': '#000000',
+                        'brutal-white': '#FFFFFF',
+                        'brutal-gray': '#4B4B4B',
+                    },
+                    fontFamily: {
+                        mono: ['Courier New', 'Courier', 'monospace'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom brutalist styles to override Tailwind defaults */
+        body {
+            line-height: 1.3;
+        }
+        h1, h2, h3, h4 {
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        a, button {
+            transition: none;
+        }
+        a:hover, button:hover {
+            background-color: #4B4B4B;
+            color: #FFFFFF;
+        }
+        .border-brutal {
+            border: 2px solid #000000;
+        }
+    </style>
+</head>
+<body class="bg-brutal-white text-brutal-black font-mono">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-brutal-black text-brutal-white z-50 border-b-2 border-brutal-black">
+        <div class="container mx-auto px-2 py-1 flex justify-between items-center">
+            <a href="#" class="text-lg font-bold">OR.SYS</a>
+            <div class="hidden md:flex space-x-2 text-sm">
+                <a href="#access-log" class="px-2 py-1 hover:bg-brutal-gray">ACCESS LOG</a>
+                <a href="#projects" class="px-2 py-1 hover:bg-brutal-gray">PROJECTS</a>
+                <a href="#profile" class="px-2 py-1 hover:bg-brutal-gray">PROFILE</a>
+                <a href="#contact" class="px-2 py-1 hover:bg-brutal-gray">CONTACT</a>
+            </div>
+            <button class="md:hidden focus:outline-none" onclick="toggleMenu()">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-brutal-black border-t-2 border-brutal-black">
+            <a href="#access-log" class="block px-2 py-1 text-sm hover:bg-brutal-gray">ACCESS LOG</a>
+            <a href="#projects" class="block px-2 py-1 text-sm hover:bg-brutal-gray">PROJECTS</a>
+            <a href="#profile" class="block px-2 py-1 text-sm hover:bg-brutal-gray">PROFILE</a>
+            <a href="#contact" class="block px-2 py-1 text-sm hover:bg-brutal-gray">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="access-log" class="min-h-screen flex items-center justify-center pt-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">OBIDUR RAHMAN</h1>
+            <p class="text-lg md:text-xl mb-4">DATA SCIENTIST</p>
+            <p class="text-sm md:text-base mb-6">INITIATING DATA TRANSFORMATION PROTOCOL...</p>
+            <p class="text-sm md:text-base max-w-lg mx-auto mb-8">
+                Mathematics student passionate about building intelligent systems that solve real-world problems.
+                This interface provides an overview of operations.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#projects" class="bg-brutal-black text-brutal-white px-4 py-2 border-2 border-brutal-black">VIEW PROJECT LOG</a>
+                <a href="#contact" class="bg-brutal-white text-brutal-black px-4 py-2 border-2 border-brutal-black">ESTABLISH COMMS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="py-8 bg-brutal-white">
+        <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="text-center p-4 border-brutal">
+                <h3 class="font-bold text-lg">MATHEMATICIAN</h3>
+                <p>BSc in Mathematics</p>
+            </div>
+            <div class="text-center p-4 border-brutal">
+                <h3 class="font-bold text-lg">DATA SCIENTIST</h3>
+                <p>ML & AI Specialist</p>
+            </div>
+            <div class="text-center p-4 border-brutal">
+                <h3 class="font-bold text-lg">COMMUNITY LEADER</h3>
+                <p>100+ Members</p>
+            </div>
+            <div class="text-center p-4 border-brutal">
+                <h3 class="font-bold text-lg">EDUCATOR</h3>
+                <p>13+ Articles</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-8 bg-brutal-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">PROJECT LOG // TECH STACK</h2>
+            <p class="text-center mb-8">OPERATIONAL PROJECTS & CORE TECHNOLOGIES UTILIZED. DATA PROCESSING & MODELING REPORTS.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Project 1 -->
+                <div class="p-4 border-brutal">
+                    <h3 class="text-lg font-bold mb-2">A COMPARATIVE ANALYSIS OF DEEP AND TRADITIONAL LEARNING MODELS FOR TOMATO LEAF DISEASE CLASSIFICATION</h3>
+                    <p class="mb-4 text-sm">
+                        A comprehensive analysis comparing traditional Machine Learning models with modern Deep Learning
+                        architectures in classifying tomato leaf diseases. This agricultural AI research explores model performance on
+                        real-world data, including the impact of background removal techniques.
+                    </p>
+                    <p class="font-bold mb-2">SYSTEM MODULES & DATA PROTOCOLS:</p>
+                    <ul class="list-none mb-4 text-sm">
+                        <li>PYTHON</li>
+                        <li>TENSORFLOW</li>
+                        <li>KERAS</li>
+                        <li>SCIKIT-LEARN</li>
+                        <li>XCEPTION</li>
+                        <li>EFFICIENTNET</li>
+                        <li>MOBILENET</li>
+                        <li>COMPUTER VISION</li>
+                    </ul>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                        <div><strong>97.00%</strong><br>Xception Accuracy</div>
+                        <div><strong>94.26%</strong><br>EfficientNetB0</div>
+                        <div><strong>92.79%</strong><br>MobileNetV2</div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="p-4 border-brutal">
+                    <h3 class="text-lg font-bold mb-2">COMPREHENSIVE STUDY OF UNDERGRADUATE ADMISSION OUTCOMES IN BANGLADESH</h3>
+                    <p class="mb-4 text-sm">
+                        Developed and deployed a comprehensive machine learning model to predict undergraduate admission
+                        outcomes. The project involved extensive feature engineering, hyperparameter optimization, and explainable
+                        AI techniques to provide actionable insights for educational institutions and students.
+                    </p>
+                    <p class="font-bold mb-2">SYSTEM MODULES & DATA PROTOCOLS:</p>
+                    <ul class="list-none mb-4 text-sm">
+                        <li>PYTHON</li>
+                        <li>SCIKIT-LEARN</li>
+                        <li>XGBOOST</li>
+                        <li>SHAP</li>
+                        <li>PANDAS</li>
+                        <li>NUMPY</li>
+                        <li>PREDICTIVE MODELING</li>
+                        <li>FEATURE ENGINEERING</li>
+                    </ul>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                        <div><strong>83.87%</strong><br>Model Accuracy</div>
+                        <div><strong>89%</strong><br>Precision Score</div>
+                        <div><strong>15K+</strong><br>Data Records</div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="p-4 border-brutal">
+                    <h3 class="text-lg font-bold mb-2">ADVANCED STATISTICAL LEARNING & PATTERN RECOGNITION SYSTEMS</h3>
+                    <p class="mb-4 text-sm">
+                        Multiple research projects focusing on statistical learning theory, pattern recognition algorithms,
+                        and mathematical optimization. Published findings in peer-reviewed journals and presented at academic conferences.
+                    </p>
+                    <p class="font-bold mb-2">SYSTEM MODULES & DATA PROTOCOLS:</p>
+                    <ul class="list-none mb-4 text-sm">
+                        <li>R</li>
+                        <li>PYTHON</li>
+                        <li>MATLAB</li>
+                        <li>STATISTICAL MODELING</li>
+                        <li>MATHEMATICAL ANALYSIS</li>
+                        <li>OPTIMIZATION</li>
+                        <li>RESEARCH</li>
+                        <li>ACADEMIC WRITING</li>
+                    </ul>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                        <div><strong>13+</strong><br>Published Articles</div>
+                        <div><strong>100+</strong><br>Community Members</div>
+                        <div><strong>5+</strong><br>Research Projects</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="py-8 bg-brutal-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">PROFILE // SYSTEM SPECIFICATIONS</h2>
+            <p class="text-center mb-8">PERSONAL DATA ANALYSIS & OPERATIONAL CAPABILITIES OVERVIEW.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="text-lg font-bold mb-2">BACKGROUND PROCESS</h3>
+                    <div class="mb-4">
+                        <h4 class="font-bold">EDUCATIONAL SYSTEM</h4>
+                        <p class="text-sm">Currently pursuing BSc in Mathematics, focusing on statistical learning theory, mathematical optimization, and data analysis methodologies.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-bold">MISSION OBJECTIVE</h4>
+                        <p class="text-sm">Developing intelligent systems that bridge mathematical theory with practical applications. Passionate about using data science to solve complex real-world problems and drive innovation.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">COMMUNITY PROTOCOLS</h4>
+                        <p class="text-sm">Active community leader with 100+ members, sharing knowledge through articles, tutorials, and mentoring aspiring data scientists and mathematicians.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-2">CORE SYSTEMS</h3>
+                    <div class="grid grid-cols-2 gap-2 mb-4 text-sm">
+                        <div>PYTHON</div>
+                        <div>MACHINE LEARNING</div>
+                        <div>DEEP LEARNING</div>
+                        <div>STATISTICS</div>
+                        <div>R</div>
+                        <div>MATHEMATICS</div>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">OPERATION LOG</h3>
+                    <div class="space-y-2 text-sm">
+                        <div>
+                            <strong>2024 - PRESENT</strong><br>
+                            <p>Research & Community Leadership<br>Leading data science community, publishing research articles, and developing educational content for aspiring data scientists.</p>
+                        </div>
+                        <div>
+                            <strong>2023 - 2024</strong><br>
+                            <p>Machine Learning Projects<br>Developed multiple ML models for classification and prediction tasks, with focus on agricultural AI and educational analytics.</p>
+                        </div>
+                        <div>
+                            <strong>2022 - 2023</strong><br>
+                            <p>Mathematical Research<br>Conducted research in statistical learning theory and mathematical optimization, publishing findings in academic journals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-8 bg-brutal-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">CONTACT // ESTABLISH CONNECTION</h2>
+            <p class="text-center mb-8">INITIATE COMMUNICATION PROTOCOL. MULTIPLE CHANNELS AVAILABLE FOR DATA EXCHANGE.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="text-lg font-bold mb-2">COMMUNICATION CHANNELS</h3>
+                    <div class="space-y-2 text-sm">
+                        <div>
+                            <span class="mr-2">[EMAIL]</span>
+                            <a href="mailto:[email protected]" class="hover:text-brutal-white hover:bg-brutal-gray">[email protected]</a>
+                        </div>
+                        <div>
+                            <span class="mr-2">[LINKEDIN]</span>
+                            <a href="https://linkedin.com/in/obidur-rahman" class="hover:text-brutal-white hover:bg-brutal-gray">linkedin.com/in/obidur-rahman</a>
+                        </div>
+                        <div>
+                            <span class="mr-2">[GITHUB]</span>
+                            <a href="https://github.com/obidur-rahman" class="hover:text-brutal-white hover:bg-brutal-gray">github.com/obidur-rahman</a>
+                        </div>
+                        <div>
+                            <span class="mr-2">[RESEARCHGATE]</span>
+                            <a href="https://researchgate.net/profile/obidur" class="hover:text-brutal-white hover:bg-brutal-gray">researchgate.net/profile/obidur</a>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold mt-4 mb-2">CURRENT STATUS</h3>
+                    <div class="space-y-2 text-sm">
+                        <p>SYSTEM ONLINE</p>
+                        <p>ACCEPTING NEW PROJECTS</p>
+                        <p>RESEARCH COLLABORATIONS OPEN</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-2">MESSAGE INTERFACE</h3>
+                    <div class="space-y-2 text-sm">
+                        <input type="text" placeholder="SENDER IDENTIFICATION" class="w-full p-2 border-brutal bg-brutal-white text-brutal-black focus:outline-none">
+                        <input type="email" placeholder="COMMUNICATION ADDRESS" class="w-full p-2 border-brutal bg-brutal-white text-brutal-black focus:outline-none">
+                        <select class="w-full p-2 border-brutal bg-brutal-white text-brutal-black focus:outline-none">
+                            <option disabled selected>SELECT PROTOCOL TYPE</option>
+                            <option>RESEARCH COLLABORATION</option>
+                            <option>PROJECT CONSULTATION</option>
+                            <option>EDUCATIONAL INQUIRY</option>
+                            <option>GENERAL COMMUNICATION</option>
+                        </select>
+                        <textarea placeholder="MESSAGE PAYLOAD" class="w-full p-2 border-brutal bg-brutal-white text-brutal-black focus:outline-none h-24"></textarea>
+                        <button class="w-full bg-brutal-black text-brutal-white p-2 border-brutal">TRANSMIT MESSAGE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-brutal-black text-brutal-white text-center">
+        <div class="container mx-auto px-4">
+            <h3 class="text-lg font-bold mb-2">OR.SYS</h3>
+            <p class="mb-2 text-sm">Data Scientist // Mathematical Researcher<br>Building intelligent systems for tomorrow.</p>
+            <p class="mb-2 text-sm">SYSTEM STATUS: <span class="text-brutal-gray">ALL SYSTEMS OPERATIONAL</span></p>
+            <p class="mb-2 text-sm">LAST UPDATED: 2024.12.CURRENT<br>VERSION 2.0.0</p>
+            <p class="text-sm">© 2024 OBIDUR RAHMAN SYSTEMS. ALL PROTOCOLS RESERVED. | DESIGNED WITH BRUTAL EFFICIENCY.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
