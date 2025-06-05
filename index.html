@@ -4,79 +4,481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obidur Rahman - Data Scientist // Access Log</title>
+    <title>Obidur Rahman - Data Scientist // Enhanced System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@700;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Neo-Brutalist inspired color palette */
         :root {
             --primary-bg: #FFFFFF;
-            /* Stark White */
-            --secondary-bg: #E0E0E0;
-            /* Light Gray */
+            --secondary-bg: #F5F5F5;
             --tertiary-bg: #1A1A1A;
-            /* Near Black for contrast elements */
             --text-primary: #1A1A1A;
-            /* Dark Text */
             --text-secondary: #4A4A4A;
-            /* Slightly lighter dark text */
             --border-color: #000000;
-            /* Solid Black Borders */
             --accent-color: #FF00FF;
-            /* Vibrant Magenta (or choose #00FFFF for Cyan, #FFFF00 for Yellow) */
+            --accent-secondary: #00FFFF;
             --glow-accent: rgba(255, 0, 255, 0.3);
-            /* Subtle glow for accent */
+            --warning-color: #FF3333;
+            --success-color: #00FF88;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Space Mono', monospace;
             background-color: var(--primary-bg);
             color: var(--text-primary);
-            line-height: 1.5;
-            /* Standard line height */
+            line-height: 1.6;
             overflow-x: hidden;
-            border: 4px solid var(--border-color);
-            /* Overall body border */
-            min-height: 100vh;
-            /* Ensure border shows */
-            padding: 4px;
-            /* Space for the border */
-            box-sizing: border-box;
-            position: relative;
-            /* For absolute positioning of mobile menu */
+            margin: 0;
+            padding: 0;
         }
 
-        /* Animated background grid - adapted for neo-brutalism */
+        /* Enhanced animated background */
         .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background-image:
-                linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
-                /* Lighter, subtle black grid */
-                linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
-            background-size: 40px 40px;
-            /* Slightly tighter grid */
-            z-index: -1;
-            /* No animation to keep it more static/raw */
+                linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            animation: gridMove 20s linear infinite;
         }
 
-        /* Stronger, bolder gradient for text/elements */
-        .logo-gradient,
-        .hero-title-main-gradient,
-        .section-title-gradient,
-        .btn-primary-gradient,
-        .icon-gradient {
-            background: linear-gradient(135deg, var(--accent-color), #8B5CF6);
-            /* Blend accent with a complementary color */
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* Enhanced brutalist elements */
+        .brutal-box {
+            border: 3px solid var(--border-color);
+            box-shadow: 6px 6px 0px var(--border-color);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brutal-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px var(--border-color);
+        }
+
+        .brutal-button {
+            border: 3px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--border-color);
+            transition: all 0.15s ease-out;
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .brutal-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--border-color);
+            background: var(--tertiary-bg);
+            color: var(--accent-color);
+        }
+
+        /* Enhanced navbar with unique design */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-bg);
+            border-bottom: 4px solid var(--border-color);
+            z-index: 1000;
+            transform: translateY(-100%);
+            animation: slideDown 0.8s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideDown {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            border: 3px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            box-shadow: 4px 4px 0px var(--border-color);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--glow-accent));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 15px var(--glow-accent));
+            }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-bg);
+            border-color: var(--border-color);
+            transform: skewX(-5deg);
+        }
+
+        .nav-link:hover::before {
+            left: 0;
+        }
+
+        /* Mobile menu enhancement */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            border: 3px solid var(--border-color);
+            background: var(--secondary-bg);
+            box-shadow: 3px 3px 0px var(--border-color);
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--tertiary-bg);
+            border-top: 4px solid var(--border-color);
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-item {
+            display: block;
+            padding: 1.5rem 2rem;
+            color: var(--primary-bg);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-item:hover {
+            background: var(--accent-color);
+            color: var(--tertiary-bg);
+            transform: translateX(10px);
+        }
+
+        /* Enhanced animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(100px);
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Hero section enhancements */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--primary-bg);
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 60%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title-main {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% {
+                filter: drop-shadow(0 0 10px var(--glow-accent));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 20px var(--glow-accent));
+            }
+        }
+
+        .hero-subtitle {
+            display: block;
+            color: var(--accent-color);
+            transform: skewX(-5deg);
+            border: 4px solid var(--border-color);
+            padding: 1rem 2rem;
+            background: var(--secondary-bg);
+            box-shadow: 6px 6px 0px var(--border-color);
+            margin: 2rem 0;
+            font-size: clamp(2rem, 5vw, 4rem);
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--accent-color);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--accent-color);
+            }
+        }
+
+        /* Floating elements enhancement */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .floating-card {
+            background: var(--secondary-bg);
+            border: 3px solid var(--border-color);
+            box-shadow: 5px 5px 0px var(--border-color);
+            padding: 1.5rem;
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-card:hover {
+            animation-play-state: paused;
+            transform: scale(1.1) rotate(0deg) !important;
+        }
+
+        /* Section styling improvements */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 6px;
+            background: var(--accent-color);
+            box-shadow: 0 0 20px var(--glow-accent);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Project cards enhancement */
+        .project-card {
+            background: var(--primary-bg);
+            border: 4px solid var(--border-color);
+            box-shadow: 8px 8px 0px var(--border-color);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .project-card::before {
@@ -85,575 +487,753 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            /* Distinct top border */
-            background: var(--accent-color);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            /* More separation */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            /* Longer line */
-            height: 4px;
-            /* Thicker line */
-            background: var(--accent-color);
-            /* Solid accent color */
-            border-radius: 0;
-            /* Sharp corners */
-        }
-
-        /* Elements with harsh borders and distinct look */
-        .brutal-box {
-            border: 2px solid var(--border-color);
-            box-shadow: 4px 4px 0px var(--border-color);
-            /* Distinct box shadow */
-        }
-
-        .brutal-button {
-            border: 3px solid var(--border-color);
-            box-shadow: 4px 4px 0px var(--border-color);
-            transition: all 0.1s ease-out;
-            /* Snapier transition */
-            color: var(--primary-bg);
-            /* Default text color for buttons */
-        }
-
-        .brutal-button:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px var(--border-color);
-        }
-
-        /* Primary button specific brutalist styles */
-        .btn-primary-gradient {
-            background: var(--accent-color);
-            /* Solid accent color */
-            color: var(--primary-bg);
-            /* White text on accent */
-        }
-
-        .btn-primary-gradient:hover {
-            background: var(--tertiary-bg);
-            /* Darker on hover */
-            color: var(--accent-color);
-            /* Accent text on hover */
-            box-shadow: 2px 2px 0px var(--accent-color);
-            /* Accent shadow on hover */
-        }
-
-        /* Secondary button specific brutalist styles */
-        .btn-secondary-brutal {
-            background: var(--tertiary-bg);
-            color: var(--primary-bg);
-        }
-
-        .btn-secondary-brutal:hover {
-            background: var(--accent-color);
-            color: var(--primary-bg);
-            box-shadow: 2px 2px 0px var(--border-color);
-        }
-
-
-        /* Scroll animations - kept for functionality, but less 'smooth' visually */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease-out;
-            /* Quicker fade in */
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hero dynamic background - still subtle but changed color */
-        .hero-dynamic-bg {
-            transition: background 0.3s ease-out;
-        }
-
-        /* Specific Arknights-like UI elements adaptations */
-        .segmented-panel {
-            border: 2px solid var(--border-color);
-            /* Prominent borders */
-            background-color: var(--secondary-bg);
-            box-shadow: 4px 4px 0px var(--border-color);
-            /* Harsh shadow */
-        }
-
-        .tech-tag {
-            border: 1px solid var(--text-secondary);
-            /* Clear, simple borders */
-            background-color: var(--secondary-bg);
-            /* Muted background */
-            transition: all 0.1s ease-out;
-        }
-
-        .tech-tag:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-            transform: scale(1.05);
-            box-shadow: 2px 2px 0px var(--border-color);
-        }
-
-        .metric {
-            border: 2px solid var(--border-color);
-            /* Strong borders for metrics */
-            background-color: var(--secondary-bg);
-            box-shadow: 2px 2px 0px var(--border-color);
-        }
-
-        /* Specific hover effects for the neo-brutalist style */
-        .nav-link-hover {
-            position: relative;
-            display: inline-block;
-        }
-
-        .nav-link-hover:hover {
-            color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .nav-link-hover::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            /* Stronger underline */
-            left: 0;
-            width: 0;
-            height: 3px;
-            background-color: var(--accent-color);
-            transition: width 0.2s ease-out;
-        }
-
-        .nav-link-hover:hover::after {
-            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
         }
 
         .project-card:hover {
             transform: translate(-4px, -4px);
-            /* Larger "lift" on hover */
-            box-shadow: 8px 8px 0px var(--border-color);
-            /* Exaggerated shadow on hover */
+            box-shadow: 12px 12px 0px var(--border-color);
         }
 
-        .achievement-item {
-            border: 2px solid var(--border-color);
+        .project-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background: var(--secondary-bg);
+            border: 2px solid var(--text-secondary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-tag:hover {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            border-color: var(--border-color);
+            transform: scale(1.05) skewX(-5deg);
             box-shadow: 3px 3px 0px var(--border-color);
-            background-color: var(--secondary-bg);
-            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
         }
 
-        .achievement-item:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px var(--border-color);
-        }
-
-        .contact-link-brutal {
-            border: 2px solid var(--border-color);
-            box-shadow: 3px 3px 0px var(--border-color);
-            background-color: var(--secondary-bg);
-            transition: all 0.1s ease-out;
-        }
-
-        .contact-link-brutal:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-            /* Text becomes white on hover */
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px var(--border-color);
-        }
-
-        .contact-link-brutal:hover .contact-icon {
-            filter: invert(1);
-            /* Invert icon color on hover */
-        }
-
-        /* Ensure images are sharp */
-        img {
-            image-rendering: pixelated;
-            /* Optional: for a sharper image look */
-        }
-
-        /* Mobile Menu Specific Styles */
-        .mobile-menu {
-            position: absolute;
-            top: 100%;
-            /* Position below the nav bar */
-            left: 0;
-            right: 0;
-            background-color: var(--tertiary-bg);
-            color: var(--primary-bg);
-            border-top: 4px solid var(--border-color);
-            transform: translateY(-100%);
-            opacity: 0;
-            visibility: hidden;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s;
-            z-index: 999;
-        }
-
-        .mobile-menu.open {
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-menu a {
-            display: block;
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--text-secondary);
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: var(--primary-bg);
+        .metric-card {
+            background: var(--secondary-bg);
+            border: 3px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--border-color);
+            padding: 2rem;
             text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .mobile-menu a:last-child {
-            border-bottom: none;
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 6px 10px 0px var(--border-color);
         }
 
-        .mobile-menu a:hover {
-            background-color: var(--accent-color);
-            color: var(--tertiary-bg);
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive design improvements */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 120px 1rem 2rem;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: clamp(2.5rem, 10vw, 5rem);
+            }
+
+            .hero-subtitle {
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
+                transform: skewX(-3deg);
+                margin: 1rem 0;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: clamp(2rem, 8vw, 4rem);
+            }
+
+            .project-card {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .project-title {
+                font-size: 1.8rem;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .brutal-box {
+                box-shadow: 4px 4px 0px var(--border-color);
+            }
+
+            .brutal-box:hover {
+                transform: translate(-1px, -1px);
+                box-shadow: 5px 5px 0px var(--border-color);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-container {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+                padding: 0.5rem;
+            }
+
+            .hero {
+                padding: 100px 1rem 2rem;
+            }
+
+            .project-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .metric-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--secondary-bg);
+            border-left: 5px solid var(--accent-color);
+            border-radius: 0;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-color);
+            z-index: 1001;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px var(--glow-accent);
         }
     </style>
 </head>
 
-<body class="p-0 m-0">
+<body>
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Animated background -->
     <div class="bg-grid"></div>
 
-    <nav class="fixed top-0 left-0 right-0 bg-primary-bg/90 backdrop-blur-sm border-b-4 border-black z-[1000] py-4">
-        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center">
-            <div class="text-4xl font-black logo-gradient font-orbitron brutal-box p-2">OR.SYS</div>
-            <ul class="hidden md:flex space-x-10 list-none">
-                <li><a href="#home"
-                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">ACCESS
-                        LOG</a></li>
-                <li><a href="#projects"
-                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">PROJECTS
-                        // STACK</a></li>
-                <li><a href="#about"
-                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">ABOUT
-                        // PROFILE</a></li>
-                <li><a href="#contact"
-                        class="text-tertiary-bg text-lg font-bold relative transition-all duration-300 nav-link-hover">CONTACT
-                        // COMMS</a></li>
+    <!-- Enhanced Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="logo">OR.SYS</div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">ACCESS LOG</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">PROJECTS</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">PROFILE</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
             </ul>
-            <button id="mobile-menu-button"
-                class="md:hidden text-tertiary-bg text-2xl brutal-button p-3 bg-secondary-bg">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <div id="mobile-menu" class="mobile-menu">
-            <a href="#home" class="block">ACCESS LOG</a>
-            <a href="#projects" class="block">PROJECTS // STACK</a>
-            <a href="#about" class="block">ABOUT // PROFILE</a>
-            <a href="#contact" class="block">CONTACT // COMMS</a>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#home" class="mobile-menu-item">ACCESS LOG</a>
+                <a href="#projects" class="mobile-menu-item">PROJECTS</a>
+                <a href="#about" class="mobile-menu-item">PROFILE</a>
+                <a href="#contact" class="mobile-menu-item">CONTACT</a>
+            </div>
         </div>
     </nav>
 
-    <section id="home"
-        class="hero min-h-screen flex items-center relative overflow-hidden bg-primary-bg hero-dynamic-bg">
-        <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
-            <div class="hero-content text-center md:text-left brutal-box p-8 bg-secondary-bg animate-on-scroll">
-                <h1 class="text-7xl lg:text-8xl font-extrabold leading-tight mb-6 font-orbitron">
-                    <span class="hero-title-main-gradient">OBIDUR RAHMAN</span>
-                    <span
-                        class="block text-accent-color -skew-x-3 ml-0 md:ml-8 border-b-4 border-l-4 border-black inline-block p-2 text-5xl lg:text-6xl mt-4">DATA
-                        SCIENTIST</span>
-                </h1>
-                <p class="text-2xl text-tertiary-bg mb-4 font-bold">INITIATING DATA TRANSFORMATION PROTOCOL...</p>
-                <p class="text-xl text-text-secondary mb-12 max-w-lg mx-auto md:mx-0">
-                    Mathematics student passionate about building intelligent systems that solve real-world problems.
-                    This interface provides an overview of operations.
-                </p>
-                <div class="flex gap-6 justify-center md:justify-start flex-wrap">
-                    <a href="#projects"
-                        class="brutal-button px-8 py-4 font-semibold relative overflow-hidden transform -skew-x-3"
-                        style="background: var(--accent-color); color: var(--primary-bg);">
-                        VIEW PROJECT LOG
-                    </a>
-                    <a href="#contact"
-                        class="brutal-button btn-secondary-brutal px-8 py-4 font-semibold relative overflow-hidden transform -skew-x-3">
-                        ESTABLISH COMMS
-                    </a>
+    <!-- Enhanced Hero Section -->
+    <section id="home" class="hero">
+        <div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="hero-content fade-in-up">
+                <div class="brutal-box p-8 bg-secondary-bg">
+                    <h1 class="hero-title">
+                        <span class="hero-title-main typewriter">OBIDUR RAHMAN</span>
+                        <span class="hero-subtitle">DATA SCIENTIST</span>
+                    </h1>
+                    <p class="text-2xl text-tertiary-bg mb-4 font-bold">
+                        INITIATING DATA TRANSFORMATION PROTOCOL...
+                    </p>
+                    <p class="text-xl text-text-secondary mb-8 leading-relaxed">
+                        Mathematics student passionate about building intelligent systems that solve real-world
+                        problems.
+                        This interface provides an overview of operations.
+                    </p>
+                    <div class="flex gap-6 flex-wrap">
+                        <a href="#projects" class="brutal-button px-8 py-4 transform -skew-x-3">
+                            VIEW PROJECT LOG
+                        </a>
+                        <a href="#contact" class="brutal-button px-8 py-4 transform -skew-x-3"
+                            style="background: var(--tertiary-bg); color: var(--primary-bg);">
+                            ESTABLISH COMMS
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="hero-visual relative h-[500px] hidden md:block">
-                <div class="floating-card absolute brutal-box p-6 bg-secondary-bg"
-                    style="top: 50px; right: 100px; --rotate: 5deg;">
-                    <div class="text-4xl font-extrabold text-accent-color mb-2">Mathematician</div>
-                    <div class="sm text-text-secondary font-medium"></div>
+            <div class="hero-visual relative h-[600px] hidden lg:block slide-in-right">
+                <div class="floating-element floating-card" style="top: 80px; right: 120px; animation-delay: 0s;">
+                    <div class="text-3xl font-extrabold gradient-text mb-2">Mathematician</div>
+                    <div class="text-sm text-text-secondary">BSc in Mathematics</div>
                 </div>
-                <div class="floating-card absolute brutal-box p-6 bg-secondary-bg"
-                    style="bottom: 100px; right: 50px; --rotate: -8deg; animation-delay: 2s;">
-                    <div class="text-4xl font-extrabold text-accent-color mb-2">Data Scientist</div>
-                    <div class="sm text-text-secondary font-medium"></div>
+                <div class="floating-element floating-card" style="bottom: 150px; right: 60px; animation-delay: 2s;">
+                    <div class="text-3xl font-extrabold gradient-text mb-2">Data Scientist</div>
+                    <div class="text-sm text-text-secondary">ML & AI Specialist</div>
                 </div>
-                <div class="floating-card absolute brutal-box p-6 bg-secondary-bg"
-                    style="top: 200px; left: 50px; --rotate: 3deg; animation-delay: 4s;">
-                    <div class="text-4xl font-extrabold text-accent-color mb-2">Gamer</div>
-                    <div class="sm text-text-secondary font-medium"></div>
+                <div class="floating-element floating-card" style="top: 250px; left: 80px; animation-delay: 4s;">
+                    <div class="text-3xl font-extrabold gradient-text mb-2">Community Leader</div>
+                    <div class="text-sm text-text-secondary">100+ Members</div>
+                </div>
+                <div class="floating-element floating-card" style="bottom: 300px; left: 20px; animation-delay: 1s;">
+                    <div class="text-3xl font-extrabold gradient-text mb-2">Educator</div>
+                    <div class="text-sm text-text-secondary">13+ Articles</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="projects py-32 bg-secondary-bg text-tertiary-bg border-t-4 border-b-4 border-black">
+    <!-- Enhanced Projects Section -->
+    <section id="projects" class="section bg-secondary-bg border-t-4 border-b-4 border-black">
         <div class="max-w-7xl mx-auto px-8">
-            <div class="section-header text-center mb-24 animate-on-scroll">
-                <h2
-                    class="section-title text-6xl lg:text-7xl font-extrabold mb-4 relative inline-block text-tertiary-bg font-orbitron section-title-gradient">
-                    PROJECT LOG // TECH STACK</h2>
-                <p class="text-xl text-text-secondary mt-8 max-w-2xl mx-auto brutal-box p-4 bg-primary-bg">
-                    OPERATIONAL PROJECTS & CORE TECHNOLOGIES UTILIZED. DATA PROCESSING & MODELING REPORTS.
-                </p>
+            <h2 class="section-title gradient-text slide-in-left">
+                PROJECT LOG // TECH STACK
+            </h2>
+            <p
+                class="text-xl text-text-secondary text-center mb-16 brutal-box p-4 bg-primary-bg max-w-3xl mx-auto scale-in">
+                OPERATIONAL PROJECTS & CORE TECHNOLOGIES UTILIZED. DATA PROCESSING & MODELING REPORTS.
+            </p>
+
+            <div class="space-y-8">
+                <!-- Project 1 -->
+                <div class="project-card fade-in-up" style="animation-delay: 0.2s;">
+                    <h3 class="project-title">
+                        A Comparative Analysis of Deep and Traditional Learning Models for Tomato Leaf Disease
+                        Classification
+                    </h3>
+                    <p class="text-lg text-text-secondary mb-6 leading-relaxed">
+                        A comprehensive analysis comparing traditional Machine Learning models with modern Deep Learning
+                        architectures
+                        in classifying tomato leaf diseases. This agricultural AI research explores model performance on
+                        real-world data,
+                        including the impact of background removal techniques.
+                    </p>
+
+                    <div class="brutal-box p-6 bg-secondary-bg mb-6">
+                        <h4
+                            class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
+                            SYSTEM MODULES & DATA PROTOCOLS:
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tech-tag">PYTHON</span>
+                            <span class="tech-tag">TENSORFLOW</span>
+                            <span class="tech-tag">KERAS</span>
+                            <span class="tech-tag">SCIKIT-LEARN</span>
+                            <span class="tech-tag">XCEPTION</span>
+                            <span class="tech-tag">EFFICIENTNET</span>
+                            <span class="tech-tag">MOBILENET</span>
+                            <span class="tech-tag">COMPUTER VISION</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="metric-card">
+                            <div class="metric-value">97.00%</div>
+                            <div class="metric-label">Xception Accuracy</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">94.26%</div>
+                            <div class="metric-label">EfficientNetB0</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">92.79%</div>
+                            <div class="metric-label">MobileNetV2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card fade-in-up" style="animation-delay: 0.4s;">
+                    <h3 class="project-title">
+                        Comprehensive Study of Undergraduate Admission Outcomes in Bangladesh
+                    </h3>
+                    <p class="text-lg text-text-secondary mb-6 leading-relaxed">
+                        Developed and deployed a comprehensive machine learning model to predict undergraduate admission
+                        outcomes.
+                        The project involved extensive feature engineering, hyperparameter optimization, and explainable
+                        AI techniques
+                        to provide actionable insights for educational institutions and students.
+                    </p>
+
+                    <div class="brutal-box p-6 bg-secondary-bg mb-6">
+                        <h4
+                            class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
+                            SYSTEM MODULES & DATA PROTOCOLS:
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tech-tag">PYTHON</span>
+                            <span class="tech-tag">SCIKIT-LEARN</span>
+                            <span class="tech-tag">XGBOOST</span>
+                            <span class="tech-tag">SHAP</span>
+                            <span class="tech-tag">PANDAS</span>
+                            <span class="tech-tag">NUMPY</span>
+                            <span class="tech-tag">PREDICTIVE MODELING</span>
+                            <span class="tech-tag">FEATURE ENGINEERING</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="metric-card">
+                            <div class="metric-value">83.87%</div>
+                            <div class="metric-label">Model Accuracy</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">89%</div>
+                            <div class="metric-label">Precision Score</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">15K+</div>
+                            <div class="metric-label">Data Records</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card fade-in-up" style="animation-delay: 0.6s;">
+                    <h3 class="project-title">
+                        Advanced Statistical Learning & Pattern Recognition Systems
+                    </h3>
+                    <p class="text-lg text-text-secondary mb-6 leading-relaxed">
+                        Multiple research projects focusing on statistical learning theory, pattern recognition
+                        algorithms,
+                        and mathematical optimization. Published findings in peer-reviewed journals and presented at
+                        academic conferences.
+                    </p>
+
+                    <div class="brutal-box p-6 bg-secondary-bg mb-6">
+                        <h4
+                            class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
+                            SYSTEM MODULES & DATA PROTOCOLS:
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tech-tag">R</span>
+                            <span class="tech-tag">PYTHON</span>
+                            <span class="tech-tag">MATLAB</span>
+                            <span class="tech-tag">STATISTICAL MODELING</span>
+                            <span class="tech-tag">MATHEMATICAL ANALYSIS</span>
+                            <span class="tech-tag">OPTIMIZATION</span>
+                            <span class="tech-tag">RESEARCH</span>
+                            <span class="tech-tag">ACADEMIC WRITING</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="metric-card">
+                            <div class="metric-value">13+</div>
+                            <div class="metric-label">Published Articles</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">100+</div>
+                            <div class="metric-label">Community Members</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">5+</div>
+                            <div class="metric-label">Research Projects</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="grid gap-16">
-                <div
-                    class="project-card brutal-box p-12 relative overflow-hidden transition-all duration-300 animate-on-scroll bg-primary-bg">
-                    <div class="flex justify-between items-start mb-8 flex-wrap gap-4">
-                        <div>
-                            <h3 class="text-4xl lg:text-5xl font-bold text-accent-color mb-4 font-orbitron">A
-                                Comparative Analysis of Deep and Traditional Learning Models for Tomato Leaf Disease
-                                Classification</h3>
-                            <p class="text-lg text-text-secondary mb-4 leading-relaxed">
-                                A comparisonal analysis of the performance between traditional Machine Learning (ML)
-                                models and modern Deep Learning (DL) architectures in classifying tomato leaf diseases.
-                                With a focus on agricultural AI, this work explores how different models behave on
-                                real-world data, including the impact of background removal on performance.
+        </div>
+    </section>
+
+    <!-- Enhanced About Section -->
+    <section id="about" class="section">
+        <div class="max-w-7xl mx-auto px-8">
+            <h2 class="section-title gradient-text slide-in-left">
+                PROFILE // SYSTEM SPECIFICATIONS
+            </h2>
+            <p
+                class="text-xl text-text-secondary text-center mb-16 brutal-box p-4 bg-secondary-bg max-w-3xl mx-auto scale-in">
+                PERSONAL DATA ANALYSIS & OPERATIONAL CAPABILITIES OVERVIEW.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <div class="brutal-box p-8 bg-secondary-bg fade-in-up">
+                    <h3 class="text-3xl font-bold mb-6 gradient-text font-mono">BACKGROUND PROCESS</h3>
+                    <div class="space-y-6">
+                        <div class="brutal-box p-4 bg-primary-bg">
+                            <h4 class="text-xl font-bold mb-3 text-accent-color">EDUCATIONAL SYSTEM</h4>
+                            <p class="text-lg text-text-secondary">
+                                Currently pursuing BSc in Mathematics, focusing on statistical learning theory,
+                                mathematical optimization, and data analysis methodologies.
+                            </p>
+                        </div>
+
+                        <div class="brutal-box p-4 bg-primary-bg">
+                            <h4 class="text-xl font-bold mb-3 text-accent-color">MISSION OBJECTIVE</h4>
+                            <p class="text-lg text-text-secondary">
+                                Developing intelligent systems that bridge mathematical theory with practical
+                                applications.
+                                Passionate about using data science to solve complex real-world problems and drive
+                                innovation.
+                            </p>
+                        </div>
+
+                        <div class="brutal-box p-4 bg-primary-bg">
+                            <h4 class="text-xl font-bold mb-3 text-accent-color">COMMUNITY PROTOCOLS</h4>
+                            <p class="text-lg text-text-secondary">
+                                Active community leader with 100+ members, sharing knowledge through articles,
+                                tutorials, and mentoring aspiring data scientists and mathematicians.
                             </p>
                         </div>
                     </div>
-                    <div class="mb-8 brutal-box p-4 bg-secondary-bg">
-                        <h4
-                            class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
-                            SYSTEM MODULES & DATA PROTOCOLS:</h4>
-                        <div class="flex flex-wrap gap-3 mt-4">
-                            <span
-                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PYTHON</span>
-                            <span
-                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SCIKIT-LEARN</span>
-                            <span
-                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">XGBOOST</span>
-                            <span
-                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SHAP</span>
-                            <span
-                                class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PREDICTIVE
-                                MODELING</span>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="metric text-center p-5 bg-secondary-bg">
-                            <div class="text-3xl font-extrabold text-accent-color mb-1">97.00</div>
-                            <div class="text-md text-text-secondary">Xception</div>
-                        </div>
-                        <div class="metric text-center p-5 bg-secondary-bg">
-                            <div class="text-3xl font-extrabold text-accent-color mb-1">94.26</div>
-                            <div class="text-md text-text-secondary">EfficientNetB0</div>
-                        </div>
-                        <div class="metric text-center p-5 bg-secondary-bg">
-                            <div class="text-3xl font-extrabold text-accent-color mb-1">92.79</div>
-                            <div class="text-md text-text-secondary">MobileNetV2</div>
-                        </div>
-                    </div>
                 </div>
-                <div class="grid gap-16">
-                    <div
-                        class="project-card brutal-box p-12 relative overflow-hidden transition-all duration-300 animate-on-scroll bg-primary-bg">
-                        <div class="flex justify-between items-start mb-8 flex-wrap gap-4">
-                            <div>
-                                <h3 class="text-4xl lg:text-5xl font-bold text-accent-color mb-4 font-orbitron">
-                                    Comprehensive Study of Undergraduate Admission Outcomes in Bangladesh</h3>
-                                <p class="text-lg text-text-secondary mb-4 leading-relaxed">
-                                    Developed and deployed a comprehensive machine learning model to predict
-                                    undergraduate admission outcomes in Bangladesh. The project involved extensive
-                                    feature engineering, hyperparameter optimization, and explainable AI techniques to
-                                    provide actionable insights for educational institutions and students.
-                                </p>
+
+                <div class="space-y-8">
+                    <!-- Skills Grid -->
+                    <div class="brutal-box p-8 bg-tertiary-bg slide-in-right">
+                        <h3 class="text-3xl font-bold mb-6 text-primary-bg font-mono">CORE SYSTEMS</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="brutal-box p-4 bg-secondary-bg">
+                                <div class="text-xl font-bold text-accent-color mb-2">PYTHON</div>
+                                <div class="bg-primary-bg h-3 border-2 border-black">
+                                    <div class="bg-success-color h-full" style="width: 95%;"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-8 brutal-box p-4 bg-secondary-bg">
-                            <h4
-                                class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
-                                SYSTEM MODULES & DATA PROTOCOLS:</h4>
-                            <div class="flex flex-wrap gap-3 mt-4">
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PYTHON</span>
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SCIKIT-LEARN</span>
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">XGBOOST</span>
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SHAP</span>
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PREDICTIVE
-                                    MODELING</span>
+                            <div class="brutal-box p-4 bg-secondary-bg">
+                                <div class="text-xl font-bold text-accent-color mb-2">MACHINE LEARNING</div>
+                                <div class="bg-primary-bg h-3 border-2 border-black">
+                                    <div class="bg-success-color h-full" style="width: 90%;"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="metric text-center p-5 bg-secondary-bg">
-                                <div class="text-3xl font-extrabold text-accent-color mb-1">83.87%</div>
-                                <div class="text-md text-text-secondary">ACCURACY</div>
+                            <div class="brutal-box p-4 bg-secondary-bg">
+                                <div class="text-xl font-bold text-accent-color mb-2">DEEP LEARNING</div>
+                                <div class="bg-primary-bg h-3 border-2 border-black">
+                                    <div class="bg-success-color h-full" style="width: 85%;"></div>
+                                </div>
                             </div>
-                            <div class="metric text-center p-5 bg-secondary-bg">
-                                <div class="text-3xl font-extrabold text-accent-color mb-1">0.8633</div>
-                                <div class="text-md text-text-secondary">ROC-AUC</div>
+                            <div class="brutal-box p-4 bg-secondary-bg">
+                                <div class="text-xl font-bold text-accent-color mb-2">STATISTICS</div>
+                                <div class="bg-primary-bg h-3 border-2 border-black">
+                                    <div class="bg-success-color h-full" style="width: 92%;"></div>
+                                </div>
                             </div>
-                            <div class="metric text-center p-5 bg-secondary-bg">
-                                <div class="text-3xl font-extrabold text-accent-color mb-1">SHAP</div>
-                                <div class="text-md text-text-secondary">EXPLAINABILITY</div>
+                            <div class="brutal-box p-4 bg-secondary-bg">
+                                <div class="text-xl font-bold text-accent-color mb-2">R</div>
+                                <div class="bg-primary-bg h-3 border-2 border-black">
+                                    <div class="bg-success-color h-full" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="brutal-box p-4 bg-secondary-bg">
+                                <div class="text-xl font-bold text-accent-color mb-2">MATHEMATICS</div>
+                                <div class="bg-primary-bg h-3 border-2 border-black">
+                                    <div class="bg-success-color h-full" style="width: 95%;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div
-                        class="project-card brutal-box p-12 relative overflow-hidden transition-all duration-300 animate-on-scroll bg-primary-bg">
-                        <div class="flex justify-between items-start mb-8 flex-wrap gap-4">
-                            <div>
-                                <h3 class="text-4xl lg:text-5xl font-bold text-accent-color mb-4 font-orbitron">
-                                    Environmental Determinants of Diarrheal Disease: A Multi-Regional Analysis in
-                                    Bangladesh</h3>
-                                <p class="text-lg text-text-secondary mb-4 leading-relaxed">
-                                    Built and compared multiple regression models for disease trend prediction,
-                                    incorporating time-series analysis with lagged features. Created an interactive
-                                    dashboard with real-time visualizations to help public health officials understand
-                                    environmental correlations with disease outbreaks.
-                                </p>
+                    <!-- Experience Timeline -->
+                    <div class="brutal-box p-8 bg-secondary-bg scale-in">
+                        <h3 class="text-3xl font-bold mb-6 gradient-text font-mono">OPERATION LOG</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-4 border-accent-color pl-6 relative">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-accent-color border-2 border-black"></div>
+                                <div class="text-lg font-bold text-accent-color">2024 - PRESENT</div>
+                                <div class="text-xl font-bold mb-2">Research & Community Leadership</div>
+                                <div class="text-text-secondary">
+                                    Leading data science community, publishing research articles, and developing
+                                    educational content for aspiring data scientists.
+                                </div>
+                            </div>
+                            <div class="border-l-4 border-accent-color pl-6 relative">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-accent-color border-2 border-black"></div>
+                                <div class="text-lg font-bold text-accent-color">2023 - 2024</div>
+                                <div class="text-xl font-bold mb-2">Machine Learning Projects</div>
+                                <div class="text-text-secondary">
+                                    Developed multiple ML models for classification and prediction tasks,
+                                    with focus on agricultural AI and educational analytics.
+                                </div>
+                            </div>
+                            <div class="border-l-4 border-accent-color pl-6 relative">
+                                <div class="absolute -left-2 top-0 w-4 h-4 bg-accent-color border-2 border-black"></div>
+                                <div class="text-lg font-bold text-accent-color">2022 - 2023</div>
+                                <div class="text-xl font-bold mb-2">Mathematical Research</div>
+                                <div class="text-text-secondary">
+                                    Conducted research in statistical learning theory and mathematical optimization,
+                                    publishing findings in academic journals.
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-8 brutal-box p-4 bg-secondary-bg">
-                            <h4
-                                class="text-xl font-bold mb-4 text-tertiary-bg border-b-2 border-text-secondary pb-2 inline-block">
-                                OPERATIONAL FRAMEWORK & DATA SOURCES:</h4>
-                            <div class="flex flex-wrap gap-3 mt-4">
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PYTHON</span>
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">SARIMA</span>
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">XGBOOST</span>
-                                <span
-                                    class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">PLOTLY</span>
-                                <span class="tech-tag brutal-box px-4 py-2 font-semibold text-tertiary-bg text-sm">TIME
-                                    SERIES ANALYSIS</span>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="metric text-center p-5 bg-secondary-bg">
-                                <div class="text-3xl font-extrabold text-accent-color mb-1">7.40</div>
-                                <div class="text-md text-text-secondary">RMSE VALUE</div>
-                            </div>
-                            <div class="metric text-center p-5 bg-secondary-bg">
-                                <div class="text-3xl font-extrabold text-accent-color mb-1">4</div>
-                                <div class="text-md text-text-secondary">DATA DIVISIONS</div>
-                            </div>
-                            <div class="metric text-center p-5 bg-secondary-bg">
-                                <div class="text-3xl font-extrabold text-accent-color mb-1">7 DAYS</div>
-                                <div class="text-md text-text-secondary">LAG FEATURES</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-
-    <section id="about" class="about py-32 bg-primary-bg border-b-4 border-black">
-        <div class="max-w-7xl mx-auto px-8">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="about-content animate-on-scroll brutal-box p-8 bg-secondary-bg">
-                    <h2 class="text-5xl lg:text-6xl font-extrabold mb-8 section-title-gradient font-orbitron">PROFILE //
-                        STATUS LOG</h2>
-                    <p class="text-lg text-text-primary mb-6 leading-relaxed">
-                        Currently pursuing a BSc in Mathematics at the University of Chittagong, I'm passionate about
-                        the intersection of mathematical theory and practical application. My journey spans from
-                        building predictive models to fostering tech communities and mentoring aspiring developers.
-                    </p>
-                    <p class="text-lg text-text-primary mb-6 leading-relaxed">
-                        As the founder of The Code Forum, I've built a thriving community of 100+ tech enthusiasts while
-                        simultaneously serving as Research and Development Secretary at the Chittagong University Math
-                        Club. My work extends beyond personal projects—I'm committed to knowledge sharing through
-                        educational content and mentorship.
-                    </p>
-                </div>
-                <div class="achievements grid gap-8 animate-on-scroll">
-                    <div class="achievement-item flex items-center gap-4 p-5">
-                        <div
-                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
-                            🏆</div>
-                        <div class="font-semibold text-tertiary-bg text-lg">FIRST PLACE - DIGITAL INNOVATION FAIR 2018
-                        </div>
-                    </div>
-                    <div class="achievement-item flex items-center gap-4 p-5">
-                        <div
-                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
-                            👥</div>
-                        <div class="font-semibold text-tertiary-bg text-lg">FOUNDER & COMMUNITY LEAD - 100+ MEMBERS
-                        </div>
-                    </div>
-                    <div class="achievement-item flex items-center gap-4 p-5">
-                        <div
-                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
-                            📚</div>
-                        <div class="font-semibold text-tertiary-bg text-lg">13 TECHNICAL ARTICLES - 1000+ READS</div>
-                    </div>
-                    <div class="achievement-item flex items-center gap-4 p-5">
-                        <div
-                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
-                            🎥</div>
-                        <div class="font-semibold text-tertiary-bg text-lg">10+ EDUCATIONAL VIDEOS PUBLISHED</div>
-                    </div>
-                    <div class="achievement-item flex items-center gap-4 p-5">
-                        <div
-                            class="w-12 h-12 icon-gradient rounded-none flex items-center justify-center text-white font-bold text-2xl border-2 border-black brutal-box">
-                            🎓</div>
-                        <div class="font-semibold text-tertiary-bg text-lg">MULTIPLE PROFESSIONAL CERTIFICATIONS</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact py-32 bg-secondary-bg text-tertiary-bg text-center border-b-4 border-black">
+    <!-- Enhanced Contact Section -->
+    <section id="contact" class="section bg-tertiary-bg border-t-4 border-black">
         <div class="max-w-7xl mx-auto px-8">
-            <div class="section-header animate-on-scroll">
-                <h2
-                    class="section-title text-5xl lg:text-6xl font-extrabold mb-8 text-tertiary-bg font-orbitron section-title-gradient">
-                    INITIATE CONTACT // COMMS</h2>
-                <p class="text-xl text-text-secondary mb-12 max-w-2xl mx-auto brutal-box p-4 bg-primary-bg">
-                    READY TO ESTABLISH A NEW DATA STREAM? CONNECT WITH ME VIA SECURE CHANNELS.
-                </p>
-            </div>
-            <div class="flex justify-center gap-10 flex-wrap animate-on-scroll">
-                <a href="mailto:obidur.shawal@gmail.com"
-                    class="flex items-center gap-3 px-10 py-5 contact-link-brutal no-underline">
-                    <span class="text-3xl contact-icon"><i class="fas fa-envelope"></i></span>
-                    <span class="font-semibold text-xl">EMAIL PROTOCOL</span>
-                </a>
-                <a href="https://github.com/Ashfinn"
-                    class="flex items-center gap-3 px-10 py-5 contact-link-brutal no-underline" target="_blank">
-                    <span class="text-3xl contact-icon"><i class="fab fa-github"></i></span>
-                    <span class="font-semibold text-xl">GITHUB REPO</span>
-                </a>
-                <a href="https://linkedin.com/in/obidur-rahman-shawal"
-                    class="flex items-center gap-3 px-10 py-5 contact-link-brutal no-underline" target="_blank">
-                    <span class="text-3xl contact-icon"><i class="fab fa-linkedin-in"></i></span>
-                    <span class="font-semibold text-xl">LINKEDIN NETWORK</span>
-                </a>
+            <h2 class="section-title text-primary-bg slide-in-left">
+                CONTACT // ESTABLISH CONNECTION
+            </h2>
+            <p
+                class="text-xl text-gray-300 text-center mb-16 brutal-box p-4 bg-secondary-bg text-text-primary max-w-3xl mx-auto scale-in">
+                INITIATE COMMUNICATION PROTOCOL. MULTIPLE CHANNELS AVAILABLE FOR DATA EXCHANGE.
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div class="space-y-8 fade-in-up">
+                    <div class="brutal-box p-8 bg-secondary-bg">
+                        <h3 class="text-3xl font-bold mb-6 gradient-text font-mono">COMMUNICATION CHANNELS</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4 p-4 bg-primary-bg brutal-box">
+                                <div class="w-12 h-12 bg-accent-color flex items-center justify-center">
+                                    <i class="fas fa-envelope text-primary-bg text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">EMAIL PROTOCOL</div>
+                                    <div class="text-text-secondary">obidur.rahman@email.com</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-primary-bg brutal-box">
+                                <div class="w-12 h-12 bg-accent-secondary flex items-center justify-center">
+                                    <i class="fab fa-linkedin text-primary-bg text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">LINKEDIN NETWORK</div>
+                                    <div class="text-text-secondary">linkedin.com/in/obidur-rahman</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-primary-bg brutal-box">
+                                <div class="w-12 h-12 bg-accent-color flex items-center justify-center">
+                                    <i class="fab fa-github text-primary-bg text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">CODE REPOSITORY</div>
+                                    <div class="text-text-secondary">github.com/obidur-rahman</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-primary-bg brutal-box">
+                                <div class="w-12 h-12 bg-accent-secondary flex items-center justify-center">
+                                    <i class="fas fa-globe text-primary-bg text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-lg">RESEARCH PORTAL</div>
+                                    <div class="text-text-secondary">researchgate.net/profile/obidur</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="brutal-box p-8 bg-secondary-bg">
+                        <h3 class="text-3xl font-bold mb-6 gradient-text font-mono">CURRENT STATUS</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-success-color"></div>
+                                <span class="text-lg font-bold">SYSTEM ONLINE</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-success-color"></div>
+                                <span class="text-lg font-bold">ACCEPTING NEW PROJECTS</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-success-color"></div>
+                                <span class="text-lg font-bold">RESEARCH COLLABORATIONS OPEN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="brutal-box p-8 bg-secondary-bg slide-in-right">
+                    <h3 class="text-3xl font-bold mb-6 gradient-text font-mono">MESSAGE INTERFACE</h3>
+                    <form class="space-y-6" id="contactForm">
+                        <div>
+                            <label class="block text-lg font-bold mb-2 text-text-primary">SENDER IDENTIFICATION</label>
+                            <input type="text" name="name" required
+                                class="w-full p-4 bg-primary-bg border-3 border-black font-mono text-lg focus:outline-none focus:border-accent-color transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-lg font-bold mb-2 text-text-primary">COMMUNICATION ADDRESS</label>
+                            <input type="email" name="email" required
+                                class="w-full p-4 bg-primary-bg border-3 border-black font-mono text-lg focus:outline-none focus:border-accent-color transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-lg font-bold mb-2 text-text-primary">PROJECT CATEGORY</label>
+                            <select name="subject" required
+                                class="w-full p-4 bg-primary-bg border-3 border-black font-mono text-lg focus:outline-none focus:border-accent-color transition-colors">
+                                <option value="">SELECT PROTOCOL TYPE</option>
+                                <option value="collaboration">RESEARCH COLLABORATION</option>
+                                <option value="project">PROJECT CONSULTATION</option>
+                                <option value="education">EDUCATIONAL INQUIRY</option>
+                                <option value="other">GENERAL COMMUNICATION</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-lg font-bold mb-2 text-text-primary">MESSAGE PAYLOAD</label>
+                            <textarea name="message" rows="6" required
+                                class="w-full p-4 bg-primary-bg border-3 border-black font-mono text-lg focus:outline-none focus:border-accent-color transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="brutal-button w-full py-4 text-xl">
+                            TRANSMIT MESSAGE
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-tertiary-bg py-8 text-center text-white border-t-4 border-black">
-        <p class="text-lg">&copy; 2025 OBIDUR RAHMAN // DATA SEGMENT_A. ALL RIGHTS RESERVED. // OPERATIONAL SINCE [DATE]
-        </p>
+    <!-- Enhanced Footer -->
+    <footer class="bg-tertiary-bg border-t-4 border-black py-12">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="brutal-box p-8 bg-secondary-bg">
+                <div class="grid md:grid-cols-3 gap-8 items-center">
+                    <div>
+                        <div class="logo text-3xl mb-4">OR.SYS</div>
+                        <p class="text-text-secondary">
+                            Data Scientist // Mathematical Researcher<br>
+                            Building intelligent systems for tomorrow.
+                        </p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="text-lg font-bold mb-4 gradient-text">SYSTEM STATUS</div>
+                        <div class="flex justify-center space-x-4">
+                            <div class="w-4 h-4 bg-success-color"></div>
+                            <span class="font-bold">ALL SYSTEMS OPERATIONAL</span>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <div class="text-lg font-bold mb-4 gradient-text">LAST UPDATED</div>
+                        <div class="font-mono text-text-secondary">2024.12.CURRENT</div>
+                        <div class="font-mono text-text-secondary">VERSION 2.0.0</div>
+                    </div>
+                </div>
+
+                <div class="border-t-2 border-text-secondary mt-8 pt-8 text-center">
+                    <p class="text-text-secondary font-mono">
+                        © 2024 OBIDUR RAHMAN SYSTEMS. ALL PROTOCOLS RESERVED. | DESIGNED WITH BRUTAL EFFICIENCY.
+                    </p>
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <!-- Enhanced JavaScript -->
     <script>
+        // Loading animation
+        window.addEventListener('load', function () {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Scroll indicator
+        window.addEventListener('scroll', function () {
+            const scrollIndicator = document.getElementById('scrollIndicator');
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            scrollIndicator.style.width = scrollPercent + '%';
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuToggle.addEventListener('click', function () {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -664,53 +1244,59 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                }
-                // Close mobile menu if open
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
+                    // Close mobile menu if open
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
                 }
             });
         });
 
-        // Animate elements on scroll
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                } else {
-                    // Optional: remove animated class if element scrolls out of view
-                    // entry.target.classList.remove('animated');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) translateX(0) scale(1)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
             observer.observe(el);
         });
 
-        // Parallax effect for floating cards - slightly reduced movement
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.floating-card');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-            cards.forEach((card, index) => {
-                const intensity = (index + 1) * 0.3; /* Reduced intensity */
-                const xOffset = (mouseX - 0.5) * intensity * 10;
-                const yOffset = (mouseY - 0.5) * intensity * 10;
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
 
-                card.style.transform = `translate(${xOffset}px, ${yOffset}px) rotate(var(--rotate, 0deg))`;
-            });
+            // Show success message (in a real implementation, you'd send this to a server)
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+
+            button.textContent = 'MESSAGE TRANSMITTED';
+            button.style.background = 'var(--success-color)';
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'var(--accent-color)';
+                this.reset();
+            }, 3000);
+
+            console.log('Form submitted:', data);
         });
 
-        // Subtle typing effect to hero title
-        function typeWriter(element, text, speed = 80) {
+        // Enhanced typewriter effect for hero title
+        function typeWriter(element, text, speed = 100) {
             let i = 0;
             element.innerHTML = '';
 
@@ -721,104 +1307,59 @@
                     setTimeout(type, speed);
                 }
             }
+
             type();
         }
 
-        // Initialize typing effect when page loads
-        window.addEventListener('load', () => {
-            const heroTitleSpan = document.querySelector('.hero-title-main-gradient');
-            if (heroTitleSpan) {
-                typeWriter(heroTitleSpan, 'OBIDUR RAHMAN', 80);
+        // Initialize typewriter effect when page loads
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.typewriter');
+            if (heroTitle) {
+                typeWriter(heroTitle, 'OBIDUR RAHMAN', 150);
             }
-        });
+        }, 1500);
 
-        // Dynamic gradient background to hero section (subtle, high-contrast version)
-        document.addEventListener('mousemove', (e) => {
-            const hero = document.querySelector('.hero'); /* Targeting hero section directly */
-            if (hero) {
-                const rect = hero.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-                hero.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(0, 0, 0, 0.05) 0%, var(--primary-bg) 50%)`;
-            }
-        });
-
-        // Add loading animation (brutal style)
-        window.addEventListener('load', function () {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.2s ease-out'; /* Quick fade */
-                document.body.style.opacity = '1';
-            }, 50);
-        });
-
-        // Easter egg: Konami code for special effect - adjusted for brutalist palette
-        let konamiCode = [];
-        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // Up Up Down Down Left Right Left Right B A
-
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.keyCode);
-            if (konamiCode.length > konamiSequence.length) {
-                konamiCode.shift();
-            }
-
-            if (konamiCode.join(',') === konamiSequence.join(',')) {
-                // Special effect: Change accent color temporarily to a stark warning red
-                document.documentElement.style.setProperty('--accent-color', '#FF0000');
-
-                // Show a fun message
-                const message = document.createElement('div');
-                message.innerHTML = 'ALERT: ANOMALY DETECTED // PROTOCOL ACTIVATED // COLORS MUTATED';
-                message.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: var(--tertiary-bg);
-                    color: #FF0000; /* Red text on black */
-                    border: 4px solid #FF0000;
-                    padding: 2.5rem;
-                    font-size: 2rem;
-                    font-weight: bold;
-                    text-align: center;
-                    z-index: 10000;
-                    box-shadow: 8px 8px 0px #FF0000;
-                    animation: glitchEffect 0.1s infinite alternate;
-                `;
-                document.body.appendChild(message);
-
-                const glitchEffect = `
-                    @keyframes glitchEffect {
-                        0% { transform: translate(-50%, -50%) skewX(0deg); }
-                        25% { transform: translate(-52%, -48%) skewX(-5deg); }
-                        50% { transform: translate(-48%, -51%) skewX(0deg); }
-                        75% { transform: translate(-51%, -49%) skewX(5deg); }
-                        100% { transform: translate(-50%, -50%) skewX(0deg); }
-                    }
-                `;
-                const styleSheet = document.createElement("style");
-                styleSheet.type = "text/css";
-                styleSheet.innerText = glitchEffect;
-                document.head.appendChild(styleSheet);
+        // Dynamic tech tag interactions
+        document.querySelectorAll('.tech-tag').forEach(tag => {
+            tag.addEventListener('click', function () {
+                // Add click animation
+                this.style.transform = 'scale(1.1) skewX(-10deg)';
+                this.style.background = 'var(--accent-secondary)';
 
                 setTimeout(() => {
-                    // Reset colors
-                    document.documentElement.style.setProperty('--accent-color', '#FF00FF'); /* Reset to original magenta */
-                    document.body.removeChild(message);
-                    document.head.removeChild(styleSheet); /* Clean up dynamic style */
-                    konamiCode = [];
-                }, 5000);
-            }
+                    this.style.transform = '';
+                    this.style.background = '';
+                }, 200);
+            });
         });
 
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', function () {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-element');
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            });
         });
+
+        // Console easter egg
+        console.log(`
+    ██████╗ ██████╗     ███████╗██╗   ██╗███████╗
+    ██╔═══██╗██╔══██╗    ██╔════╝╚██╗ ██╔╝██╔════╝
+    ██║   ██║██████╔╝    ███████╗ ╚████╔╝ ███████╗
+    ██║   ██║██╔══██╗    ╚════██║  ╚██╔╝  ╚════██║
+    ╚██████╔╝██║  ██║    ███████║   ██║   ███████║
+     ╚═════╝ ╚═╝  ╚═╝    ╚══════╝   ╚═╝   ╚══════╝
+    
+    SYSTEM INITIALIZED SUCCESSFULLY
+    Data Scientist // Mathematical Researcher
+    All protocols are operational.
+    
+    Interested in the code? Check out the repository!
+        `);
     </script>
 </body>
 
