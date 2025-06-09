@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Obidur Rahman</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+    <meta name="description"
+        content="Explore a collection of data science, machine learning, and web development projects by Obidur Rahman.">
+    <meta property="og:title" content="Projects - Obidur Rahman">
+    <meta property="og:description"
+        content="A showcase of predictive models, data analysis, and other technical projects.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --header-bg: rgba(10, 10, 10, 0.8);
+            --accent-blue: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            height: 100%;
+            background: var(--text-primary);
+            width: 0%;
+            animation: loading 2s ease-in-out;
+        }
+
+        @keyframes loading {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            padding: 0 40px;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .logo:hover {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        /* Projects Page Content */
+        .projects-container {
+            max-width: 1200px;
+            margin: 120px auto 60px auto;
+            padding: 0 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .projects-container h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .projects-container .page-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .card-header .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .project-title svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-secondary);
+        }
+
+        .project-card .public-badge {
+            font-size: 10px;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 2px 6px;
+            border-radius: 20px;
+            margin-left: auto;
+        }
+
+        .card-body .project-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .tech-stack {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tech-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .tech-color.jupyter {
+            background-color: #DA5B0B;
+        }
+
+        .tech-color.html {
+            background-color: #e34c26;
+        }
+
+        .tech-color.matlab {
+            background-color: #0076A8;
+        }
+
+        .tech-color.python {
+            background-color: #3572A5;
+        }
+
+        .project-stats {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            background: var(--bg-secondary);
+            padding: 30px 40px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .footer-bottom p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 20px;
+            }
+
+            .projects-container {
+                margin-top: 100px;
+                padding: 0 20px;
+            }
+
+            .projects-container h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 15px;
+                height: 60px;
+            }
+
+            .projects-container {
+                margin-top: 90px;
+                padding: 0 15px;
+            }
+
+            .card-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .project-stats {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">LOADING PROJECTS</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <a class="logo" href="index.html">OBIDUR RAHMAN</a>
+        <div class="header-actions">
+            <a href="index.html" class="btn">Back to Portfolio</a>
+            <a href="https://github.com/Ashfinn" target="_blank" rel="noopener noreferrer"
+                class="btn btn-primary">GitHub</a>
+        </div>
+    </header>
+
+    <main class="projects-container">
+        <h1>My Projects</h1>
+        <p class="page-subtitle">A selection of my work in data analysis, machine learning, and web application
+            development. Click any card to view the source on GitHub.</p>
+
+        <div class="projects-grid">
+            <div class="project-card" onclick="window.open('https://github.com/Ashfinn/tomato-leaf', '_blank')">
+                <div>
+                    <div class="card-header">
+                        <h2 class="project-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z">
+                                </path>
+                            </svg>
+                            tomato-leaf
+                            <span class="public-badge">Public</span>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="project-description">A Comparisional analysis of the performance between traditional
+                            Machine learning (ML) models and modern Deep Learning (DL) architectures in classifying
+                            tomato leaf diseases</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="tech-stack">
+                        <span class="tech-color jupyter"></span> Jupyter Notebook
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                                </path>
+                            </svg>
+                            1
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card"
+                onclick="window.open('https://github.com/Ashfinn/Diarrhea-Prediction-Model', '_blank')">
+                <div>
+                    <div class="card-header">
+                        <h2 class="project-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z">
+                                </path>
+                            </svg>
+                            Diarrhea-Prediction-Model
+                            <span class="public-badge">Public</span>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="project-description">This research project analyzes the relationship between
+                            environmental factors and diarrheal disease incidence across four major divisions in
+                            Bangladesh.</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="tech-stack">
+                        <span class="tech-color jupyter"></span> Jupyter Notebook
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                                </path>
+                            </svg>
+                            3
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card"
+                onclick="window.open('https://github.com/Ashfinn/undergraduate-admission-analysis', '_blank')">
+                <div>
+                    <div class="card-header">
+                        <h2 class="project-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z">
+                                </path>
+                            </svg>
+                            undergraduate-admission-analysis
+                            <span class="public-badge">Public</span>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="project-description">Analysis and predictive modeling project exploring factors
+                            affecting public and private university admission</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="tech-stack">
+                        <span class="tech-color jupyter"></span> Jupyter Notebook
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                                </path>
+                            </svg>
+                            1
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://github.com/Ashfinn/ashfinn.github.io', '_blank')">
+                <div>
+                    <div class="card-header">
+                        <h2 class="project-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z">
+                                </path>
+                            </svg>
+                            ashfinn.github.io
+                            <span class="public-badge">Public</span>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="project-description">This website serves as a digital space where I showcase my
+                            projects, skills, and achievements. Basically my digital resume.</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="tech-stack">
+                        <span class="tech-color html"></span> HTML
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                                </path>
+                            </svg>
+                            5
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="window.open('https://github.com/Ashfinn/Matlab-Hero', '_blank')">
+                <div>
+                    <div class="card-header">
+                        <h2 class="project-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z">
+                                </path>
+                            </svg>
+                            Matlab-Hero
+                            <span class="public-badge">Public</span>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="project-description">Ultimate resource for mastering MATLAB programming. Challenges
+                            and Practice Problems for Matlab. Made with Next.js and Nextra.</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="tech-stack">
+                        <span class="tech-color matlab"></span> MATLAB
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                                </path>
+                            </svg>
+                            6
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card"
+                onclick="window.open('https://github.com/Ashfinn/Letterboxd-Lifesaver', '_blank')">
+                <div>
+                    <div class="card-header">
+                        <h2 class="project-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z">
+                                </path>
+                            </svg>
+                            Letterboxd-Lifesaver
+                            <span class="public-badge">Public</span>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="project-description">Letterboxd Lifesaver is a web application that helps users choose
+                            movies based on their Letterboxd watchlist. Simply enter your Letterboxd username, and let
+                            the app randomly select a movie for you ...</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="tech-stack">
+                        <span class="tech-color python"></span> Python
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                                </path>
+                            </svg>
+                            4
+                        </div>
+                        <div class="stat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.9-2-2-2h-8l-2-2z">
+                                </path>
+                            </svg> 1
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 OBIDUR RAHMAN. ALL RIGHTS RESERVED.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            }
+
+            let lastScrollTop = 0;
+            const header = document.querySelector('.header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > lastScrollTop && scrollTop > header.clientHeight) {
+                        header.style.transform = 'translateY(-100%)';
+                    } else {
+                        header.style.transform = 'translateY(0)';
+                    }
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
