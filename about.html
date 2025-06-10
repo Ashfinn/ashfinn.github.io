@@ -39,6 +39,76 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
+        /* Enhanced Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+
+        .loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .loader-bar {
+            width: 240px;
+            height: 3px;
+            background: var(--border-color);
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+
+        .loader-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+            animation: loading 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 3px;
+        }
+
+        @keyframes loading {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
@@ -448,74 +518,6 @@
             opacity: 0.5;
         }
 
-        .cta-section {
-            text-align: center;
-            padding: 60px 0;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            margin-top: 60px;
-        }
-
-        .cta-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-
-        .cta-description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-cta {
-            padding: 15px 30px;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border: 2px solid var(--accent-primary);
-            background: transparent;
-            color: var(--accent-primary);
-            text-decoration: none;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-primary);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .btn-cta:hover::before {
-            left: 0;
-        }
-
-        .btn-cta:hover {
-            color: var(--bg-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
-        }
-
         /* Responsive Design */
         @media (max-width: 1200px) {
             .main-content {
@@ -555,16 +557,6 @@
 
             .hero-section {
                 padding: 60px 0 40px 0;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn-cta {
-                width: 100%;
-                max-width: 300px;
             }
         }
 
@@ -650,6 +642,12 @@
         <div class="scroll-progress" id="scrollProgress"></div>
     </div>
 
+    <div class="loader" id="loader">
+        <div class="loader-text">FETCHING DETAILS</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
     <header class="header">
         <a class="logo" href="index.html">OBIDUR RAHMAN</a>
         <a href="https://github.com/Ashfinn" target="_blank" rel="noopener noreferrer"
@@ -658,13 +656,9 @@
 
     <main class="main-content">
         <section class="hero-section fade-in">
-            <h1 class="hero-title">About Me</h1>
-            <p class="hero-subtitle">Mathematician • Data Scientist • Open Source Advocate</p>
-            <p class="hero-description">
-                Hi, I'm Obidur Rahman — an aspiring mathematician, passionate writer, and ardent advocate for open
-                source.
-                I am a dedicated Bachelor of Science in Mathematics student at University of Chittagong.
-            </p>
+            <h1 class="hero-title">Hi, I'm Obidur Rahman</h1>
+            <p class="hero-subtitle">An aspiring mathematician, passionate writer, and ardent advocate for open
+                source. I am a dedicated Bachelor of Science in Mathematics student at University of Chittagong.</p>
         </section>
 
         <div class="content-grid">
@@ -743,55 +737,6 @@
                     </p>
                 </div>
             </section>
-
-            <section class="full-width-section fade-in">
-                <div class="section-label">EXPERTISE</div>
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Programming Languages</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">C++</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">HTML/CSS</span>
-                            <span class="skill-tag">MATLAB</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Data Science & ML</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">scikit-learn</span>
-                            <span class="skill-tag">Pandas</span>
-                            <span class="skill-tag">NumPy</span>
-                            <span class="skill-tag">XGBoost</span>
-                            <span class="skill-tag">SHAP</span>
-                            <span class="skill-tag">SARIMA</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Tools & Technologies</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">Streamlit</span>
-                            <span class="skill-tag">Plotly</span>
-                            <span class="skill-tag">Matplotlib</span>
-                            <span class="skill-tag">Firebase</span>
-                            <span class="skill-tag">LaTeX</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Mathematical Domains</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">Complex Analysis</span>
-                            <span class="skill-tag">Numerical Analysis</span>
-                            <span class="skill-tag">Linear Algebra</span>
-                            <span class="skill-tag">Statistics</span>
-                            <span class="skill-tag">Optimization</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
 
         <section class="quote-section fade-in">
@@ -801,24 +746,23 @@
                 discovery opens a door to infinite possibilities.
             </p>
         </section>
-
-        <section class="cta-section fade-in">
-            <h2 class="cta-title">Let's Connect & Collaborate</h2>
-            <p class="cta-description">
-                I'm always excited to discuss new ideas, collaborate on innovative projects, or share insights about
-                mathematics, data science, and technology. Whether you're looking to explore the intersection of math
-                and code or build something impactful together, I'd love to hear from you.
-            </p>
-            <div class="cta-buttons">
-                <a href="mailto:obidur.shawal@gmail.com" class="btn-cta">Get In Touch</a>
-                <a href="projects.html" class="btn-cta">View My Work</a>
-                <a href="https://linkedin.com/in/obidur-rahman-shawal" target="_blank" class="btn-cta">LinkedIn</a>
-            </div>
-        </section>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Enhanced loading animation
+            const loader = document.getElementById('loader');
+            if (loader) {
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        loader.classList.add('fade-out');
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 800);
+                    }, 1200);
+                });
+            }
+
             // Scroll progress indicator
             const scrollProgress = document.getElementById('scrollProgress');
             if (scrollProgress) {
