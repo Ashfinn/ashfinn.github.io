@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Obidur Rahman</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>捉窶昨汳ｻ</text></svg>">
     <meta name="description"
-        content="Learn more about Obidur Rahman, a BSc Mathematics student specializing in data science and machine learning.">
-    <meta property="og:title" content="About - Obidur Rahman">
-    <meta property="og:description" content="Dive into the background, skills, and journey of Obidur Rahman.">
+        content="Learn about Obidur Rahman's journey as a BSc Mathematics student passionate about data science, machine learning, and open source development.">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -23,13 +21,22 @@
 
         :root {
             --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #2a2a2a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #151515;
             --text-primary: #ffffff;
             --text-secondary: #b8b8b8;
             --text-muted: #888888;
             --border-color: #333333;
-            --header-bg: rgba(10, 10, 10, 0.8);
+            --border-subtle: #252525;
+            --accent-primary: #00ff88;
+            --accent-secondary: #0088ff;
+            --accent-tertiary: #ff8800;
+            --accent-quaternary: #ff0088;
+            --accent-glow: rgba(0, 255, 136, 0.2);
+            --header-bg: rgba(10, 10, 10, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
@@ -37,67 +44,41 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             overflow-x: hidden;
-            line-height: 1.7;
-            /* Increased for readability */
-            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        /* Loading Animation */
-        .loader {
+        /* Animated background gradient */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--bg-primary);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loader.fade-out {
-            opacity: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 136, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(255, 0, 136, 0.02) 0%, transparent 50%);
             pointer-events: none;
+            z-index: -1;
+            animation: gradientShift 20s ease-in-out infinite;
         }
 
-        .loader-text {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 30px;
-            letter-spacing: 0.1em;
-        }
+        @keyframes gradientShift {
 
-        .loader-bar {
-            width: 200px;
-            height: 2px;
-            background: var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loader-progress {
-            height: 100%;
-            background: var(--text-primary);
-            width: 0%;
-            animation: loading 2s ease-in-out;
-        }
-
-        @keyframes loading {
-            0% {
-                width: 0%;
-            }
-
+            0%,
             100% {
-                width: 100%;
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
             }
         }
 
-        /* Header */
+        /* Header styles - copied from index */
         .header {
             position: fixed;
             top: 0;
@@ -105,60 +86,92 @@
             right: 0;
             z-index: 1000;
             background: var(--header-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             padding: 0 40px;
-            height: 70px;
+            height: 80px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0.5;
         }
 
         .logo {
             font-family: 'JetBrains Mono', monospace;
-            padding: 8px 16px;
+            padding: 12px 20px;
             border: 1px solid var(--border-color);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 800;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            transition: all 0.3s ease;
+            letter-spacing: 0.15em;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             background: var(--text-primary);
             color: var(--bg-primary);
-            border-color: var(--text-primary);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .logo:hover::before {
+            left: 100%;
         }
 
         .logo:hover {
             background: transparent;
             color: var(--text-primary);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 15px;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 12px 20px;
             border: 1px solid var(--border-color);
-            background: transparent;
+            background: var(--glass-bg);
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 12px;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
+            border-radius: 2px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
             background: var(--text-primary);
             color: var(--bg-primary);
             border-color: var(--text-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
         }
 
         .btn-primary {
@@ -170,262 +183,702 @@
         .btn-primary:hover {
             background: transparent;
             color: var(--text-primary);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* About Page Content */
-        .about-container {
-            max-width: 1100px;
-            margin: 120px auto 60px auto;
-            padding: 0 40px;
+        /* Main content styles */
+        .main-content {
+            padding: 50px;
+            max-width: 1400px;
+            margin: 80px auto 0 auto;
+            min-height: calc(100vh - 160px);
+        }
+
+        .hero-section {
+            padding: 80px 0 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            line-height: 1.8;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .content-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 40px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--glass-bg);
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 0.5s;
-            /* Wait for loader to finish */
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(10px);
+            z-index: -1;
         }
 
-        @keyframes fadeIn {
+        .content-section:hover::before {
+            opacity: 1;
+        }
+
+        .content-section:hover {
+            background: var(--bg-tertiary);
+            transform: translateY(-4px);
+            border-color: var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 1px;
+            background: var(--accent-primary);
+            opacity: 0.6;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            padding: 6px 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 2px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-color: var(--accent-primary);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg-primary), 0 0 0 6px var(--accent-primary);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .full-width-section {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 50px;
+            margin-top: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .full-width-section:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-section {
+            text-align: center;
+            padding: 60px 0;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-primary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--accent-primary);
+            opacity: 0.5;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            margin-top: 60px;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            padding: 15px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 2px solid var(--accent-primary);
+            background: transparent;
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-primary);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-cta:hover::before {
+            left: 0;
+        }
+
+        .btn-cta:hover {
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-content {
+                padding: 40px;
+            }
+
+            .content-grid {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 25px;
+                height: 70px;
+            }
+
+            .main-content {
+                padding: 25px;
+                margin-top: 70px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .content-section,
+            .full-width-section {
+                padding: 30px;
+            }
+
+            .hero-section {
+                padding: 60px 0 40px 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-cta {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 20px;
+                height: 65px;
+            }
+
+            .main-content {
+                margin-top: 65px;
+                padding: 20px;
+            }
+
+            .content-section,
+            .full-width-section {
+                padding: 25px;
+            }
+
+            .btn,
+            .logo {
+                font-size: 11px;
+                padding: 10px 16px;
+            }
+
+            .quote-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 50px;
-            align-items: start;
-        }
-
-        .about-image-wrapper {
-            background-color: var(--bg-secondary);
-            padding: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .about-image-wrapper img {
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            display: block;
-            filter: grayscale(20%);
-            transition: filter 0.4s ease;
+            height: 2px;
+            background: var(--bg-secondary);
+            z-index: 1001;
         }
 
-        .about-image-wrapper:hover img {
-            filter: grayscale(0%);
-        }
-
-        .about-content h1 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 15px;
-        }
-
-        .about-content .main-headline {
-            font-family: 'Inter', sans-serif;
-            font-size: 36px;
-            color: var(--text-primary);
-            font-weight: 800;
-            margin-bottom: 25px;
-            line-height: 1.3;
-            text-transform: none;
-            letter-spacing: normal;
-        }
-
-        .about-content p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        .skills-section {
-            margin-top: 40px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-        }
-
-        .skills-section h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            list-style: none;
-        }
-
-        .skill-item {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 6px 14px;
-            font-size: 12px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            color: var(--text-primary);
-            border-color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 900px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .about-image-wrapper {
-                max-width: 350px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 0 20px;
-            }
-
-            .about-container {
-                margin-top: 100px;
-                padding: 0 20px;
-            }
-
-            .about-content .main-headline {
-                font-size: 28px;
-            }
-
-            .about-content p {
-                font-size: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 0 15px;
-                height: 60px;
-            }
-
-            .header-actions .btn-primary {
-                /* Hide GitHub on smallest screens if needed */
-                display: none;
-            }
-
-            .about-container {
-                margin-top: 90px;
-                padding: 0 15px;
-            }
-
-            .about-content .main-headline {
-                font-size: 24px;
-            }
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+            transition: width 0.1s ease;
         }
     </style>
 </head>
 
 <body>
-    <div class="loader" id="loader">
-        <div class="loader-text">LOADING DETAILS</div>
-        <div class="loader-bar">
-            <div class="loader-progress"></div>
-        </div>
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
     </div>
 
     <header class="header">
         <a class="logo" href="index.html">OBIDUR RAHMAN</a>
-        <div class="header-actions">
-            <a href="index.html" class="btn">Back to Portfolio</a>
-            <a href="https://github.com/Ashfinn" target="_blank" rel="noopener noreferrer"
-                class="btn btn-primary">GitHub</a>
-        </div>
+        <a href="https://github.com/Ashfinn" target="_blank" rel="noopener noreferrer"
+            class="btn btn-primary">GitHub</a>
     </header>
 
-    <main class="about-container">
-        <div class="about-grid">
-            <div class="about-image-wrapper">
-                <img src="me.jpg" alt="Obidur Rahman">
-            </div>
-            <div class="about-content">
-                <h1>About & Background</h1>
-                <h2 class="main-headline">Bridging the gap between mathematical theory and intelligent application.</h2>
-                <p>
-                    Hi, I'm Obidur Rahman — an aspiring mathematician, passionate writer, and ardent advocate for open
-                    source. I am a dedicated Bachelor of Science in Mathematics student at Univeristy of CHittagong.
-                </p>
-                <p>
-                    Since my earliest days, I've been captivated by the elegance of Mathematics and the limitless
-                    possibilities of Computer Science. As a curious learner, I thrive on exploring new ideas, mastering
-                    intricate concepts, and uncovering the marvels of our world through numbers, algorithms, and
-                    patterns. My mission isn’t just to crunch numbers or write code, but to invent, build, and discover
-                    — shedding light on the unseen
-                    wonders of
-                    the universe.
-                </p>
-                <p>
-                    My fascination lies at the intersection of abstract mathematical concepts and tangible technological
-                    implementation. I thrive on translating statistical models and algorithmic logic into functional
-                    code, primarily using Python and its powerful data science ecosystem.
-                </p>
+    <main class="main-content">
+        <section class="hero-section fade-in">
+            <h1 class="hero-title">About Me</h1>
+            <p class="hero-subtitle">Mathematician • Data Scientist • Open Source Advocate</p>
+            <p class="hero-description">
+                Hi, I'm Obidur Rahman — an aspiring mathematician, passionate writer, and ardent advocate for open
+                source.
+                I am a dedicated Bachelor of Science in Mathematics student at University of Chittagong.
+            </p>
+        </section>
 
-                <div class="skills-section">
-                    <h3>Core Technical Skills</h3>
-                    <ul class="skills-list">
-                        <li class="skill-item">Python</li>
-                        <li class="skill-item">TensorFlow</li>
-                        <li class="skill-item">SQL</li>
-                        <li class="skill-item">TypeScript</li>
-                        <li class="skill-item">Next.js</li>
-                        <li class="skill-item">Redux</li>
-                        <li class="skill-item">DBMS</li>
-                        <li class="skill-item">Prisma</li>
-                        <li class="skill-item">MongoDB</li>
-                    </ul>
+        <div class="content-grid">
+            <section class="content-section fade-in">
+                <div class="section-label">PHILOSOPHY</div>
+                <h2 class="section-title">My Journey</h2>
+                <div class="section-content">
+                    <p>Since my earliest days, I've been captivated by the elegance of Mathematics and the limitless
+                        possibilities of Computer Science. As a curious learner, I thrive on exploring new ideas,
+                        mastering intricate concepts, and uncovering the marvels of our world through numbers,
+                        algorithms, and patterns.</p>
+
+                    <p style="margin-top: 20px;">My mission isn't just to crunch numbers or write code, but to invent,
+                        build, and discover — shedding light on the unseen wonders of the universe. My fascination lies
+                        at the intersection of abstract mathematical concepts and tangible technological implementation.
+                    </p>
                 </div>
-            </div>
+            </section>
+
+            <section class="content-section fade-in">
+                <div class="section-label">FOCUS</div>
+                <h2 class="section-title">What Drives Me</h2>
+                <div class="section-content">
+                    <p>I thrive on translating statistical models and algorithmic logic into functional code, primarily
+                        using Python and its powerful data science ecosystem. My work focuses on bridging the gap
+                        between theoretical mathematics and practical applications.</p>
+
+                    <p style="margin-top: 20px;">Through machine learning projects, environmental data analysis, and
+                        community building, I aim to create solutions that make a meaningful impact while advancing our
+                        understanding of complex systems and patterns.</p>
+                </div>
+            </section>
+
+            <section class="content-section fade-in">
+                <div class="section-label">EDUCATION</div>
+                <h2 class="section-title">Academic Background</h2>
+                <div class="section-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2022 - 2026</div>
+                            <div class="timeline-title">BSc in Mathematics</div>
+                            <div class="timeline-description">University of Chittagong, Bangladesh<br>
+                                Specializing in Complex Analysis, Numerical Analysis, Linear Programming, and
+                                Mathematical Programming</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">Software Engineering Fellowship</div>
+                            <div class="timeline-description">Headstarter - Developed five full-stack applications using
+                                modern technologies</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-title">MATLAB Programming</div>
+                            <div class="timeline-description">Vanderbilt University - Advanced programming concepts and
+                                mathematical computing</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section fade-in">
+                <div class="section-label">IMPACT</div>
+                <h2 class="section-title">Community & Leadership</h2>
+                <div class="section-content">
+                    <p><strong>Founder & Community Lead</strong> of The Code Forum, where I've built a thriving tech
+                        community with 100+ members and established 5 comprehensive learning paths for aspiring
+                        developers.</p>
+
+                    <p style="margin-top: 15px;"><strong>Research and Development Secretary</strong> at Chittagong
+                        University Math Club, leading research initiatives and organizing knowledge-sharing events that
+                        bridge academic theory with practical applications.</p>
+
+                    <p style="margin-top: 15px;"><strong>Content Creator & Educator</strong> with 10+ educational videos
+                        on ML and Mathematics, plus 13 published articles gaining 1000+ reads on Python and ML topics.
+                    </p>
+                </div>
+            </section>
+
+            <section class="full-width-section fade-in">
+                <div class="section-label">EXPERTISE</div>
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">MATLAB</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Data Science & ML</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">scikit-learn</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">XGBoost</span>
+                            <span class="skill-tag">SHAP</span>
+                            <span class="skill-tag">SARIMA</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Tools & Technologies</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Streamlit</span>
+                            <span class="skill-tag">Plotly</span>
+                            <span class="skill-tag">Matplotlib</span>
+                            <span class="skill-tag">Firebase</span>
+                            <span class="skill-tag">LaTeX</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Mathematical Domains</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Complex Analysis</span>
+                            <span class="skill-tag">Numerical Analysis</span>
+                            <span class="skill-tag">Linear Algebra</span>
+                            <span class="skill-tag">Statistics</span>
+                            <span class="skill-tag">Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
+
+        <section class="quote-section fade-in">
+            <p class="quote-text">
+                The beauty of mathematics lies not just in its precision, but in its power to reveal the hidden patterns
+                that govern our universe. Every equation tells a story, every algorithm solves a puzzle, and every
+                discovery opens a door to infinite possibilities.
+            </p>
+        </section>
+
+        <section class="cta-section fade-in">
+            <h2 class="cta-title">Let's Connect & Collaborate</h2>
+            <p class="cta-description">
+                I'm always excited to discuss new ideas, collaborate on innovative projects, or share insights about
+                mathematics, data science, and technology. Whether you're looking to explore the intersection of math
+                and code or build something impactful together, I'd love to hear from you.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:obidur.shawal@gmail.com" class="btn-cta">Get In Touch</a>
+                <a href="projects.html" class="btn-cta">View My Work</a>
+                <a href="https://linkedin.com/in/obidur-rahman-shawal" target="_blank" class="btn-cta">LinkedIn</a>
+            </div>
+        </section>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Loading animation ---
-            const loader = document.getElementById('loader');
-            if (loader) {
-                // Using a timeout to ensure content has a moment to render before fading out loader
-                setTimeout(() => {
-                    loader.classList.add('fade-out');
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                    }, 500); // Match this with CSS transition duration
-                }, 1000); // Adjust this delay as needed
+            // Scroll progress indicator
+            const scrollProgress = document.getElementById('scrollProgress');
+            if (scrollProgress) {
+                window.addEventListener('scroll', () => {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrollPercent = (scrollTop / scrollHeight) * 100;
+                    scrollProgress.style.width = scrollPercent + '%';
+                });
             }
 
-            // --- Header scroll effect ---
+            // Enhanced header scroll effect
             let lastScrollTop = 0;
             const header = document.querySelector('.header');
             if (header) {
                 window.addEventListener('scroll', () => {
                     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                     if (scrollTop > lastScrollTop && scrollTop > header.clientHeight) {
-                        // Scrolling Down
                         header.style.transform = 'translateY(-100%)';
                     } else {
-                        // Scrolling Up
                         header.style.transform = 'translateY(0)';
                     }
                     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
                 });
             }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Add intersection observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach((el) => {
+                observer.observe(el);
+            });
         });
     </script>
 </body>

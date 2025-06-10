@@ -288,7 +288,6 @@
             min-height: calc(100vh - 160px);
         }
 
-
         /* Section styling */
         .section {
             margin-bottom: 80px;
@@ -318,24 +317,63 @@
             opacity: 0.6;
         }
 
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .breadcrumb.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .breadcrumb-item {
+            cursor: pointer;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--accent-primary);
+        }
+
+        .breadcrumb-separator {
+            width: 12px;
+            height: 1px;
+            background: var(--border-color);
+        }
+
         /* Grid layouts */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3px;
+            margin-bottom: 40px;
+        }
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 3px;
             margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3px;
-        }
-
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3px;
+        .projects-grid.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Grid item base styling */
@@ -349,7 +387,7 @@
             flex-direction: column;
             justify-content: space-between;
             border: 1px solid var(--border-subtle);
-            min-height: 400px;
+            min-height: 60vh;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -547,6 +585,21 @@
             font-weight: 600;
         }
 
+        /* Hidden projects section */
+        .projects-section {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(-20px);
+        }
+
+        .projects-section.show {
+            opacity: 1;
+            max-height: 2000px;
+            transform: translateY(0);
+        }
+
         /* Specific card accent colors */
         .grid-item:nth-child(1):hover {
             box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1), 0 0 0 1px rgba(0, 255, 136, 0.2);
@@ -564,15 +617,23 @@
             box-shadow: 0 20px 40px rgba(255, 0, 136, 0.1), 0 0 0 1px rgba(255, 0, 136, 0.2);
         }
 
-        .grid-item:nth-child(5):hover {
-            box-shadow: 0 20px 40px rgba(136, 255, 0, 0.1), 0 0 0 1px rgba(136, 255, 0, 0.2);
+        /* Background images */
+        .programming .grid-item-bg {
+            background-image: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80');
         }
 
-        .grid-item:nth-child(6):hover {
-            box-shadow: 0 20px 40px rgba(255, 136, 136, 0.1), 0 0 0 1px rgba(255, 136, 136, 0.2);
+        .data-science .grid-item-bg {
+            background-image: url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&q=80');
         }
 
-        /* Background images for project cards */
+        .tools .grid-item-bg {
+            background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80');
+        }
+
+        .certifications .grid-item-bg {
+            background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80');
+        }
+
         .project-1 .grid-item-bg {
             background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80');
         }
@@ -581,20 +642,12 @@
             background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&q=80');
         }
 
-        .skills-1 .grid-item-bg {
-            background-image: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&q=80');
+        .project-3 .grid-item-bg {
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80');
         }
 
-        .skills-2 .grid-item-bg {
-            background-image: url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&q=80');
-        }
-
-        .skills-3 .grid-item-bg {
-            background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80');
-        }
-
-        .cert-bg .grid-item-bg {
-            background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80');
+        .project-4 .grid-item-bg {
+            background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80');
         }
 
         @keyframes fadeInUp {
@@ -610,16 +663,12 @@
                 padding: 40px;
             }
 
+            .main-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+
             .projects-grid {
                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-
-            .certifications-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             }
         }
 
@@ -634,13 +683,8 @@
                 margin-top: 70px;
             }
 
-            .page-title {
-                font-size: 32px;
-            }
-
-            .projects-grid,
-            .skills-grid,
-            .certifications-grid {
+            .main-grid,
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -670,10 +714,6 @@
 
             .grid-content {
                 padding: 25px;
-            }
-
-            .page-title {
-                font-size: 28px;
             }
 
             .btn,
@@ -725,10 +765,19 @@
     </header>
 
     <main class="main-container">
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb" id="breadcrumb">
+            <span class="breadcrumb-item" onclick="showMainGrid()">Skills & Overview</span>
+            <div class="breadcrumb-separator"></div>
+            <span class="breadcrumb-item" id="currentSection"></span>
+        </div>
+
         <section class="section">
-            <h2 class="section-title">TECHNICAL SKILLS</h2>
-            <div class="skills-grid">
-                <div class="grid-item skills-1">
+            <h2 class="section-title" id="sectionTitle">SKILLS & EXPERTISE</h2>
+
+            <!-- Main Skills Grid -->
+            <div class="main-grid" id="mainGrid">
+                <div class="grid-item programming" onclick="showProjects('programming')">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">PROGRAMMING</div>
@@ -747,7 +796,7 @@
                     </div>
                 </div>
 
-                <div class="grid-item skills-2">
+                <div class="grid-item data-science" onclick="showProjects('data-science')">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">DATA SCIENCE</div>
@@ -766,7 +815,7 @@
                     </div>
                 </div>
 
-                <div class="grid-item skills-3">
+                <div class="grid-item tools" onclick="showProjects('tools')">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">TOOLS & PLATFORMS</div>
@@ -785,139 +834,295 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section">
-            <h2 class="section-title">FEATURED PROJECTS</h2>
-            <div class="projects-grid">
-                <div class="grid-item project-1" onclick="window.open('https://github.com/Ashfinn', '_blank')">
-                    <div class="grid-item-bg"></div>
-                    <div class="grid-content">
-                        <div class="grid-label">MACHINE LEARNING</div>
-                        <div class="grid-bottom">
-                            <div class="grid-title">Undergraduate Admission Predictor</div>
-                            <div class="grid-subtitle">Machine learning model predicting undergraduate admission
-                                outcomes in Bangladesh with 83.87% accuracy using XGBoost and SHAP analysis for feature
-                                interpretation.</div>
-                            <div class="grid-stats">
-                                <div class="stat">
-                                    <span>Accuracy:</span>
-                                    <span class="stat-value">83.87%</span>
-                                </div>
-                                <div class="stat">
-                                    <span>ROC-AUC:</span>
-                                    <span class="stat-value">0.8633</span>
-                                </div>
-                            </div>
-                            <div class="grid-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">scikit-learn</span>
-                                <span class="tag">XGBoost</span>
-                                <span class="tag">SHAP</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="grid-item project-2" onclick="window.open('https://github.com/Ashfinn', '_blank')">
+                <div class="grid-item certifications" onclick="showProjects('certifications')">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
-                        <div class="grid-label">DATA SCIENCE</div>
+                        <div class="grid-label">CERTIFICATIONS</div>
                         <div class="grid-bottom">
-                            <div class="grid-title">Environmental Disease Analysis</div>
-                            <div class="grid-subtitle">Comprehensive analysis of environmental determinants of diarrheal
-                                disease using multiple regression models and time-series data with interactive dashboard
-                                visualization.</div>
-                            <div class="grid-stats">
-                                <div class="stat">
-                                    <span>RMSE:</span>
-                                    <span class="stat-value">7.40</span>
-                                </div>
-                                <div class="stat">
-                                    <span>MSE:</span>
-                                    <span class="stat-value">54.82</span>
-                                </div>
-                            </div>
+                            <div class="grid-title">Training & Education</div>
+                            <div class="grid-subtitle">Professional certifications and specialized training programs in
+                                software engineering, data science, and programming.</div>
                             <div class="grid-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">SARIMA</span>
-                                <span class="tag">Plotly</span>
-                                <span class="tag">Time Series</span>
+                                <span class="tag">Headstarter</span>
+                                <span class="tag">Johns Hopkins</span>
+                                <span class="tag">Vanderbilt</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-
-        <section class="section">
-            <h2 class="section-title">CERTIFICATIONS & TRAINING</h2>
-            <div class="certifications-grid">
-                <div class="grid-item cert-bg">
-                    <div class="grid-item-bg"></div>
-                    <div class="grid-content">
-                        <div class="grid-label">FELLOWSHIP</div>
-                        <div class="grid-bottom">
-                            <div class="grid-title">Software Engineering Fellowship</div>
-                            <div class="grid-subtitle">Headstarter • Aug 2024<br>
-                                Developed five full-stack web applications using Firebase, Git, and JavaScript in
-                                collaborative team environment.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-item cert-bg">
-                    <div class="grid-item-bg"></div>
-                    <div class="grid-content">
-                        <div class="grid-label">PROGRAMMING</div>
-                        <div class="grid-bottom">
-                            <div class="grid-title">MATLAB Programming</div>
-                            <div class="grid-subtitle">Vanderbilt University • Jun 2024<br>
-                                Comprehensive introduction to programming concepts and applications using MATLAB,
-                                including data structures, algorithms, and visualization techniques.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-item cert-bg">
-                    <div class="grid-item-bg"></div>
-                    <div class="grid-content">
-                        <div class="grid-label">DATA SCIENCE</div>
-                        <div class="grid-bottom">
-                            <div class="grid-title">Data Science Specialization</div>
-                            <div class="grid-subtitle">Johns Hopkins University • May 2024<br>
-                                Comprehensive specialization covering data analysis, statistical modeling, and machine
-                                learning techniques using R and Python.</div>
-                        </div>
-                    </div>
+            <!-- Projects Section (Hidden initially) -->
+            <div class="projects-section" id="projectsSection">
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Projects will be dynamically inserted here -->
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Enhanced loading animation
-            const loader = document.getElementById('loader');
-            if (loader) {
-                window.addEventListener('load', () => {
-                    setTimeout(() => {
-                        loader.classList.add('fade-out');
-                        setTimeout(() => {
-                            loader.style.display = 'none';
-                        }, 800);
-                    }, 1200);
-                });
-            }
+        // Project data organized by category
+        const projectsData = {
+            'programming': [
+                {
+                    label: 'WEB APPLICATION',
+                    title: 'Personal Portfolio Website',
+                    subtitle: 'Modern, responsive portfolio built with HTML5, CSS3, and JavaScript featuring interactive animations, smooth transitions, and optimized performance.',
+                    tags: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
+                    stats: [
+                        { label: 'Performance Score', value: '98/100' },
+                        { label: 'Load Time', value: '<2s' }
+                    ],
+                    className: 'project-1'
+                },
+                {
+                    label: 'FULL-STACK',
+                    title: 'Firebase Chat Application',
+                    subtitle: 'Real-time chat application built during Headstarter fellowship using Firebase for backend, authentication, and real-time database functionality.',
+                    tags: ['JavaScript', 'Firebase', 'HTML', 'CSS'],
+                    stats: [
+                        { label: 'Users', value: '50+' },
+                        { label: 'Messages', value: '1000+' }
+                    ],
+                    className: 'project-2'
+                },
+                {
+                    label: 'SCRIPTING',
+                    title: 'Automation Scripts',
+                    subtitle: 'A collection of Python and Bash scripts for automating repetitive tasks, data processing, and workflow optimization.',
+                    tags: ['Python', 'Bash', 'Automation'],
+                    stats: [
+                        { label: 'Scripts', value: '10+' },
+                        { label: 'Saved Hours', value: '100+' }
+                    ],
+                    className: 'project-3'
+                },
+                {
+                    label: 'NETWORKING',
+                    title: 'httPY Public',
+                    subtitle: 'A simple HTTP server implemented in Python that handles basic HTTP requests and responds according to specified endpoints.',
+                    tags: ['Python', 'Socket', 'Networking', 'HTTP Server', 'Socket Programming'],
+                    stats: [
+                        { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/httPY" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
+                    ],
+                    className: 'project-4'
+                }
+            ],
+            'data-science': [
+                {
+                    label: 'DEEP LEARNING',
+                    title: 'Tomato Leaf Disease Classification',
+                    subtitle: 'Comparative analysis of traditional ML and deep learning models (Xception, EfficientNet, MobileNet) for tomato leaf disease classification. Explored background removal and real-world data impact.',
+                    tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Xception', 'EfficientNet', 'MobileNet', 'Computer Vision'],
+                    stats: [
+                        { label: 'Xception', value: '97.00%' },
+                        { label: 'EfficientNetB0', value: '94.26%' },
+                        { label: 'MobileNetV2', value: '92.79%' }
+                    ],
+                    className: 'project-1'
+                },
+                {
+                    label: 'EDUCATION ANALYTICS',
+                    title: 'Bangladesh Undergraduate Admission Outcomes',
+                    subtitle: 'Comprehensive ML model for predicting undergraduate admission outcomes. Included feature engineering, hyperparameter optimization, and explainable AI for actionable insights.',
+                    tags: ['Python', 'scikit-learn', 'XGBoost', 'SHAP', 'Pandas', 'NumPy', 'Predictive Modeling'],
+                    stats: [
+                        { label: 'Accuracy', value: '83.87%' },
+                        { label: 'Precision', value: '89%' },
+                        { label: 'Records', value: '15K+' }
+                    ],
+                    className: 'project-2'
+                },
+                {
+                    label: 'STATISTICAL LEARNING',
+                    title: 'Advanced Statistical Learning & Pattern Recognition',
+                    subtitle: 'Research on statistical learning theory, pattern recognition, and optimization. Published in peer-reviewed journals and presented at conferences.',
+                    tags: ['R', 'Python', 'MATLAB', 'Statistical Modeling', 'Optimization', 'Research'],
+                    stats: [
+                        { label: 'Articles', value: '13+' },
+                        { label: 'Community', value: '100+' },
+                        { label: 'Projects', value: '5+' }
+                    ],
+                    className: 'project-3'
+                },
+                {
+                    label: 'RESEARCH',
+                    title: 'Diarrhea-Prediction-Model Public',
+                    subtitle: 'This research project analyzes the relationship between environmental factors and diarrheal disease incidence across four major divisions in Bangladesh.',
+                    tags: ['machine-learning', 'research', 'predictive-modeling', 'correlation-analysis'],
+                    stats: [
+                        { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Diarrhea-Prediction-Model" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
+                    ],
+                    className: 'project-4'
+                }
+            ],
+            'tools': [
+                {
+                    label: 'DEPLOYMENT',
+                    title: 'Streamlit ML Dashboard',
+                    subtitle: 'Interactive dashboard for ML model results and visualizations, deployed with Streamlit and integrated with cloud storage.',
+                    tags: ['Streamlit', 'Python', 'Cloud'],
+                    stats: [
+                        { label: 'Users', value: '30+' },
+                        { label: 'Models', value: '3' }
+                    ],
+                    className: 'project-1'
+                },
+                {
+                    label: 'VERSION CONTROL',
+                    title: 'Git Workflow Templates',
+                    subtitle: 'Standardized Git branching and workflow templates for collaborative development and CI/CD pipelines.',
+                    tags: ['Git', 'CI/CD', 'Templates'],
+                    stats: [
+                        { label: 'Repos', value: '8+' },
+                        { label: 'Contributors', value: '10+' }
+                    ],
+                    className: 'project-2'
+                },
+                {
+                    label: 'DOCUMENTATION',
+                    title: 'LaTeX Report Generator',
+                    subtitle: 'Automated LaTeX report generation for data science projects, including charts and tables.',
+                    tags: ['LaTeX', 'Python', 'Automation'],
+                    stats: [
+                        { label: 'Reports', value: '12+' },
+                        { label: 'Pages', value: '100+' }
+                    ],
+                    className: 'project-3'
+                }
+            ],
+            'certifications': [
+                {
+                    label: 'FELLOWSHIP',
+                    title: 'Software Engineering Fellowship – Headstarter',
+                    subtitle: 'Developed five full-stack web applications using Firebase, Git, and JavaScript. Collaborated in a team of four developers, following agile methodologies to deliver projects on time.',
+                    tags: ['Headstarter', 'Full-Stack', 'Firebase', 'JavaScript', 'Agile'],
+                    stats: [
+                        { label: 'Projects', value: '5' },
+                        { label: 'Duration', value: '12 weeks' }
+                    ],
+                    className: 'project-1'
+                },
+                {
+                    label: 'MOOC',
+                    title: 'Introduction to Programming with MATLAB – Vanderbilt University',
+                    subtitle: 'Credential ID: Z6HMC9DS5LSM — View Credential',
+                    tags: ['Vanderbilt', 'MATLAB', 'Programming'],
+                    stats: [
+                        { label: 'Completed', value: 'Jun 2024' }
+                    ],
+                    className: 'project-2'
+                },
+                {
+                    label: 'MOOC',
+                    title: 'Developing AI Applications with Python and Flask – IBM',
+                    subtitle: 'Credential ID: HV6QNTGU2KHY — View Credential',
+                    tags: ['IBM', 'Python', 'Flask', 'AI'],
+                    stats: [
+                        { label: 'Completed', value: 'Jan 2024' }
+                    ],
+                    className: 'project-3'
+                },
+                {
+                    label: 'SPECIALIZATION',
+                    title: 'Programming in C++: A Hands-on Introduction – Codio',
+                    subtitle: 'Credential ID: MNYQFWD4JX4P — View Credential',
+                    tags: ['Codio', 'C++', 'Programming'],
+                    stats: [
+                        { label: 'Completed', value: 'Dec 2023' }
+                    ],
+                    className: 'project-4'
+                },
+                {
+                    label: 'MOOC',
+                    title: 'Python for Data Science, AI & Development – IBM',
+                    subtitle: 'Credential ID: 4LK9Y375MAQ7 — View Credential',
+                    tags: ['IBM', 'Python', 'Data Science', 'AI'],
+                    stats: [
+                        { label: 'Completed', value: 'Nov 2023' }
+                    ],
+                    className: 'project-5'
+                }
+            ]
+        };
 
-            // Scroll progress bar
-            window.addEventListener('scroll', function () {
-                const scrollProgress = document.getElementById('scrollProgress');
-                const scrollTop = window.scrollY || document.documentElement.scrollTop;
-                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (scrollTop / docHeight) * 100;
-                scrollProgress.style.width = scrolled + '%';
+        // Helper to render project cards
+        function renderProjects(category) {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
+            if (!projectsData[category]) return;
+            projectsData[category].forEach((proj, idx) => {
+                const item = document.createElement('div');
+                item.className = `grid-item ${proj.className}`;
+                item.style.animationDelay = `${0.1 + idx * 0.1}s`;
+                item.innerHTML = `
+                    <div class="grid-item-bg"></div>
+                    <div class="grid-content">
+                        <div class="grid-label">${proj.label}</div>
+                        <div class="grid-bottom">
+                            <div class="grid-title">${proj.title}</div>
+                            <div class="grid-subtitle">${proj.subtitle}</div>
+                            <div class="grid-tags">
+                                ${proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                            <div class="grid-stats">
+                                ${proj.stats.map(stat => `<span class="stat"><span class="stat-value">${stat.value}</span> ${stat.label}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(item);
             });
+            setTimeout(() => grid.classList.add('show'), 10);
+        }
+
+        // Show projects for a category
+        function showProjects(category) {
+            document.getElementById('mainGrid').style.display = 'none';
+            document.getElementById('projectsSection').classList.add('show');
+            renderProjects(category);
+            document.getElementById('breadcrumb').classList.add('show');
+            document.getElementById('currentSection').textContent = category.replace(/-/g, ' ').toUpperCase();
+            document.getElementById('sectionTitle').textContent = category.replace(/-/g, ' ').toUpperCase();
+        }
+
+        // Show main grid (skills overview)
+        function showMainGrid() {
+            document.getElementById('mainGrid').style.display = '';
+            document.getElementById('projectsSection').classList.remove('show');
+            document.getElementById('breadcrumb').classList.remove('show');
+            document.getElementById('sectionTitle').textContent = 'SKILLS & EXPERTISE';
+        }
+
+        // Loader animation
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('fade-out');
+            }, 1800);
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 2600);
+        });
+
+        // Animate main grid on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.main-grid .grid-item').forEach((el, i) => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }, 600);
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const percent = docHeight ? (scrollTop / docHeight) * 100 : 0;
+            scrollProgress.style.width = percent + '%';
         });
     </script>
 </body>
