@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get In Touch - Obidur Rahman</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+    <meta name="description"
+        content="Get in touch with Obidur Rahman. Connect through email, LinkedIn, GitHub, and other social platforms.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #151515;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --border-subtle: #252525;
+            --accent-primary: #00ff88;
+            --accent-secondary: #0088ff;
+            --accent-glow: rgba(0, 255, 136, 0.2);
+            --header-bg: rgba(10, 10, 10, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 136, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(255, 0, 136, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: gradientShift 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            padding: 0 40px;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0.5;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .logo:hover::before {
+            left: 100%;
+        }
+
+        .logo:hover {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            border-radius: 2px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        .main-container {
+            padding: 120px 50px 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .contact-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .form-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            background: #00cc6a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        .contact-info {
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item:hover {
+            padding-left: 10px;
+            background: var(--glass-bg);
+            border-radius: 8px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover .info-icon {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: scale(1.1);
+        }
+
+        .info-details h4 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .info-details p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .info-details a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-details a:hover {
+            color: var(--accent-primary);
+        }
+
+        .social-section {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        .social-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .social-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-details h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .social-details p {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* Platform-specific colors */
+        .github {
+            background: #333;
+        }
+
+        .linkedin {
+            background: #0077b5;
+        }
+
+        .twitter {
+            background: #1da1f2;
+        }
+
+        .email {
+            background: #ea4335;
+        }
+
+        .telegram {
+            background: #0088cc;
+        }
+
+        .discord {
+            background: #5865f2;
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .facebook {
+            background: #1877f2;
+        }
+
+        .social-link:hover .github {
+            background: #24292e;
+            transform: scale(1.1);
+        }
+
+        .social-link:hover .linkedin {
+            background: #0066cc;
+            transform: scale(1.1);
+        }
+
+        .social-link:hover .twitter {
+            background: #1991db;
+            transform: scale(1.1);
+        }
+
+        .social-link:hover .email {
+            background: #d93025;
+            transform: scale(1.1);
+        }
+
+        .social-link:hover .telegram {
+            background: #0077be;
+            transform: scale(1.1);
+        }
+
+        .social-link:hover .discord {
+            background: #4752c4;
+            transform: scale(1.1);
+        }
+
+        .social-link:hover .instagram {
+            transform: scale(1.1);
+        }
+
+        .social-link:hover .facebook {
+            background: #166fe5;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 100px 25px 60px 25px;
+            }
+
+            .header {
+                padding: 0 25px;
+                height: 70px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-form {
+                padding: 30px;
+            }
+
+            .social-links {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .social-link {
+                padding: 20px 25px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--bg-secondary);
+            z-index: 1001;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <header class="header">
+        <a class="logo" href="index.html">OBIDUR RAHMAN</a>
+        <a href="index.html" class="btn">Back to Home</a>
+    </header>
+
+    <main class="main-container">
+        <section class="contact-header">
+            <h1 class="contact-title">Get In Touch</h1>
+            <p class="contact-subtitle">
+                Ready to collaborate on your next project? Let's connect and discuss how we can work together to bring
+                your ideas to life.
+            </p>
+        </section>
+
+        <section class="contact-grid">
+            <div class="contact-form">
+                <h2 class="form-title">Send a Message</h2>
+                <p class="form-subtitle">I'll get back to you within 24 hours</p>
+
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message</label>
+                        <textarea id="message" name="message" class="form-textarea" required></textarea>
+                    </div>
+
+                    <button type="submit" class="form-button">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <h2 class="info-title">Contact Information</h2>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-details">
+                        <h4>Email</h4>
+                        <p><a href="mailto:obidur.rahman@example.com">obidur.rahman@example.com</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-details">
+                        <h4>Location</h4>
+                        <p>Chattogram, Bangladesh</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-details">
+                        <h4>Response Time</h4>
+                        <p>Usually within 24 hours</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="info-details">
+                        <h4>Availability</h4>
+                        <p>Open for collaborations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section">
+            <h2 class="social-title">Connect With Me</h2>
+            <p class="social-subtitle">Follow my journey and connect on your preferred platform</p>
+
+            <div class="social-links">
+                <a href="https://github.com/Ashfinn" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <div class="social-icon github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>GitHub</h4>
+                        <p>@Ashfinn - Code repositories and open source projects</p>
+                    </div>
+                </a>
+
+                <a href="https://linkedin.com/in/obidur-rahman" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <div class="social-icon linkedin">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>LinkedIn</h4>
+                        <p>Professional network and career updates</p>
+                    </div>
+                </a>
+
+                <a href="https://twitter.com/obidur_rahman" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <div class="social-icon twitter">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>Twitter</h4>
+                        <p>Tech thoughts, insights, and community discussions</p>
+                    </div>
+                </a>
+
+                <a href="mailto:obidur.rahman@example.com" class="social-link">
+                    <div class="social-icon email">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>Email</h4>
+                        <p>Direct communication for business inquiries</p>
+                    </div>
+                </a>
+
+                <a href="https://t.me/obidur_rahman" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <div class="social-icon telegram">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>Telegram</h4>
+                        <p>Quick messages and instant communication</p>
+                    </div>
+                </a>
+
+                <a href="https://discord.com/users/obidur#1234" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <div class="social-icon discord">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>Discord</h4>
+                        <p>Gaming and tech community discussions</p>
+                    </div>
+                </a>
+
+                <a href="https://instagram.com/obidur.rahman" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <div class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>Instagram</h4>
+                        <p>Behind the scenes and personal moments</p>
+                    </div>
+                </a>
+
+                <a href="https://facebook.com/obidur.rahman" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <div class="social-icon facebook">
+                        <i class="fab fa-facebook"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>Facebook</h4>
+                        <p>Updates and community engagement</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scroll progress indicator
+            const scrollProgress = document.getElementById('scrollProgress');
+            if (scrollProgress) {
+                window.addEventListener('scroll', () => {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrollPercent = (scrollTop / scrollHeight) * 100;
+                    scrollProgress.style.width = scrollPercent + '%';
+                });
+            }
+
+            // Form submission handling
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    // Get form data
+                    const formData = new FormData(form);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const subject = formData.get('subject');
+                    const message = formData.get('message');
+
+                    // Create mailto link
+                    const mailtoLink = `mailto:obidur.rahman@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+
+                    // Open email client
+                    window.location.href = mailtoLink;
+
+                    // Show success feedback
+                    const button = form.querySelector('.form-button');
+                    const originalText = button.textContent;
+                    button.textContent = 'Email Client Opened!';
+                    button.style.background = 'var(--accent-secondary)';
+
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = 'var(--accent-primary)';
+                        form.reset();
+                    }, 3000);
+                });
+            }
+
+            // Add hover effects to social links
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+
+                link.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Header scroll effect
+            let lastScrollTop = 0;
+            const header = document.querySelector('.header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > lastScrollTop && scrollTop > header.clientHeight) {
+                        header.style.transform = 'translateY(-100%)';
+                    } else {
+                        header.style.transform = 'translateY(0)';
+                    }
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                });
+            }
+
+            // Add subtle animation to form inputs
+            const inputs = document.querySelectorAll('.form-input, .form-textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function () {
+                    this.style.transform = 'translateY(-2px)';
+                });
+
+                input.addEventListener('blur', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
