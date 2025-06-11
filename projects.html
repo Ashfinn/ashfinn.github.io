@@ -317,7 +317,7 @@
             opacity: 0.6;
         }
 
-        /* Breadcrumb Navigation */
+        /* Enhanced Breadcrumb Navigation */
         .breadcrumb {
             display: flex;
             align-items: center;
@@ -338,19 +338,68 @@
 
         .breadcrumb-item {
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
         }
 
         .breadcrumb-item:hover {
             color: var(--accent-primary);
+            background: var(--glass-bg);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--text-primary);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
         }
 
         .breadcrumb-separator {
             width: 12px;
             height: 1px;
             background: var(--border-color);
+            opacity: 0.6;
+        }
+
+        /* Back button */
+        .back-button {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            padding: 10px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .back-button.show {
+            display: flex;
+        }
+
+        .back-button:hover {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+            transform: translateX(-2px);
+        }
+
+        .back-button::before {
+            content: '←';
+            font-size: 14px;
         }
 
         /* Grid layouts */
@@ -359,6 +408,7 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3px;
             margin-bottom: 40px;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .projects-grid {
@@ -596,8 +646,15 @@
 
         .projects-section.show {
             opacity: 1;
-            max-height: 2000px;
+            max-height: 5000px;
             transform: translateY(0);
+        }
+
+        /* Navigation state classes */
+        .main-grid.hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
         }
 
         /* Specific card accent colors */
@@ -749,7 +806,7 @@
     </div>
 
     <div class="loader" id="loader">
-        <div class="loader-text">INITIALIZING WORK DETAILS</div>
+        <div class="loader-text">FETCHING PROJECT DETAILS</div>
         <div class="loader-bar">
             <div class="loader-progress"></div>
         </div>
@@ -765,11 +822,16 @@
     </header>
 
     <main class="main-container">
-        <!-- Breadcrumb Navigation -->
+        <!-- Back Button -->
+        <div class="back-button" id="backButton" onclick="navigateBack()">
+            Back to Skills
+        </div>
+
+        <!-- Enhanced Breadcrumb Navigation -->
         <div class="breadcrumb" id="breadcrumb">
-            <span class="breadcrumb-item" onclick="showMainGrid()">Skills & Overview</span>
-            <div class="breadcrumb-separator"></div>
-            <span class="breadcrumb-item" id="currentSection"></span>
+            <span class="breadcrumb-item active" id="skillsItem" onclick="showMainGrid()">Skills & Overview</span>
+            <div class="breadcrumb-separator" id="separator" style="display: none;"></div>
+            <span class="breadcrumb-item" id="currentSection" style="display: none;"></span>
         </div>
 
         <section class="section">
@@ -842,288 +904,326 @@
                         <div class="grid-bottom">
                             <div class="grid-title">Training & Education</div>
                             <div class="grid-subtitle">Professional certifications and specialized training programs in
-                                software engineering, data science, and programming.</div>
+                                machine learning and related fields.</div>
                             <div class="grid-tags">
-                                <span class="tag">Headstarter</span>
-                                <span class="tag">Johns Hopkins</span>
-                                <span class="tag">Vanderbilt</span>
+                                <span class="tag">Machine Learning</span>
+                                <span class="tag">Deep Learning</span>
+                                <span class="tag">Natural Language Processing</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Projects Section (Hidden initially) -->
             <div class="projects-section" id="projectsSection">
                 <div class="projects-grid" id="projectsGrid">
-                    <!-- Projects will be dynamically inserted here -->
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        // Project data organized by category
-        const projectsData = {
-            'programming': [
-                {
-                    label: 'WEB APPLICATION',
-                    title: 'Personal Portfolio Website',
-                    subtitle: 'Modern, responsive portfolio built with HTML5, CSS3, and JavaScript featuring interactive animations, smooth transitions, and optimized performance.',
-                    tags: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
-                    stats: [
-                        { label: 'Performance Score', value: '98/100' },
-                        { label: 'Load Time', value: '<2s' }
-                    ],
-                    className: 'project-1'
-                },
-                {
-                    label: 'FULL-STACK',
-                    title: 'Firebase Chat Application',
-                    subtitle: 'Real-time chat application built during Headstarter fellowship using Firebase for backend, authentication, and real-time database functionality.',
-                    tags: ['JavaScript', 'Firebase', 'HTML', 'CSS'],
-                    stats: [
-                        { label: 'Users', value: '50+' },
-                        { label: 'Messages', value: '1000+' }
-                    ],
-                    className: 'project-2'
-                },
-                {
-                    label: 'SCRIPTING',
-                    title: 'Automation Scripts',
-                    subtitle: 'A collection of Python and Bash scripts for automating repetitive tasks, data processing, and workflow optimization.',
-                    tags: ['Python', 'Bash', 'Automation'],
-                    stats: [
-                        { label: 'Scripts', value: '10+' },
-                        { label: 'Saved Hours', value: '100+' }
-                    ],
-                    className: 'project-3'
-                },
-                {
-                    label: 'NETWORKING',
-                    title: 'httPY Public',
-                    subtitle: 'A simple HTTP server implemented in Python that handles basic HTTP requests and responds according to specified endpoints.',
-                    tags: ['Python', 'Socket', 'Networking', 'HTTP Server', 'Socket Programming'],
-                    stats: [
-                        { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/httPY" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                    ],
-                    className: 'project-4'
-                }
-            ],
-            'data-science': [
-                {
-                    label: 'DEEP LEARNING',
-                    title: 'Tomato Leaf Disease Classification',
-                    subtitle: 'Comparative analysis of traditional ML and deep learning models (Xception, EfficientNet, MobileNet) for tomato leaf disease classification. Explored background removal and real-world data impact.',
-                    tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Xception', 'EfficientNet', 'MobileNet', 'Computer Vision'],
-                    stats: [
-                        { label: 'Xception', value: '97.00%' },
-                        { label: 'EfficientNetB0', value: '94.26%' },
-                        { label: 'MobileNetV2', value: '92.79%' }
-                    ],
-                    className: 'project-1'
-                },
-                {
-                    label: 'EDUCATION ANALYTICS',
-                    title: 'Bangladesh Undergraduate Admission Outcomes',
-                    subtitle: 'Comprehensive ML model for predicting undergraduate admission outcomes. Included feature engineering, hyperparameter optimization, and explainable AI for actionable insights.',
-                    tags: ['Python', 'scikit-learn', 'XGBoost', 'SHAP', 'Pandas', 'NumPy', 'Predictive Modeling'],
-                    stats: [
-                        { label: 'Accuracy', value: '83.87%' },
-                        { label: 'Precision', value: '89%' },
-                        { label: 'Records', value: '15K+' }
-                    ],
-                    className: 'project-2'
-                },
-                {
-                    label: 'STATISTICAL LEARNING',
-                    title: 'Advanced Statistical Learning & Pattern Recognition',
-                    subtitle: 'Research on statistical learning theory, pattern recognition, and optimization. Published in peer-reviewed journals and presented at conferences.',
-                    tags: ['R', 'Python', 'MATLAB', 'Statistical Modeling', 'Optimization', 'Research'],
-                    stats: [
-                        { label: 'Articles', value: '13+' },
-                        { label: 'Community', value: '100+' },
-                        { label: 'Projects', value: '5+' }
-                    ],
-                    className: 'project-3'
-                },
-                {
-                    label: 'RESEARCH',
-                    title: 'Diarrhea-Prediction-Model Public',
-                    subtitle: 'This research project analyzes the relationship between environmental factors and diarrheal disease incidence across four major divisions in Bangladesh.',
-                    tags: ['machine-learning', 'research', 'predictive-modeling', 'correlation-analysis'],
-                    stats: [
-                        { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Diarrhea-Prediction-Model" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                    ],
-                    className: 'project-4'
-                }
-            ],
-            'tools': [
-                {
-                    label: 'DEPLOYMENT',
-                    title: 'Streamlit ML Dashboard',
-                    subtitle: 'Interactive dashboard for ML model results and visualizations, deployed with Streamlit and integrated with cloud storage.',
-                    tags: ['Streamlit', 'Python', 'Cloud'],
-                    stats: [
-                        { label: 'Users', value: '30+' },
-                        { label: 'Models', value: '3' }
-                    ],
-                    className: 'project-1'
-                },
-                {
-                    label: 'VERSION CONTROL',
-                    title: 'Git Workflow Templates',
-                    subtitle: 'Standardized Git branching and workflow templates for collaborative development and CI/CD pipelines.',
-                    tags: ['Git', 'CI/CD', 'Templates'],
-                    stats: [
-                        { label: 'Repos', value: '8+' },
-                        { label: 'Contributors', value: '10+' }
-                    ],
-                    className: 'project-2'
-                },
-                {
-                    label: 'DOCUMENTATION',
-                    title: 'LaTeX Report Generator',
-                    subtitle: 'Automated LaTeX report generation for data science projects, including charts and tables.',
-                    tags: ['LaTeX', 'Python', 'Automation'],
-                    stats: [
-                        { label: 'Reports', value: '12+' },
-                        { label: 'Pages', value: '100+' }
-                    ],
-                    className: 'project-3'
-                }
-            ],
-            'certifications': [
-                {
-                    label: 'FELLOWSHIP',
-                    title: 'Software Engineering Fellowship – Headstarter',
-                    subtitle: 'Developed five full-stack web applications using Firebase, Git, and JavaScript. Collaborated in a team of four developers, following agile methodologies to deliver projects on time.',
-                    tags: ['Headstarter', 'Full-Stack', 'Firebase', 'JavaScript', 'Agile'],
-                    stats: [
-                        { label: 'Projects', value: '5' },
-                        { label: 'Duration', value: '12 weeks' }
-                    ],
-                    className: 'project-1'
-                },
-                {
-                    label: 'MOOC',
-                    title: 'Introduction to Programming with MATLAB – Vanderbilt University',
-                    subtitle: 'Credential ID: Z6HMC9DS5LSM — View Credential',
-                    tags: ['Vanderbilt', 'MATLAB', 'Programming'],
-                    stats: [
-                        { label: 'Completed', value: 'Jun 2024' }
-                    ],
-                    className: 'project-2'
-                },
-                {
-                    label: 'MOOC',
-                    title: 'Developing AI Applications with Python and Flask – IBM',
-                    subtitle: 'Credential ID: HV6QNTGU2KHY — View Credential',
-                    tags: ['IBM', 'Python', 'Flask', 'AI'],
-                    stats: [
-                        { label: 'Completed', value: 'Jan 2024' }
-                    ],
-                    className: 'project-3'
-                },
-                {
-                    label: 'SPECIALIZATION',
-                    title: 'Programming in C++: A Hands-on Introduction – Codio',
-                    subtitle: 'Credential ID: MNYQFWD4JX4P — View Credential',
-                    tags: ['Codio', 'C++', 'Programming'],
-                    stats: [
-                        { label: 'Completed', value: 'Dec 2023' }
-                    ],
-                    className: 'project-4'
-                },
-                {
-                    label: 'MOOC',
-                    title: 'Python for Data Science, AI & Development – IBM',
-                    subtitle: 'Credential ID: 4LK9Y375MAQ7 — View Credential',
-                    tags: ['IBM', 'Python', 'Data Science', 'AI'],
-                    stats: [
-                        { label: 'Completed', value: 'Nov 2023' }
-                    ],
-                    className: 'project-5'
-                }
-            ]
+        document.addEventListener("DOMContentLoaded", function () {
+            const loader = document.getElementById('loader');
+            const mainContent = document.querySelector('.main-container');
+            const scrollProgress = document.getElementById('scrollProgress');
+            const breadcrumb = document.getElementById('breadcrumb');
+
+            // --- Loading Animation ---
+            mainContent.style.visibility = 'hidden';
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+                mainContent.style.visibility = 'visible';
+                breadcrumb.classList.add('show');
+            }, 2500);
+
+            // --- Scroll Indicator ---
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.body.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / totalHeight) * 100;
+                scrollProgress.style.width = progress + '%';
+            });
+        });
+
+        // --- Data for Projects ---
+        const projectData = {
+            'programming': {
+                title: 'Programming Projects',
+                items: [
+                    {
+                        label: 'WEB APPLICATION',
+                        title: 'Personal Portfolio Website',
+                        subtitle: 'Modern, responsive portfolio built with HTML5, CSS3, and JavaScript featuring interactive animations, smooth transitions, and optimized performance.',
+                        tags: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
+                        stats: [
+                            { label: 'Performance Score', value: '98/100' },
+                            { label: 'Load Time', value: '<2s' }
+                        ],
+                        className: 'project-1'
+                    },
+                    {
+                        label: 'FULL-STACK',
+                        title: 'Firebase Chat Application',
+                        subtitle: 'Real-time chat application built during Headstarter fellowship using Firebase for backend, authentication, and real-time database functionality.',
+                        tags: ['JavaScript', 'Firebase', 'HTML', 'CSS'],
+                        stats: [
+                            { label: 'Users', value: '50+' },
+                            { label: 'Messages', value: '1000+' }
+                        ],
+                        className: 'project-2'
+                    },
+                    {
+                        label: 'SCRIPTING',
+                        title: 'Automation Scripts',
+                        subtitle: 'A collection of Python and Bash scripts for automating repetitive tasks, data processing, and workflow optimization.',
+                        tags: ['Python', 'Bash', 'Automation'],
+                        stats: [
+                            { label: 'Scripts', value: '10+' },
+                            { label: 'Saved Hours', value: '100+' }
+                        ],
+                        className: 'project-3'
+                    },
+                    {
+                        label: 'NETWORKING',
+                        title: 'httPY Public',
+                        subtitle: 'A simple HTTP server implemented in Python that handles basic HTTP requests and responds according to specified endpoints.',
+                        tags: ['Python', 'Socket', 'Networking', 'HTTP Server', 'Socket Programming'],
+                        stats: [
+                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/httPY" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
+                        ],
+                        className: 'project-4'
+                    }
+                ]
+            },
+            'data-science': {
+                title: 'Data Science Projects',
+                items: [
+                    {
+                        label: 'DEEP LEARNING',
+                        title: 'Tomato Leaf Disease Classification',
+                        subtitle: 'Comparative analysis of traditional ML and deep learning models (Xception, EfficientNet, MobileNet) for tomato leaf disease classification. Explored background removal and real-world data impact.',
+                        tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Xception', 'EfficientNet', 'MobileNet', 'Computer Vision'],
+                        stats: [
+                            { label: 'Xception', value: '97.00%' },
+                            { label: 'EfficientNetB0', value: '94.26%' },
+                            { label: 'MobileNetV2', value: '92.79%' }
+                        ],
+                        className: 'project-1'
+                    },
+                    {
+                        label: 'EDUCATION ANALYTICS',
+                        title: 'Bangladesh Undergraduate Admission Outcomes',
+                        subtitle: 'Comprehensive ML model for predicting undergraduate admission outcomes. Included feature engineering, hyperparameter optimization, and explainable AI for actionable insights.',
+                        tags: ['Python', 'scikit-learn', 'XGBoost', 'SHAP', 'Pandas', 'NumPy', 'Predictive Modeling'],
+                        stats: [
+                            { label: 'Accuracy', value: '83.87%' },
+                            { label: 'Precision', value: '89%' },
+                            { label: 'Records', value: '15K+' }
+                        ],
+                        className: 'project-2'
+                    },
+                    {
+                        label: 'STATISTICAL LEARNING',
+                        title: 'Advanced Statistical Learning & Pattern Recognition',
+                        subtitle: 'Research on statistical learning theory, pattern recognition, and optimization. Published in peer-reviewed journals and presented at conferences.',
+                        tags: ['R', 'Python', 'MATLAB', 'Statistical Modeling', 'Optimization', 'Research'],
+                        stats: [
+                            { label: 'Articles', value: '13+' },
+                            { label: 'Community', value: '100+' },
+                            { label: 'Projects', value: '5+' }
+                        ],
+                        className: 'project-3'
+                    },
+                    {
+                        label: 'RESEARCH',
+                        title: 'Diarrhea-Prediction-Model Public',
+                        subtitle: 'This research project analyzes the relationship between environmental factors and diarrheal disease incidence across four major divisions in Bangladesh.',
+                        tags: ['machine-learning', 'research', 'predictive-modeling', 'correlation-analysis'],
+                        stats: [
+                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Diarrhea-Prediction-Model" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
+                        ],
+                        className: 'project-4'
+                    }
+                ]
+            },
+            'tools': {
+                title: 'Tools & Platforms Projects',
+                items: [
+                    {
+                        label: 'DEPLOYMENT',
+                        title: 'Streamlit ML Dashboard',
+                        subtitle: 'Interactive dashboard for ML model results and visualizations, deployed with Streamlit and integrated with cloud storage.',
+                        tags: ['Streamlit', 'Python', 'Cloud'],
+                        stats: [
+                            { label: 'Users', value: '30+' },
+                            { label: 'Models', value: '3' }
+                        ],
+                        className: 'project-1'
+                    },
+                    {
+                        label: 'VERSION CONTROL',
+                        title: 'Git Workflow Templates',
+                        subtitle: 'Standardized Git branching and workflow templates for collaborative development and CI/CD pipelines.',
+                        tags: ['Git', 'CI/CD', 'Templates'],
+                        stats: [
+                            { label: 'Repos', value: '8+' },
+                            { label: 'Contributors', value: '10+' }
+                        ],
+                        className: 'project-2'
+                    },
+                    {
+                        label: 'DOCUMENTATION',
+                        title: 'LaTeX Report Generator',
+                        subtitle: 'Automated LaTeX report generation for data science projects, including charts and tables.',
+                        tags: ['LaTeX', 'Python', 'Automation'],
+                        stats: [
+                            { label: 'Reports', value: '12+' },
+                            { label: 'Pages', value: '100+' }
+                        ],
+                        className: 'project-3'
+                    }
+                ]
+            },
+            'certifications': {
+                title: 'Certifications',
+                items: [
+                    {
+                        label: 'FELLOWSHIP',
+                        title: 'Software Engineering Fellowship – Headstarter',
+                        subtitle: 'Developed five full-stack web applications using Firebase, Git, and JavaScript. Collaborated in a team of four developers, following agile methodologies to deliver projects on time.',
+                        tags: ['Headstarter', 'Full-Stack', 'Firebase', 'JavaScript', 'Agile'],
+                        stats: [
+                            { label: 'Projects', value: '5' },
+                            { label: 'Duration', value: '12 weeks' }
+                        ],
+                        className: 'project-1'
+                    },
+                    {
+                        label: 'MOOC',
+                        title: 'Introduction to Programming with MATLAB – Vanderbilt University',
+                        subtitle: 'Credential ID: Z6HMC9DS5LSM — View Credential',
+                        tags: ['Vanderbilt', 'MATLAB', 'Programming'],
+                        stats: [
+                            { label: 'Completed', value: 'Jun 2024' }
+                        ],
+                        className: 'project-2'
+                    },
+                    {
+                        label: 'MOOC',
+                        title: 'Developing AI Applications with Python and Flask – IBM',
+                        subtitle: 'Credential ID: HV6QNTGU2KHY — View Credential',
+                        tags: ['IBM', 'Python', 'Flask', 'AI'],
+                        stats: [
+                            { label: 'Completed', value: 'Jan 2024' }
+                        ],
+                        className: 'project-3'
+                    },
+                    {
+                        label: 'SPECIALIZATION',
+                        title: 'Programming in C++: A Hands-on Introduction – Codio',
+                        subtitle: 'Credential ID: MNYQFWD4JX4P — View Credential',
+                        tags: ['Codio', 'C++', 'Programming'],
+                        stats: [
+                            { label: 'Completed', value: 'Dec 2023' }
+                        ],
+                        className: 'project-4'
+                    },
+                    {
+                        label: 'MOOC',
+                        title: 'Python for Data Science, AI & Development – IBM',
+                        subtitle: 'Credential ID: 4LK9Y375MAQ7 — View Credential',
+                        tags: ['IBM', 'Python', 'Data Science', 'AI'],
+                        stats: [
+                            { label: 'Completed', value: 'Nov 2023' }
+                        ],
+                        className: 'project-5'
+                    }
+                ]
+            }
         };
 
-        // Helper to render project cards
-        function renderProjects(category) {
-            const grid = document.getElementById('projectsGrid');
-            grid.innerHTML = '';
-            if (!projectsData[category]) return;
-            projectsData[category].forEach((proj, idx) => {
-                const item = document.createElement('div');
-                item.className = `grid-item ${proj.className}`;
-                item.style.animationDelay = `${0.1 + idx * 0.1}s`;
-                item.innerHTML = `
-                    <div class="grid-item-bg"></div>
-                    <div class="grid-content">
-                        <div class="grid-label">${proj.label}</div>
-                        <div class="grid-bottom">
-                            <div class="grid-title">${proj.title}</div>
-                            <div class="grid-subtitle">${proj.subtitle}</div>
-                            <div class="grid-tags">
-                                ${proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        const mainGrid = document.getElementById('mainGrid');
+        const projectsSection = document.getElementById('projectsSection');
+        const projectsGrid = document.getElementById('projectsGrid');
+        const sectionTitle = document.getElementById('sectionTitle');
+        const backButton = document.getElementById('backButton');
+
+        const skillsItem = document.getElementById('skillsItem');
+        const separator = document.getElementById('separator');
+        const currentSection = document.getElementById('currentSection');
+
+
+        function showProjects(category) {
+            const data = projectData[category];
+            if (!data) return;
+
+            // --- Update Breadcrumb ---
+            skillsItem.classList.remove('active');
+            currentSection.textContent = data.title;
+            currentSection.style.display = 'block';
+            separator.style.display = 'block';
+            currentSection.classList.add('active');
+
+            // --- Animate and switch views ---
+            mainGrid.classList.add('hidden');
+            setTimeout(() => {
+                mainGrid.style.display = 'none';
+                backButton.classList.add('show');
+                sectionTitle.textContent = data.title;
+                projectsGrid.innerHTML = ''; // Clear previous projects
+
+                data.items.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = `grid-item ${item.bgClass}`;
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.innerHTML = `
+                        <div class="grid-item-bg"></div>
+                        <div class="grid-content">
+                            <div>
+                                <div class="grid-label">${item.label}</div>
+                                <div class="grid-title">${item.title}</div>
+                                <div class="grid-subtitle">${item.subtitle}</div>
                             </div>
-                            <div class="grid-stats">
-                                ${proj.stats.map(stat => `<span class="stat"><span class="stat-value">${stat.value}</span> ${stat.label}</span>`).join('')}
+                            <div class="grid-bottom">
+                                <div class="grid-tags">
+                                    ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                grid.appendChild(item);
-            });
-            setTimeout(() => grid.classList.add('show'), 10);
-        }
-
-        // Show projects for a category
-        function showProjects(category) {
-            document.getElementById('mainGrid').style.display = 'none';
-            document.getElementById('projectsSection').classList.add('show');
-            renderProjects(category);
-            document.getElementById('breadcrumb').classList.add('show');
-            document.getElementById('currentSection').textContent = category.replace(/-/g, ' ').toUpperCase();
-            document.getElementById('sectionTitle').textContent = category.replace(/-/g, ' ').toUpperCase();
-        }
-
-        // Show main grid (skills overview)
-        function showMainGrid() {
-            document.getElementById('mainGrid').style.display = '';
-            document.getElementById('projectsSection').classList.remove('show');
-            document.getElementById('breadcrumb').classList.remove('show');
-            document.getElementById('sectionTitle').textContent = 'SKILLS & EXPERTISE';
-        }
-
-        // Loader animation
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('fade-out');
-            }, 1800);
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-            }, 2600);
-        });
-
-        // Animate main grid on load
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                document.querySelectorAll('.main-grid .grid-item').forEach((el, i) => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
+                    `;
+                    projectsGrid.appendChild(card);
                 });
-            }, 600);
-        });
 
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const scrollProgress = document.getElementById('scrollProgress');
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const percent = docHeight ? (scrollTop / docHeight) * 100 : 0;
-            scrollProgress.style.width = percent + '%';
-        });
+                projectsSection.classList.add('show');
+                projectsGrid.classList.add('show');
+            }, 500);
+        }
+
+        function showMainGrid() {
+            if (mainGrid.style.display === 'grid') return;
+
+            projectsSection.classList.remove('show');
+            projectsGrid.classList.remove('show');
+            backButton.classList.remove('show');
+
+            // --- Update Breadcrumb ---
+            skillsItem.classList.add('active');
+            currentSection.style.display = 'none';
+            separator.style.display = 'none';
+            currentSection.classList.remove('active');
+
+            setTimeout(() => {
+                projectsGrid.innerHTML = '';
+                sectionTitle.textContent = 'SKILLS & EXPERTISE';
+                mainGrid.style.display = 'grid';
+                setTimeout(() => mainGrid.classList.remove('hidden'), 50); // Re-trigger fade in
+            }, 500);
+        }
+
+        function navigateBack() {
+            showMainGrid();
+        }
+
     </script>
 </body>
 
