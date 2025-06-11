@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obidur Rahman</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>捉窶昨汳ｻ</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
     <meta name="description"
         content="Portfolio of Obidur Rahman, a BSc Mathematics student with a focus on data science, machine learning, and development.">
     <meta property="og:title" content="Obidur Rahman - Portfolio">
@@ -68,15 +68,8 @@
         }
 
         @keyframes gradientShift {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         /* Enhanced Loading Animation */
@@ -111,15 +104,8 @@
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .loader-bar {
@@ -140,13 +126,8 @@
         }
 
         @keyframes loading {
-            0% {
-                width: 0%;
-            }
-
-            100% {
-                width: 100%;
-            }
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
         /* Enhanced Header */
@@ -275,6 +256,119 @@
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
+        /* Hero Section */
+        .hero-section {
+            padding: 120px 50px 80px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-greeting {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 50px;
+            max-width: 550px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.2s forwards;
+        }
+
+        .scroll-hint-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .scroll-arrow {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent-primary), transparent);
+            position: relative;
+            animation: scrollBounce 2s infinite;
+        }
+
+        .scroll-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-right: 1px solid var(--accent-primary);
+            border-bottom: 1px solid var(--accent-primary);
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(10px); }
+        }
+
         /* Enhanced Main Grid */
         .main-container {
             padding: 50px;
@@ -283,7 +377,7 @@
             gap: 3px;
             min-height: calc(100vh - 160px);
             max-width: 100vw;
-            margin: 80px auto 0 auto;
+            margin: 0 auto;
         }
 
         .grid-item {
@@ -475,6 +569,10 @@
             .header {
                 padding: 0 30px;
             }
+
+            .hero-section {
+                padding: 100px 40px 60px 40px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -483,12 +581,22 @@
                 height: 70px;
             }
 
+            .hero-section {
+                padding: 90px 25px 50px 25px;
+                min-height: 90vh;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
             .main-container {
                 grid-template-columns: 1fr;
                 padding: 25px;
                 gap: 2px;
                 min-height: 0;
-                margin-top: 70px;
             }
 
             .grid-item {
@@ -506,8 +614,11 @@
                 height: 65px;
             }
 
+            .hero-section {
+                padding: 85px 20px 40px 20px;
+            }
+
             .main-container {
-                margin-top: 65px;
                 padding: 20px;
             }
 
@@ -523,34 +634,10 @@
                 font-size: 12px;
             }
 
-            .btn,
-            .logo {
+            .btn, .logo {
                 font-size: 11px;
                 padding: 10px 16px;
             }
-        }
-
-        /* Enhanced fade in animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-
-        .fade-in:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .fade-in:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .fade-in:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .fade-in:nth-child(4) {
-            animation-delay: 0.4s;
         }
 
         @keyframes fadeInUp {
@@ -598,8 +685,30 @@
             class="btn btn-primary">GitHub</a>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-greeting">Hello, I'm</div>
+            <h1 class="hero-title">Obidur Rahman</h1>
+            <p class="hero-subtitle">A mathematician who fell in love with code, data, and building things that matter.</p>
+            <p class="hero-description">
+                Currently pursuing BSc Mathematics while diving deep into data science, machine learning, and development. 
+                I believe the best solutions come from curiosity, creativity, and a willingness to explore the unexpected.
+            </p>
+            <div class="hero-cta">
+                <a href="#about" class="btn">Explore My Journey</a>
+                <a href="mailto:youremail@example.com" class="btn btn-primary">Get In Touch</a>
+            </div>
+        </div>
+        
+        <div class="scroll-hint">
+            <span class="scroll-hint-text">Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
     <main class="main-container">
-        <div id="about" class="grid-item fade-in" onclick="window.location.href='about.html'">
+        <div id="about" class="grid-item" onclick="window.location.href='about.html'">
             <div class="grid-item-bg"></div>
             <div class="grid-content">
                 <div class="grid-label">MATHEMATICS</div>
@@ -611,7 +720,7 @@
             </div>
         </div>
 
-        <div id="projects-skills" class="grid-item fade-in" onclick="window.location.href='projects.html'">
+        <div id="projects-skills" class="grid-item" onclick="window.location.href='projects.html'">
             <div class="grid-item-bg"></div>
             <div class="grid-content">
                 <div class="grid-label">EXPERTISE</div>
@@ -622,7 +731,7 @@
             </div>
         </div>
 
-        <div id="achievements" class="grid-item fade-in" onclick="window.location.href='#achievements'">
+        <div id="achievements" class="grid-item" onclick="window.location.href='#achievements'">
             <div class="grid-item-bg"></div>
             <div class="grid-content">
                 <div class="grid-label">RECOGNITION</div>
@@ -634,7 +743,7 @@
             </div>
         </div>
 
-        <div id="contact" class="grid-item fade-in" onclick="window.location.href='mailto:youremail@example.com'">
+        <div id="contact" class="grid-item" onclick="window.location.href='mailto:youremail@example.com'">
             <div class="grid-item-bg"></div>
             <div class="grid-content">
                 <div class="grid-label">CONNECT</div>
@@ -733,4 +842,3 @@
 </body>
 
 </html>
-<!-- End of index.html -->
