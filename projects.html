@@ -839,33 +839,14 @@
 
             <!-- Main Skills Grid -->
             <div class="main-grid" id="mainGrid">
-                <div class="grid-item programming" onclick="showProjects('programming')">
-                    <div class="grid-item-bg"></div>
-                    <div class="grid-content">
-                        <div class="grid-label">PROGRAMMING</div>
-                        <div class="grid-bottom">
-                            <div class="grid-title">Languages & Frameworks</div>
-                            <div class="grid-subtitle">Proficient in multiple programming languages with focus on data
-                                science and web development applications.</div>
-                            <div class="grid-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">C++</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">HTML</span>
-                                <span class="tag">CSS</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="grid-item data-science" onclick="showProjects('data-science')">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">DATA SCIENCE</div>
                         <div class="grid-bottom">
-                            <div class="grid-title">ML & Analytics</div>
-                            <div class="grid-subtitle">Comprehensive toolkit for machine learning, data analysis, and
-                                statistical modeling with hands-on project experience.</div>
+                            <div class="grid-title">Machine Learning and Deep Learning</div>
+                            <div class="grid-subtitle">Expertise in supervised/unsupervised learning, deep neural
+                                networks, and AI for real-world data science applications.</div>
                             <div class="grid-tags">
                                 <span class="tag">scikit-learn</span>
                                 <span class="tag">Pandas</span>
@@ -877,21 +858,39 @@
                     </div>
                 </div>
 
+                <div class="grid-item programming" onclick="showProjects('programming')">
+                    <div class="grid-item-bg"></div>
+                    <div class="grid-content">
+                        <div class="grid-label">PROGRAMMING</div>
+                        <div class="grid-bottom">
+                            <div class="grid-title">Languages & Frameworks</div>
+                            <div class="grid-subtitle">Proficient in Python, C++, and JavaScript. Experienced in
+                                building scalable applications in multiple languages</div>
+                            <div class="grid-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">C++</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">MATLAB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="grid-item tools" onclick="showProjects('tools')">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
-                        <div class="grid-label">TOOLS & PLATFORMS</div>
+                        <div class="grid-label">WEB</div>
                         <div class="grid-bottom">
-                            <div class="grid-title">Development & Deployment</div>
-                            <div class="grid-subtitle">Modern development tools and platforms for version control,
-                                visualization, and application deployment.</div>
+                            <div class="grid-title">Web Development & Deployment</div>
+                            <div class="grid-subtitle">Modern web technologies, frameworks, and platforms for building, deploying, and maintaining web applications.</div>
                             <div class="grid-tags">
-                                <span class="tag">Git</span>
-                                <span class="tag">Streamlit</span>
-                                <span class="tag">Matplotlib</span>
-                                <span class="tag">Plotly</span>
+                                <span class="tag">React</span>
+                                <span class="tag">Next.js</span>
+                                <span class="tag">Express</span>
+                                <span class="tag">SQL</span>
+                                <span class="tag">MongoDB</span>
                                 <span class="tag">Firebase</span>
-                                <span class="tag">LaTeX</span>
                             </div>
                         </div>
                     </div>
@@ -951,47 +950,14 @@
                 title: 'Programming Projects',
                 items: [
                     {
-                        label: 'WEB APPLICATION',
-                        title: 'Personal Portfolio Website',
-                        subtitle: 'Modern, responsive portfolio built with HTML5, CSS3, and JavaScript featuring interactive animations, smooth transitions, and optimized performance.',
-                        tags: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
-                        stats: [
-                            { label: 'Performance Score', value: '98/100' },
-                            { label: 'Load Time', value: '<2s' }
-                        ],
-                        className: 'project-1'
-                    },
-                    {
-                        label: 'FULL-STACK',
-                        title: 'Firebase Chat Application',
-                        subtitle: 'Real-time chat application built during Headstarter fellowship using Firebase for backend, authentication, and real-time database functionality.',
-                        tags: ['JavaScript', 'Firebase', 'HTML', 'CSS'],
-                        stats: [
-                            { label: 'Users', value: '50+' },
-                            { label: 'Messages', value: '1000+' }
-                        ],
-                        className: 'project-2'
-                    },
-                    {
-                        label: 'SCRIPTING',
-                        title: 'Automation Scripts',
-                        subtitle: 'A collection of Python and Bash scripts for automating repetitive tasks, data processing, and workflow optimization.',
-                        tags: ['Python', 'Bash', 'Automation'],
-                        stats: [
-                            { label: 'Scripts', value: '10+' },
-                            { label: 'Saved Hours', value: '100+' }
-                        ],
-                        className: 'project-3'
-                    },
-                    {
                         label: 'NETWORKING',
-                        title: 'httPY Public',
-                        subtitle: 'A simple HTTP server implemented in Python that handles basic HTTP requests and responds according to specified endpoints.',
-                        tags: ['Python', 'Socket', 'Networking', 'HTTP Server', 'Socket Programming'],
+                        title: 'httPy',
+                        subtitle: 'Custom Python HTTP server demonstrating understanding of web protocols and backend fundamentals. Lightweight, educational project showing low-level web tech knowledge.',
+                        tags: ['Python', 'HTTP', 'Networking', 'Backend'],
                         stats: [
                             { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/httPY" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
                         ],
-                        className: 'project-4'
+                        className: 'project-1'
                     }
                 ]
             },
@@ -1012,7 +978,7 @@
                     },
                     {
                         label: 'EDUCATION ANALYTICS',
-                        title: 'Bangladesh Undergraduate Admission Outcomes',
+                        title: 'Undergraduate Admission Prediction Model',
                         subtitle: 'Comprehensive ML model for predicting undergraduate admission outcomes. Included feature engineering, hyperparameter optimization, and explainable AI for actionable insights.',
                         tags: ['Python', 'scikit-learn', 'XGBoost', 'SHAP', 'Pandas', 'NumPy', 'Predictive Modeling'],
                         stats: [
@@ -1023,20 +989,8 @@
                         className: 'project-2'
                     },
                     {
-                        label: 'STATISTICAL LEARNING',
-                        title: 'Advanced Statistical Learning & Pattern Recognition',
-                        subtitle: 'Research on statistical learning theory, pattern recognition, and optimization. Published in peer-reviewed journals and presented at conferences.',
-                        tags: ['R', 'Python', 'MATLAB', 'Statistical Modeling', 'Optimization', 'Research'],
-                        stats: [
-                            { label: 'Articles', value: '13+' },
-                            { label: 'Community', value: '100+' },
-                            { label: 'Projects', value: '5+' }
-                        ],
-                        className: 'project-3'
-                    },
-                    {
-                        label: 'RESEARCH',
-                        title: 'Diarrhea-Prediction-Model Public',
+                        label: 'PUBLIC HEALTH',
+                        title: 'Diarrheal Disease Prediction Model',
                         subtitle: 'This research project analyzes the relationship between environmental factors and diarrheal disease incidence across four major divisions in Bangladesh.',
                         tags: ['machine-learning', 'research', 'predictive-modeling', 'correlation-analysis'],
                         stats: [
@@ -1050,37 +1004,47 @@
                 title: 'Tools & Platforms Projects',
                 items: [
                     {
-                        label: 'DEPLOYMENT',
-                        title: 'Streamlit ML Dashboard',
-                        subtitle: 'Interactive dashboard for ML model results and visualizations, deployed with Streamlit and integrated with cloud storage.',
-                        tags: ['Streamlit', 'Python', 'Cloud'],
+                        label: 'PORTFOLIO',
+                        title: 'This Portfolio Website',
+                        subtitle: 'The site you are viewing now! Built with modern HTML, CSS, and JavaScript. Features animated transitions, responsive design, and a dynamic project showcase.',
+                        tags: ['HTML', 'CSS', 'JavaScript', 'Responsive', 'Portfolio'],
                         stats: [
-                            { label: 'Users', value: '30+' },
-                            { label: 'Models', value: '3' }
+                            { label: 'Source', value: '<a href="https://github.com/Ashfinn/ashfinn.github.io" target="_blank" style="color:inherit;text-decoration:underline;">GitHub</a>' }
                         ],
                         className: 'project-1'
                     },
                     {
-                        label: 'VERSION CONTROL',
-                        title: 'Git Workflow Templates',
-                        subtitle: 'Standardized Git branching and workflow templates for collaborative development and CI/CD pipelines.',
-                        tags: ['Git', 'CI/CD', 'Templates'],
+                        label: 'WEB PLATFORM',
+                        title: 'Matlab-Hero',
+                        subtitle: 'Next.js-based web platform for coding challenges related to MATLAB. Good for showing frontend skills, React/Next.js expertise, and interactive learning tools.',
+                        tags: ['Next.js', 'React', 'MATLAB', 'Frontend'],
                         stats: [
-                            { label: 'Repos', value: '8+' },
-                            { label: 'Contributors', value: '10+' }
-                        ],
-                        className: 'project-2'
-                    },
-                    {
-                        label: 'DOCUMENTATION',
-                        title: 'LaTeX Report Generator',
-                        subtitle: 'Automated LaTeX report generation for data science projects, including charts and tables.',
-                        tags: ['LaTeX', 'Python', 'Automation'],
-                        stats: [
-                            { label: 'Reports', value: '12+' },
-                            { label: 'Pages', value: '100+' }
+                            { label: 'Frontend', value: 'Next.js' },
+                            { label: 'Challenges', value: 'MATLAB' }
                         ],
                         className: 'project-3'
+                    },
+                    {
+                        label: 'FORUM',
+                        title: 'the-code-forum',
+                        subtitle: 'Responsive web forum with Tailwind CSS and GSAP animations. Great example of frontend design, animations, and usability.',
+                        tags: ['Tailwind CSS', 'GSAP', 'Frontend', 'Forum'],
+                        stats: [
+                            { label: 'CSS', value: 'Tailwind' },
+                            { label: 'Animations', value: 'GSAP' }
+                        ],
+                        className: 'project-5'
+                    },
+                    {
+                        label: 'FULL-STACK',
+                        title: 'Letterboxd-Lifesaver',
+                        subtitle: 'A full-stack app built with Flask backend and React frontend that helps users discover movies to watch. Includes API integration, user-friendly UI, and clean separation of front and backend logic.',
+                        tags: ['Flask', 'React', 'API', 'Full-Stack'],
+                        stats: [
+                            { label: 'Frontend', value: 'React' },
+                            { label: 'Backend', value: 'Flask' }
+                        ],
+                        className: 'project-6'
                     }
                 ]
             },
