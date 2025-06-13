@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements & Impact - Obidur Rahman</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
+    <meta name="description"
+        content="Explore the achievements, leadership roles, content, and certifications of Obidur Rahman.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #151515;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --text-muted: #888888;
+            --border-color: #333333;
+            --border-subtle: #252525;
+            --accent-primary: #00ff88;
+            --accent-secondary: #0088ff;
+            --accent-glow: rgba(0, 255, 136, 0.2);
+            --header-bg: rgba(10, 10, 10, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 90%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(0, 136, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: gradientShift 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            padding: 0 40px;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0.5;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .logo:hover::before {
+            left: 100%;
+        }
+
+        .logo:hover {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            border-radius: 2px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
+        }
+
+        .main-container {
+            padding: 120px 50px 80px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .page-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .full-width-section {
+            grid-column: 1 / -1;
+        }
+
+        .content-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 40px;
+            border-radius: 8px;
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            transition: all 0.4s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-color);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-grid .content-section:nth-child(1) {
+            animation-delay: 0.4s;
+        }
+
+        .content-grid .content-section:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 1px;
+            background: var(--accent-primary);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        .section-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 40px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg-primary), 0 0 0 6px var(--accent-primary);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .timeline-description a {
+            color: var(--text-secondary);
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+
+        .timeline-description a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Content Creation Card */
+        .content-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            text-decoration: none;
+            padding: 25px;
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .content-card:not(:last-child) {
+            margin-bottom: 25px;
+        }
+
+        .content-card:hover {
+            transform: translateY(-3px);
+            background: var(--bg-secondary);
+            border-color: var(--border-subtle);
+        }
+
+        .content-card-icon {
+            font-size: 24px;
+            color: var(--accent-primary);
+            margin-top: 5px;
+            width: 40px;
+        }
+
+        .content-card-details h4 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .content-card-details p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .content-card-details p a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 100px 25px 60px 25px;
+            }
+
+            .header {
+                padding: 0 25px;
+                height: 70px;
+            }
+
+            .content-section {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a class="logo" href="index.html">OBIDUR RAHMAN</a>
+        <a href="index.html" class="btn">Back to Home</a>
+    </header>
+
+    <main class="main-container">
+        <section class="page-header">
+            <h1 class="page-title">Achievements & Impact</h1>
+            <p class="page-subtitle">
+                Beyond academics and projects, I am passionate about building communities, sharing knowledge, and
+                continuously learning. Here are some of my key roles and accomplishments.
+            </p>
+        </section>
+
+        <div class="content-grid">
+            <section class="content-section">
+                <div class="section-label">LEADERSHIP</div>
+                <h2 class="section-title">Community Building</h2>
+                <div class="section-content">
+                    <p>
+                        <strong>Founder & Community Lead</strong> of <strong>The Code Forum</strong>, a tech community I
+                        built from the ground up. I have grown the community to over 100 members and established 5
+                        comprehensive learning paths for aspiring developers.
+                    </p>
+                    <p>
+                        <strong>Research and Development Secretary</strong> at the <strong>Chittagong University Math
+                            Club</strong>, where I lead research initiatives and organize knowledge-sharing events that
+                        connect academic theory with real-world applications.
+                    </p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="section-label">KNOWLEDGE SHARING</div>
+                <h2 class="section-title">Content Creation</h2>
+                <div class="section-content">
+                    <a href="https://ashfin.hashnode.dev/" target="_blank" rel="noopener noreferrer"
+                        class="content-card">
+                        <div class="content-card-icon"><i class="fas fa-blog"></i></div>
+                        <div class="content-card-details">
+                            <h4>Hashnode Blog</h4>
+                            <p>I write technical articles on Python and Machine Learning, with over 13 publications and
+                                1,000+ reads. <a href="https://ashfin.hashnode.dev/" target="_blank"
+                                    rel="noopener noreferrer">Read my articles</a></p>
+                        </div>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC9d2c2f_khed12sWn-s4_qA" target="_blank"
+                        rel="noopener noreferrer" class="content-card">
+                        <div class="content-card-icon"><i class="fab fa-youtube"></i></div>
+                        <div class="content-card-details">
+                            <h4>YouTube Channel</h4>
+                            <p>I create educational videos on Mathematics and Machine Learning, simplifying complex
+                                topics for a broader audience. <a
+                                    href="https://www.youtube.com/channel/UC9d2c2f_khed12sWn-s4_qA" target="_blank"
+                                    rel="noopener noreferrer">Watch my videos</a></p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <section class="content-section full-width-section" style="animation-delay: 0.6s;">
+            <div class="section-label">TRAINING</div>
+            <h2 class="section-title">Certifications & Professional Development</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <h3 class="timeline-title">Software Engineering Fellowship – Headstarter</h3>
+                    <p class="timeline-description">Completed an intensive fellowship focused on full-stack development.
+                        Built five web applications using modern technologies and collaborated in an agile team
+                        environment.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">JUN 2024</div>
+                    <h3 class="timeline-title">Introduction to Programming with MATLAB – Vanderbilt University</h3>
+                    <p class="timeline-description">Credential ID: Z6HMC9DS5LSM — <a
+                            href="https://www.coursera.org/account/accomplishments/certificate/Z6HMC9DS5LSM"
+                            target="_blank" rel="noopener noreferrer">View Credential</a></p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">JAN 2024</div>
+                    <h3 class="timeline-title">Developing AI Applications with Python and Flask – IBM</h3>
+                    <p class="timeline-description">Credential ID: HV6QNTGU2KHY — <a
+                            href="https://www.coursera.org/account/accomplishments/certificate/HV6QNTGU2KHY"
+                            target="_blank" rel="noopener noreferrer">View Credential</a></p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">DEC 2023</div>
+                    <h3 class="timeline-title">Programming in C++: A Hands-on Introduction – Codio</h3>
+                    <p class="timeline-description">Credential ID: MNYQFWD4JX4P — <a
+                            href="https://www.coursera.org/account/accomplishments/specialization/certificate/MNYQFWD4JX4P"
+                            target="_blank" rel="noopener noreferrer">View Credential</a></p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">NOV 2023</div>
+                    <h3 class="timeline-title">Python for Data Science, AI & Development – IBM</h3>
+                    <p class="timeline-description">Credential ID: 4LK9Y375MAQ7 — <a
+                            href="https://www.coursera.org/account/accomplishments/certificate/4LK9Y375MAQ7"
+                            target="_blank" rel="noopener noreferrer">View Credential</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

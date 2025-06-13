@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects & Skills - Obidur Rahman</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>捉窶昨汳ｻ</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>‍💻</text></svg>">
     <meta name="description" content="Explore my machine learning projects, technical skills, and development work.">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap"
@@ -822,12 +822,10 @@
     </header>
 
     <main class="main-container">
-        <!-- Back Button -->
-        <div class="back-button" id="backButton" onclick="navigateBack()">
+        <a id="backButton" class="back-button" onclick="navigateBack()">
             Back to Skills
-        </div>
+        </a>
 
-        <!-- Enhanced Breadcrumb Navigation -->
         <div class="breadcrumb" id="breadcrumb">
             <span class="breadcrumb-item active" id="skillsItem" onclick="showMainGrid()">Skills & Overview</span>
             <div class="breadcrumb-separator" id="separator" style="display: none;"></div>
@@ -837,7 +835,6 @@
         <section class="section">
             <h2 class="section-title" id="sectionTitle">SKILLS & EXPERTISE</h2>
 
-            <!-- Main Skills Grid -->
             <div class="main-grid" id="mainGrid">
                 <div class="grid-item data-science" onclick="showProjects('data-science')">
                     <div class="grid-item-bg"></div>
@@ -883,7 +880,8 @@
                         <div class="grid-label">WEB</div>
                         <div class="grid-bottom">
                             <div class="grid-title">Web Development & Deployment</div>
-                            <div class="grid-subtitle">Modern web technologies, frameworks, and platforms for building, deploying, and maintaining web applications.</div>
+                            <div class="grid-subtitle">Modern web technologies, frameworks, and platforms for building,
+                                deploying, and maintaining web applications.</div>
                             <div class="grid-tags">
                                 <span class="tag">React</span>
                                 <span class="tag">Next.js</span>
@@ -939,8 +937,10 @@
             // --- Scroll Indicator ---
             window.addEventListener('scroll', () => {
                 const totalHeight = document.body.scrollHeight - window.innerHeight;
-                const progress = (window.pageYOffset / totalHeight) * 100;
-                scrollProgress.style.width = progress + '%';
+                if (totalHeight > 0) {
+                    const progress = (window.pageYOffset / totalHeight) * 100;
+                    scrollProgress.style.width = progress + '%';
+                }
             });
         });
 
@@ -957,7 +957,7 @@
                         stats: [
                             { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/httPY" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
                         ],
-                        className: 'project-1'
+                        bgClass: 'project-1'
                     }
                 ]
             },
@@ -974,7 +974,7 @@
                             { label: 'EfficientNetB0', value: '94.26%' },
                             { label: 'MobileNetV2', value: '92.79%' }
                         ],
-                        className: 'project-1'
+                        bgClass: 'project-1'
                     },
                     {
                         label: 'EDUCATION ANALYTICS',
@@ -984,9 +984,10 @@
                         stats: [
                             { label: 'Accuracy', value: '83.87%' },
                             { label: 'Precision', value: '89%' },
-                            { label: 'Records', value: '15K+' }
+                            { label: 'Records', value: '15K+' },
+                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Undergraduate-Admission-Prediction" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
                         ],
-                        className: 'project-2'
+                        bgClass: 'project-2'
                     },
                     {
                         label: 'PUBLIC HEALTH',
@@ -996,12 +997,12 @@
                         stats: [
                             { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Diarrhea-Prediction-Model" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
                         ],
-                        className: 'project-4'
+                        bgClass: 'project-4'
                     }
                 ]
             },
             'tools': {
-                title: 'Tools & Platforms Projects',
+                title: 'Web & Tools Projects',
                 items: [
                     {
                         label: 'PORTFOLIO',
@@ -1011,7 +1012,7 @@
                         stats: [
                             { label: 'Source', value: '<a href="https://github.com/Ashfinn/ashfinn.github.io" target="_blank" style="color:inherit;text-decoration:underline;">GitHub</a>' }
                         ],
-                        className: 'project-1'
+                        bgClass: 'project-1'
                     },
                     {
                         label: 'WEB PLATFORM',
@@ -1019,10 +1020,9 @@
                         subtitle: 'Next.js-based web platform for coding challenges related to MATLAB. Good for showing frontend skills, React/Next.js expertise, and interactive learning tools.',
                         tags: ['Next.js', 'React', 'MATLAB', 'Frontend'],
                         stats: [
-                            { label: 'Frontend', value: 'Next.js' },
-                            { label: 'Challenges', value: 'MATLAB' }
+                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Matlab-Hero" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
                         ],
-                        className: 'project-3'
+                        bgClass: 'project-3'
                     },
                     {
                         label: 'FORUM',
@@ -1030,10 +1030,9 @@
                         subtitle: 'Responsive web forum with Tailwind CSS and GSAP animations. Great example of frontend design, animations, and usability.',
                         tags: ['Tailwind CSS', 'GSAP', 'Frontend', 'Forum'],
                         stats: [
-                            { label: 'CSS', value: 'Tailwind' },
-                            { label: 'Animations', value: 'GSAP' }
+                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/the-code-forum" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
                         ],
-                        className: 'project-5'
+                        bgClass: 'project-5'
                     },
                     {
                         label: 'FULL-STACK',
@@ -1041,10 +1040,9 @@
                         subtitle: 'A full-stack app built with Flask backend and React frontend that helps users discover movies to watch. Includes API integration, user-friendly UI, and clean separation of front and backend logic.',
                         tags: ['Flask', 'React', 'API', 'Full-Stack'],
                         stats: [
-                            { label: 'Frontend', value: 'React' },
-                            { label: 'Backend', value: 'Flask' }
+                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Letterboxd-Lifesaver" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
                         ],
-                        className: 'project-6'
+                        bgClass: 'project-6'
                     }
                 ]
             },
@@ -1058,49 +1056,48 @@
                         tags: ['Headstarter', 'Full-Stack', 'Firebase', 'JavaScript', 'Agile'],
                         stats: [
                             { label: 'Projects', value: '5' },
-                            { label: 'Duration', value: '12 weeks' }
                         ],
-                        className: 'project-1'
+                        bgClass: 'project-1'
                     },
                     {
                         label: 'MOOC',
                         title: 'Introduction to Programming with MATLAB – Vanderbilt University',
-                        subtitle: 'Credential ID: Z6HMC9DS5LSM — View Credential',
+                        subtitle: 'Credential ID: Z6HMC9DS5LSM — <a href="https://www.coursera.org/account/accomplishments/certificate/Z6HMC9DS5LSM" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
                         tags: ['Vanderbilt', 'MATLAB', 'Programming'],
                         stats: [
                             { label: 'Completed', value: 'Jun 2024' }
                         ],
-                        className: 'project-2'
+                        bgClass: 'project-2'
                     },
                     {
                         label: 'MOOC',
                         title: 'Developing AI Applications with Python and Flask – IBM',
-                        subtitle: 'Credential ID: HV6QNTGU2KHY — View Credential',
+                        subtitle: 'Credential ID: HV6QNTGU2KHY — <a href="https://www.coursera.org/account/accomplishments/certificate/HV6QNTGU2KHY" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
                         tags: ['IBM', 'Python', 'Flask', 'AI'],
                         stats: [
                             { label: 'Completed', value: 'Jan 2024' }
                         ],
-                        className: 'project-3'
+                        bgClass: 'project-3'
                     },
                     {
                         label: 'SPECIALIZATION',
                         title: 'Programming in C++: A Hands-on Introduction – Codio',
-                        subtitle: 'Credential ID: MNYQFWD4JX4P — View Credential',
+                        subtitle: 'Credential ID: MNYQFWD4JX4P — <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/MNYQFWD4JX4P" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
                         tags: ['Codio', 'C++', 'Programming'],
                         stats: [
                             { label: 'Completed', value: 'Dec 2023' }
                         ],
-                        className: 'project-4'
+                        bgClass: 'project-4'
                     },
                     {
                         label: 'MOOC',
                         title: 'Python for Data Science, AI & Development – IBM',
-                        subtitle: 'Credential ID: 4LK9Y375MAQ7 — View Credential',
+                        subtitle: 'Credential ID: 4LK9Y375MAQ7 — <a href="https://www.coursera.org/account/accomplishments/certificate/4LK9Y375MAQ7" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
                         tags: ['IBM', 'Python', 'Data Science', 'AI'],
                         stats: [
                             { label: 'Completed', value: 'Nov 2023' }
                         ],
-                        className: 'project-5'
+                        bgClass: 'project-5'
                     }
                 ]
             }
@@ -1140,6 +1137,10 @@
                     const card = document.createElement('div');
                     card.className = `grid-item ${item.bgClass}`;
                     card.style.animationDelay = `${index * 0.1}s`;
+                    let statsHTML = '';
+                    if (item.stats && item.stats.length) {
+                        statsHTML = `<div class="grid-stats">${item.stats.map(stat => `<div class="stat">${stat.label}: <span class="stat-value">${stat.value}</span></div>`).join('')}</div>`;
+                    }
                     card.innerHTML = `
                         <div class="grid-item-bg"></div>
                         <div class="grid-content">
@@ -1152,6 +1153,7 @@
                                 <div class="grid-tags">
                                     ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                                 </div>
+                                ${statsHTML}
                             </div>
                         </div>
                     `;
@@ -1187,6 +1189,11 @@
         function navigateBack() {
             showMainGrid();
         }
+
+        // Make functions globally accessible
+        window.showProjects = showProjects;
+        window.showMainGrid = showMainGrid;
+        window.navigateBack = navigateBack;
 
     </script>
 </body>

@@ -37,6 +37,7 @@
             --header-bg: rgba(10, 10, 10, 0.85);
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
+            scroll-behavior: smooth;
         }
 
         /* Enhanced Loading Animation */
@@ -148,7 +149,7 @@
             }
         }
 
-        /* Header styles - copied from index */
+        /* Header styles */
         .header {
             position: fixed;
             top: 0;
@@ -423,6 +424,7 @@
             background: var(--accent-primary);
             color: var(--bg-primary);
             border-color: var(--accent-primary);
+            cursor: pointer;
         }
 
         .timeline {
@@ -444,6 +446,10 @@
             position: relative;
             margin-bottom: 40px;
             padding-left: 40px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
         }
 
         .timeline-item::before {
@@ -632,7 +638,7 @@
             height: 100%;
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
             width: 0%;
-            transition: width 0.1s ease;
+            transition: width 0.1s ease-out;
         }
     </style>
 </head>
@@ -648,65 +654,65 @@
             <div class="loader-progress"></div>
         </div>
     </div>
-    <header class="header">
-        <a class="logo" href="index.html">OBIDUR RAHMAN</a>
-        <a href="https://github.com/Ashfinn" target="_blank" rel="noopener noreferrer"
-            class="btn btn-primary">GitHub</a>
+
+    <header class="header" role="banner">
+        <a class="logo" href="index.html" aria-label="Return to Homepage">OBIDUR RAHMAN</a>
+        <a href="https://github.com/Ashfinn" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+            aria-label="View my GitHub profile">GitHub</a>
     </header>
 
-    <main class="main-content">
+    <main class="main-content" role="main">
         <div class="content-grid">
-            <section class="content-section fade-in">
+            <section class="content-section fade-in" aria-labelledby="journey-title">
                 <div class="section-label">PHILOSOPHY</div>
-                <h2 class="section-title">My Journey</h2>
+                <h2 class="section-title" id="journey-title">My Journey</h2>
                 <div class="section-content">
                     <p>Since my earliest days, I've been captivated by the elegance of Mathematics and the limitless
                         possibilities of Computer Science. As a curious learner, I thrive on exploring new ideas,
-                        mastering intricate concepts, and uncovering the marvels of our world through numbers,
+                        mastering intricate concepts, and uncovering the marvels of our world through the language of
+                        numbers,
                         algorithms, and patterns.</p>
-
                     <p style="margin-top: 20px;">My mission isn't just to crunch numbers or write code, but to invent,
-                        build, and discover — shedding light on the unseen wonders of the universe. My fascination lies
-                        at the intersection of abstract mathematical concepts and tangible technological implementation.
+                        build, and discover—shedding light on the unseen wonders of the universe. My fascination lies
+                        at the intersection of abstract mathematical theory and its tangible application in technology.
                     </p>
                 </div>
             </section>
 
-            <section class="content-section fade-in">
+            <section class="content-section fade-in" aria-labelledby="focus-title">
                 <div class="section-label">FOCUS</div>
-                <h2 class="section-title">What Drives Me</h2>
+                <h2 class="section-title" id="focus-title">What Drives Me</h2>
                 <div class="section-content">
                     <p>I thrive on translating statistical models and algorithmic logic into functional code, primarily
                         using Python and its powerful data science ecosystem. My work focuses on bridging the gap
-                        between theoretical mathematics and practical applications.</p>
-
+                        between theoretical mathematics and practical, real-world applications.</p>
                     <p style="margin-top: 20px;">Through machine learning projects, environmental data analysis, and
                         community building, I aim to create solutions that make a meaningful impact while advancing our
-                        understanding of complex systems and patterns.</p>
+                        understanding of complex systems.</p>
                 </div>
             </section>
 
-            <section class="content-section fade-in">
+            <section class="content-section fade-in" aria-labelledby="education-title">
                 <div class="section-label">EDUCATION</div>
-                <h2 class="section-title">Academic Background</h2>
+                <h2 class="section-title" id="education-title">Academic Background</h2>
                 <div class="section-content">
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-date">2022 - 2026</div>
-                            <div class="timeline-title">BSc in Mathematics</div>
+                            <h3 class="timeline-title">BSc in Mathematics</h3>
                             <div class="timeline-description">University of Chittagong, Bangladesh<br>
                                 Specializing in Complex Analysis, Numerical Analysis, Linear Programming, and
                                 Mathematical Programming</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-date">2024</div>
-                            <div class="timeline-title">Software Engineering Fellowship</div>
+                            <h3 class="timeline-title">Software Engineering Fellowship</h3>
                             <div class="timeline-description">Headstarter - Developed five full-stack applications using
                                 modern technologies</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-date">2024</div>
-                            <div class="timeline-title">MATLAB Programming</div>
+                            <h3 class="timeline-title">MATLAB Programming</h3>
                             <div class="timeline-description">Vanderbilt University - Advanced programming concepts and
                                 mathematical computing</div>
                         </div>
@@ -714,18 +720,16 @@
                 </div>
             </section>
 
-            <section class="content-section fade-in">
+            <section class="content-section fade-in" aria-labelledby="impact-title">
                 <div class="section-label">IMPACT</div>
-                <h2 class="section-title">Community & Leadership</h2>
+                <h2 class="section-title" id="impact-title">Community & Leadership</h2>
                 <div class="section-content">
                     <p><strong>Founder & Community Lead</strong> of The Code Forum, where I've built a thriving tech
-                        community with 100+ members and established 5 comprehensive learning paths for aspiring
+                        community of 100+ members and established 5 comprehensive learning paths for aspiring
                         developers.</p>
-
                     <p style="margin-top: 15px;"><strong>Research and Development Secretary</strong> at Chittagong
-                        University Math Club, leading research initiatives and organizing knowledge-sharing events that
-                        bridge academic theory with practical applications.</p>
-
+                        University Math Club, leading research initiatives and organizing events that
+                        bridge academic theory with practical application.</p>
                     <p style="margin-top: 15px;"><strong>Content Creator & Educator</strong> with 10+ educational videos
                         on ML and Mathematics, plus 13 published articles gaining 1000+ reads on Python and ML topics.
                     </p>
@@ -734,89 +738,82 @@
         </div>
 
         <section class="quote-section fade-in">
-            <p class="quote-text">
+            <blockquote class="quote-text">
                 The beauty of mathematics lies not just in its precision, but in its power to reveal the hidden patterns
                 that govern our universe. Every equation tells a story, every algorithm solves a puzzle, and every
                 discovery opens a door to infinite possibilities.
-            </p>
+            </blockquote>
         </section>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Enhanced loading animation
+
+            // --- Enhanced Loading Animation Handler ---
             const loader = document.getElementById('loader');
             if (loader) {
                 window.addEventListener('load', () => {
                     setTimeout(() => {
                         loader.classList.add('fade-out');
+                        // Remove loader from the DOM after transition completes
                         setTimeout(() => {
                             loader.style.display = 'none';
                         }, 800);
-                    }, 1200);
+                    }, 1200); // Ensures loader is visible for a minimum duration
                 });
             }
 
-            // Scroll progress indicator
+            // --- Scroll Progress Indicator ---
             const scrollProgress = document.getElementById('scrollProgress');
             if (scrollProgress) {
                 window.addEventListener('scroll', () => {
                     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const scrollPercent = (scrollTop / scrollHeight) * 100;
-                    scrollProgress.style.width = scrollPercent + '%';
-                });
+                    if (scrollHeight > 0) {
+                        const scrollPercent = (scrollTop / scrollHeight) * 100;
+                        scrollProgress.style.width = scrollPercent + '%';
+                    }
+                }, { passive: true }); // Use passive listener for better scroll performance
             }
 
-            // Enhanced header scroll effect
+            // --- Auto-Hiding Header on Scroll ---
             let lastScrollTop = 0;
             const header = document.querySelector('.header');
             if (header) {
                 window.addEventListener('scroll', () => {
                     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                     if (scrollTop > lastScrollTop && scrollTop > header.clientHeight) {
+                        // Scrolling Down
                         header.style.transform = 'translateY(-100%)';
                     } else {
+                        // Scrolling Up
                         header.style.transform = 'translateY(0)';
                     }
                     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-                });
+                }, { passive: true });
             }
 
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href.length > 1) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
+            // --- Fade-in Animations on Scroll ---
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            if (fadeInElements.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible'); // Use a class for animation trigger
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target); // Stop observing once visible
                         }
-                    }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px' // Trigger a bit early
                 });
-            });
 
-            // Add intersection observer for fade-in animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
+                fadeInElements.forEach((el) => {
+                    observer.observe(el);
                 });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
-            document.querySelectorAll('.fade-in').forEach((el) => {
-                observer.observe(el);
-            });
+            }
         });
     </script>
 </body>

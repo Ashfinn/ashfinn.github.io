@@ -461,24 +461,8 @@
             background: #0077b5;
         }
 
-        .twitter {
-            background: #1da1f2;
-        }
-
         .email {
             background: #ea4335;
-        }
-
-        .telegram {
-            background: #0088cc;
-        }
-
-        .discord {
-            background: #5865f2;
-        }
-
-        .instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
 
         .facebook {
@@ -495,27 +479,8 @@
             transform: scale(1.1);
         }
 
-        .social-link:hover .twitter {
-            background: #1991db;
-            transform: scale(1.1);
-        }
-
         .social-link:hover .email {
             background: #d93025;
-            transform: scale(1.1);
-        }
-
-        .social-link:hover .telegram {
-            background: #0077be;
-            transform: scale(1.1);
-        }
-
-        .social-link:hover .discord {
-            background: #4752c4;
-            transform: scale(1.1);
-        }
-
-        .social-link:hover .instagram {
             transform: scale(1.1);
         }
 
@@ -642,7 +607,7 @@
                     </div>
                     <div class="info-details">
                         <h4>Email</h4>
-                        <p><a href="mailto:obidur.rahman@example.com">obidur.rahman@example.com</a></p>
+                        <p><a href="mailto:obidur.shawal@gmail.com">obidur.shawal@gmail.com</a></p>
                     </div>
                 </div>
 
@@ -652,7 +617,7 @@
                     </div>
                     <div class="info-details">
                         <h4>Location</h4>
-                        <p>Chattogram, Bangladesh</p>
+                        <p>Chittagong, Bangladesh</p>
                     </div>
                 </div>
 
@@ -693,7 +658,7 @@
                     </div>
                 </a>
 
-                <a href="https://linkedin.com/in/obidur-rahman" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.linkedin.com/in/obidur-rahman-shawal/" target="_blank" rel="noopener noreferrer"
                     class="social-link">
                     <div class="social-icon linkedin">
                         <i class="fab fa-linkedin"></i>
@@ -704,60 +669,7 @@
                     </div>
                 </a>
 
-                <a href="https://twitter.com/obidur_rahman" target="_blank" rel="noopener noreferrer"
-                    class="social-link">
-                    <div class="social-icon twitter">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                    <div class="social-details">
-                        <h4>Twitter</h4>
-                        <p>Tech thoughts, insights, and community discussions</p>
-                    </div>
-                </a>
-
-                <a href="mailto:obidur.rahman@example.com" class="social-link">
-                    <div class="social-icon email">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="social-details">
-                        <h4>Email</h4>
-                        <p>Direct communication for business inquiries</p>
-                    </div>
-                </a>
-
-                <a href="https://t.me/obidur_rahman" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <div class="social-icon telegram">
-                        <i class="fab fa-telegram"></i>
-                    </div>
-                    <div class="social-details">
-                        <h4>Telegram</h4>
-                        <p>Quick messages and instant communication</p>
-                    </div>
-                </a>
-
-                <a href="https://discord.com/users/obidur#1234" target="_blank" rel="noopener noreferrer"
-                    class="social-link">
-                    <div class="social-icon discord">
-                        <i class="fab fa-discord"></i>
-                    </div>
-                    <div class="social-details">
-                        <h4>Discord</h4>
-                        <p>Gaming and tech community discussions</p>
-                    </div>
-                </a>
-
-                <a href="https://instagram.com/obidur.rahman" target="_blank" rel="noopener noreferrer"
-                    class="social-link">
-                    <div class="social-icon instagram">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <div class="social-details">
-                        <h4>Instagram</h4>
-                        <p>Behind the scenes and personal moments</p>
-                    </div>
-                </a>
-
-                <a href="https://facebook.com/obidur.rahman" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.facebook.com/obidur.shawal" target="_blank" rel="noopener noreferrer"
                     class="social-link">
                     <div class="social-icon facebook">
                         <i class="fab fa-facebook"></i>
@@ -765,6 +677,16 @@
                     <div class="social-details">
                         <h4>Facebook</h4>
                         <p>Updates and community engagement</p>
+                    </div>
+                </a>
+
+                <a href="mailto:obidur.shawal@gmail.com" class="social-link">
+                    <div class="social-icon email">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="social-details">
+                        <h4>Email</h4>
+                        <p>Direct communication for business inquiries</p>
                     </div>
                 </a>
             </div>
@@ -779,8 +701,10 @@
                 window.addEventListener('scroll', () => {
                     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const scrollPercent = (scrollTop / scrollHeight) * 100;
-                    scrollProgress.style.width = scrollPercent + '%';
+                    if (scrollHeight > 0) {
+                        const scrollPercent = (scrollTop / scrollHeight) * 100;
+                        scrollProgress.style.width = scrollPercent + '%';
+                    }
                 });
             }
 
@@ -798,7 +722,7 @@
                     const message = formData.get('message');
 
                     // Create mailto link
-                    const mailtoLink = `mailto:obidur.rahman@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                    const mailtoLink = `mailto:obidur.shawal@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
 
                     // Open email client
                     window.location.href = mailtoLink;
