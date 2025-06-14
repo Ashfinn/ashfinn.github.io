@@ -317,113 +317,20 @@
             opacity: 0.6;
         }
 
-        /* Enhanced Breadcrumb Navigation */
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--text-muted);
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .breadcrumb.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .breadcrumb-item {
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 8px 12px;
-            border-radius: 4px;
-            position: relative;
-        }
-
-        .breadcrumb-item:hover {
-            color: var(--accent-primary);
-            background: var(--glass-bg);
-        }
-
-        .breadcrumb-item.active {
-            color: var(--text-primary);
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .breadcrumb-separator {
-            width: 12px;
-            height: 1px;
-            background: var(--border-color);
-            opacity: 0.6;
-        }
-
-        /* Back button */
-        .back-button {
-            display: none;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 30px;
-            padding: 10px 16px;
-            background: var(--glass-bg);
-            border: 1px solid var(--border-subtle);
-            border-radius: 4px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: fit-content;
-        }
-
-        .back-button.show {
-            display: flex;
-        }
-
-        .back-button:hover {
-            background: var(--bg-card);
-            border-color: var(--border-color);
-            color: var(--text-primary);
-            transform: translateX(-2px);
-        }
-
-        .back-button::before {
-            content: '←';
-            font-size: 14px;
-        }
-
         /* Grid layouts */
         .main-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3px;
             margin-bottom: 40px;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        /* Inner grid for revealed projects */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 3px;
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .projects-grid.show {
-            opacity: 1;
-            transform: translateY(0);
+            padding: 20px 0;
         }
 
         /* Grid item base styling */
@@ -438,33 +345,18 @@
             justify-content: space-between;
             border: 1px solid var(--border-subtle);
             min-height: 60vh;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
-        .grid-item:nth-child(1) {
-            animation-delay: 0.1s;
+        .category-card.active {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        .grid-item:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .grid-item:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .grid-item:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .grid-item:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-
-        .grid-item:nth-child(6) {
-            animation-delay: 0.6s;
+        .grid-item:hover {
+            background: var(--bg-tertiary);
+            transform: translateY(-8px);
+            border-color: var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--glass-border);
         }
 
         .grid-item::before {
@@ -483,13 +375,6 @@
 
         .grid-item:hover::before {
             opacity: 1;
-        }
-
-        .grid-item:hover {
-            background: var(--bg-tertiary);
-            transform: translateY(-8px);
-            border-color: var(--border-color);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--glass-border);
         }
 
         .grid-item-bg {
@@ -635,84 +520,55 @@
             font-weight: 600;
         }
 
-        /* Hidden projects section */
-        .projects-section {
-            opacity: 0;
+        /* Container for revealed projects */
+        .projects-container {
+            grid-column: 1 / -1;
+            /* Span full width of the parent grid */
             max-height: 0;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform: translateY(-20px);
-        }
-
-        .projects-section.show {
-            opacity: 1;
-            max-height: 5000px;
-            transform: translateY(0);
-        }
-
-        /* Navigation state classes */
-        .main-grid.hidden {
             opacity: 0;
-            transform: translateY(-20px);
-            pointer-events: none;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out;
         }
 
-        /* Specific card accent colors */
-        .grid-item:nth-child(1):hover {
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1), 0 0 0 1px rgba(0, 255, 136, 0.2);
-        }
-
-        .grid-item:nth-child(2):hover {
-            box-shadow: 0 20px 40px rgba(0, 136, 255, 0.1), 0 0 0 1px rgba(0, 136, 255, 0.2);
-        }
-
-        .grid-item:nth-child(3):hover {
-            box-shadow: 0 20px 40px rgba(255, 136, 0, 0.1), 0 0 0 1px rgba(255, 136, 0, 0.2);
-        }
-
-        .grid-item:nth-child(4):hover {
-            box-shadow: 0 20px 40px rgba(255, 0, 136, 0.1), 0 0 0 1px rgba(255, 0, 136, 0.2);
+        .projects-container.open {
+            opacity: 1;
+            max-height: 2000px;
+            /* Large enough to not clip content */
         }
 
         /* Background images */
-        .programming .grid-item-bg {
+        .programming-bg .grid-item-bg {
             background-image: url('img/lang.jpg');
         }
 
-        .data-science .grid-item-bg {
+        .data-science-bg .grid-item-bg {
             background-image: url('img/ds.jpg');
         }
 
-        .tools .grid-item-bg {
+        .tools-bg .grid-item-bg {
             background-image: url('img/web.jpg');
         }
 
-        .certifications .grid-item-bg {
+        .certifications-bg .grid-item-bg {
             background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80');
         }
 
-        .project-1 .grid-item-bg {
+        .project-bg-1 .grid-item-bg {
             background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80');
         }
 
-        .project-2 .grid-item-bg {
+        .project-bg-2 .grid-item-bg {
             background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&q=80');
         }
 
-        .project-3 .grid-item-bg {
+        .project-bg-3 .grid-item-bg {
             background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80');
         }
 
-        .project-4 .grid-item-bg {
+        .project-bg-4 .grid-item-bg {
             background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80');
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
         /* Responsive Design */
         @media (max-width: 1200px) {
@@ -720,12 +576,9 @@
                 padding: 40px;
             }
 
-            .main-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            }
-
+            .main-grid,
             .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             }
         }
 
@@ -822,21 +675,11 @@
     </header>
 
     <main class="main-container">
-        <a id="backButton" class="back-button" onclick="navigateBack()">
-            Back to Skills
-        </a>
-
-        <div class="breadcrumb" id="breadcrumb">
-            <span class="breadcrumb-item active" id="skillsItem" onclick="showMainGrid()">Skills & Overview</span>
-            <div class="breadcrumb-separator" id="separator" style="display: none;"></div>
-            <span class="breadcrumb-item" id="currentSection" style="display: none;"></span>
-        </div>
-
         <section class="section">
             <h2 class="section-title" id="sectionTitle">SKILLS & EXPERTISE</h2>
 
             <div class="main-grid" id="mainGrid">
-                <div class="grid-item data-science" onclick="showProjects('data-science')">
+                <div class="grid-item category-card data-science-bg" data-category="data-science">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">DATA SCIENCE</div>
@@ -855,7 +698,7 @@
                     </div>
                 </div>
 
-                <div class="grid-item programming" onclick="showProjects('programming')">
+                <div class="grid-item category-card programming-bg" data-category="programming">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">PROGRAMMING</div>
@@ -863,7 +706,7 @@
                             <div class="grid-title">Languages & Frameworks</div>
                             <div class="grid-subtitle">Proficient in Python, C++, and JavaScript. Experienced in
                                 building scalable applications in multiple languages</div>
-                            <div class="grid-tags">
+                            <div class.grid-tags">
                                 <span class="tag">Python</span>
                                 <span class="tag">C++</span>
                                 <span class="tag">JavaScript</span>
@@ -874,7 +717,7 @@
                     </div>
                 </div>
 
-                <div class="grid-item tools" onclick="showProjects('tools')">
+                <div class="grid-item category-card tools-bg" data-category="tools">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">WEB</div>
@@ -894,7 +737,7 @@
                     </div>
                 </div>
 
-                <div class="grid-item certifications" onclick="showProjects('certifications')">
+                <div class="grid-item category-card certifications-bg" data-category="certifications">
                     <div class="grid-item-bg"></div>
                     <div class="grid-content">
                         <div class="grid-label">CERTIFICATIONS</div>
@@ -912,10 +755,8 @@
                 </div>
             </div>
 
-            <div class="projects-section" id="projectsSection">
-                <div class="projects-grid" id="projectsGrid">
-                </div>
-            </div>
+            <div id="project-display-area"></div>
+
         </section>
     </main>
 
@@ -924,14 +765,12 @@
             const loader = document.getElementById('loader');
             const mainContent = document.querySelector('.main-container');
             const scrollProgress = document.getElementById('scrollProgress');
-            const breadcrumb = document.getElementById('breadcrumb');
 
             // --- Loading Animation ---
             mainContent.style.visibility = 'hidden';
             setTimeout(() => {
                 loader.classList.add('fade-out');
                 mainContent.style.visibility = 'visible';
-                breadcrumb.classList.add('show');
             }, 2500);
 
             // --- Scroll Indicator ---
@@ -942,201 +781,187 @@
                     scrollProgress.style.width = progress + '%';
                 }
             });
-        });
 
-        // --- Data for Projects ---
-        const projectData = {
-            'programming': {
-                title: 'Programming Projects',
-                items: [
-                    {
-                        label: 'NETWORKING',
-                        title: 'httPy',
-                        subtitle: 'Custom Python HTTP server demonstrating understanding of web protocols and backend fundamentals. Lightweight, educational project showing low-level web tech knowledge.',
-                        tags: ['Python', 'HTTP', 'Networking', 'Backend'],
-                        stats: [
-                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/httPY" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                        ],
-                        bgClass: 'project-1'
-                    }
-                ]
-            },
-            'data-science': {
-                title: 'Data Science Projects',
-                items: [
-                    {
-                        label: 'DEEP LEARNING',
-                        title: 'Tomato Leaf Disease Classification',
-                        subtitle: 'Comparative analysis of traditional ML and deep learning models (Xception, EfficientNet, MobileNet) for tomato leaf disease classification. Explored background removal and real-world data impact.',
-                        tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Xception', 'EfficientNet', 'MobileNet', 'Computer Vision'],
-                        stats: [
-                            { label: 'Xception', value: '97.00%' },
-                            { label: 'EfficientNetB0', value: '94.26%' },
-                            { label: 'MobileNetV2', value: '92.79%' }
-                        ],
-                        bgClass: 'project-1'
-                    },
-                    {
-                        label: 'EDUCATION ANALYTICS',
-                        title: 'Undergraduate Admission Prediction Model',
-                        subtitle: 'Comprehensive ML model for predicting undergraduate admission outcomes. Included feature engineering, hyperparameter optimization, and explainable AI for actionable insights.',
-                        tags: ['Python', 'scikit-learn', 'XGBoost', 'SHAP', 'Pandas', 'NumPy', 'Predictive Modeling'],
-                        stats: [
-                            { label: 'Accuracy', value: '83.87%' },
-                            { label: 'Precision', value: '89%' },
-                            { label: 'Records', value: '15K+' },
-                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Undergraduate-Admission-Prediction" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                        ],
-                        bgClass: 'project-2'
-                    },
-                    {
-                        label: 'PUBLIC HEALTH',
-                        title: 'Diarrheal Disease Prediction Model',
-                        subtitle: 'This research project analyzes the relationship between environmental factors and diarrheal disease incidence across four major divisions in Bangladesh.',
-                        tags: ['machine-learning', 'research', 'predictive-modeling', 'correlation-analysis'],
-                        stats: [
-                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Diarrhea-Prediction-Model" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                        ],
-                        bgClass: 'project-4'
-                    }
-                ]
-            },
-            'tools': {
-                title: 'Web & Tools Projects',
-                items: [
-                    {
-                        label: 'PORTFOLIO',
-                        title: 'ashfinn.github.io',
-                        subtitle: 'The site you are viewing now! Built with modern HTML, CSS, and JavaScript. Features animated transitions, responsive design, and a dynamic project showcase.',
-                        tags: ['HTML', 'CSS', 'JavaScript', 'Responsive', 'Portfolio'],
-                        stats: [
-                            { label: 'Source', value: '<a href="https://github.com/Ashfinn/ashfinn.github.io" target="_blank" style="color:inherit;text-decoration:underline;">GitHub</a>' }
-                        ],
-                        bgClass: 'project-1'
-                    },
-                    {
-                        label: 'WEB PLATFORM',
-                        title: 'Matlab-Hero',
-                        subtitle: 'Next.js-based web platform for coding challenges related to MATLAB. Good for showing frontend skills, React/Next.js expertise, and interactive learning tools.',
-                        tags: ['Next.js', 'React', 'MATLAB', 'Frontend'],
-                        stats: [
-                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Matlab-Hero" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                        ],
-                        bgClass: 'project-3'
-                    },
-                    {
-                        label: 'FORUM',
-                        title: 'the-code-forum',
-                        subtitle: 'Responsive web forum with Tailwind CSS and GSAP animations. Great example of frontend design, animations, and usability.',
-                        tags: ['Tailwind CSS', 'GSAP', 'Frontend', 'Forum'],
-                        stats: [
-                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/the-code-forum" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                        ],
-                        bgClass: 'project-5'
-                    },
-                    {
-                        label: 'FULL-STACK',
-                        title: 'Letterboxd-Lifesaver',
-                        subtitle: 'A full-stack app built with Flask backend and React frontend that helps users discover movies to watch. Includes API integration, user-friendly UI, and clean separation of front and backend logic.',
-                        tags: ['Flask', 'React', 'API', 'Full-Stack'],
-                        stats: [
-                            { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Letterboxd-Lifesaver" target="_blank" style="color:inherit;text-decoration:underline;">View</a>' }
-                        ],
-                        bgClass: 'project-6'
-                    }
-                ]
-            },
-            'certifications': {
-                title: 'Certifications',
-                items: [
-                    {
-                        label: 'FELLOWSHIP',
-                        title: 'Software Engineering Fellowship – Headstarter',
-                        subtitle: 'Developed five full-stack web applications using Firebase, Git, and JavaScript. Collaborated in a team of four developers, following agile methodologies to deliver projects on time.',
-                        tags: ['Headstarter', 'Full-Stack', 'Firebase', 'JavaScript', 'Agile'],
-                        stats: [
-                            { label: 'Projects', value: '5' },
-                        ],
-                        bgClass: 'project-1'
-                    },
-                    {
-                        label: 'MOOC',
-                        title: 'Introduction to Programming with MATLAB – Vanderbilt University',
-                        subtitle: 'Credential ID: Z6HMC9DS5LSM — <a href="https://www.coursera.org/account/accomplishments/certificate/Z6HMC9DS5LSM" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
-                        tags: ['Vanderbilt', 'MATLAB', 'Programming'],
-                        stats: [
-                            { label: 'Completed', value: 'Jun 2024' }
-                        ],
-                        bgClass: 'project-2'
-                    },
-                    {
-                        label: 'MOOC',
-                        title: 'Developing AI Applications with Python and Flask – IBM',
-                        subtitle: 'Credential ID: HV6QNTGU2KHY — <a href="https://www.coursera.org/account/accomplishments/certificate/HV6QNTGU2KHY" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
-                        tags: ['IBM', 'Python', 'Flask', 'AI'],
-                        stats: [
-                            { label: 'Completed', value: 'Jan 2024' }
-                        ],
-                        bgClass: 'project-3'
-                    },
-                    {
-                        label: 'SPECIALIZATION',
-                        title: 'Programming in C++: A Hands-on Introduction – Codio',
-                        subtitle: 'Credential ID: MNYQFWD4JX4P — <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/MNYQFWD4JX4P" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
-                        tags: ['Codio', 'C++', 'Programming'],
-                        stats: [
-                            { label: 'Completed', value: 'Dec 2023' }
-                        ],
-                        bgClass: 'project-4'
-                    },
-                    {
-                        label: 'MOOC',
-                        title: 'Python for Data Science, AI & Development – IBM',
-                        subtitle: 'Credential ID: 4LK9Y375MAQ7 — <a href="https://www.coursera.org/account/accomplishments/certificate/4LK9Y375MAQ7" target="_blank" style="color:inherit;text-decoration:underline;">View Credential</a>',
-                        tags: ['IBM', 'Python', 'Data Science', 'AI'],
-                        stats: [
-                            { label: 'Completed', value: 'Nov 2023' }
-                        ],
-                        bgClass: 'project-5'
-                    }
-                ]
-            }
-        };
+            // --- Project Data and Accordion Logic ---
+            const projectData = {
+                'programming': {
+                    title: 'Programming Projects',
+                    items: [
+                        {
+                            label: 'NETWORKING',
+                            title: 'httPy',
+                            subtitle: 'Custom Python HTTP server demonstrating understanding of web protocols and backend fundamentals. Lightweight, educational project showing low-level web tech knowledge.',
+                            tags: ['Python', 'HTTP', 'Networking', 'Backend'],
+                            stats: [
+                                { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/httPY" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View</a>' }
+                            ],
+                            bgClass: 'project-bg-1'
+                        }
+                    ]
+                },
+                'data-science': {
+                    title: 'Data Science Projects',
+                    items: [
+                        {
+                            label: 'DEEP LEARNING',
+                            title: 'Tomato Leaf Disease Classification',
+                            subtitle: 'Comparative analysis of traditional ML and deep learning models (Xception, EfficientNet, MobileNet) for tomato leaf disease classification. Explored background removal and real-world data impact.',
+                            tags: ['Python', 'TensorFlow', 'Keras', 'scikit-learn', 'Xception', 'EfficientNet', 'MobileNet', 'Computer Vision'],
+                            stats: [
+                                { label: 'Xception', value: '97.00%' },
+                                { label: 'EfficientNetB0', value: '94.26%' },
+                                { label: 'MobileNetV2', value: '92.79%' }
+                            ],
+                            bgClass: 'project-bg-1'
+                        },
+                        {
+                            label: 'EDUCATION ANALYTICS',
+                            title: 'Undergraduate Admission Prediction Model',
+                            subtitle: 'Comprehensive ML model for predicting undergraduate admission outcomes. Included feature engineering, hyperparameter optimization, and explainable AI for actionable insights.',
+                            tags: ['Python', 'scikit-learn', 'XGBoost', 'SHAP', 'Pandas', 'NumPy', 'Predictive Modeling'],
+                            stats: [
+                                { label: 'Accuracy', value: '83.87%' },
+                                { label: 'Precision', value: '89%' },
+                                { label: 'Records', value: '15K+' },
+                                { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Undergraduate-Admission-Prediction" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View</a>' }
+                            ],
+                            bgClass: 'project-bg-2'
+                        },
+                        {
+                            label: 'PUBLIC HEALTH',
+                            title: 'Diarrheal Disease Prediction Model',
+                            subtitle: 'This research project analyzes the relationship between environmental factors and diarrheal disease incidence across four major divisions in Bangladesh.',
+                            tags: ['machine-learning', 'research', 'predictive-modeling', 'correlation-analysis'],
+                            stats: [
+                                { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Diarrhea-Prediction-Model" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View</a>' }
+                            ],
+                            bgClass: 'project-bg-4'
+                        }
+                    ]
+                },
+                'tools': {
+                    title: 'Web & Tools Projects',
+                    items: [
+                        {
+                            label: 'PORTFOLIO',
+                            title: 'ashfinn.github.io',
+                            subtitle: 'The site you are viewing now! Built with modern HTML, CSS, and JavaScript. Features animated transitions, responsive design, and a dynamic project showcase.',
+                            tags: ['HTML', 'CSS', 'JavaScript', 'Responsive', 'Portfolio'],
+                            stats: [
+                                { label: 'Source', value: '<a href="https://github.com/Ashfinn/ashfinn.github.io" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">GitHub</a>' }
+                            ],
+                            bgClass: 'project-bg-1'
+                        },
+                        {
+                            label: 'WEB PLATFORM',
+                            title: 'Matlab-Hero',
+                            subtitle: 'Next.js-based web platform for coding challenges related to MATLAB. Good for showing frontend skills, React/Next.js expertise, and interactive learning tools.',
+                            tags: ['Next.js', 'React', 'MATLAB', 'Frontend'],
+                            stats: [
+                                { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Matlab-Hero" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View</a>' }
+                            ],
+                            bgClass: 'project-bg-3'
+                        },
+                        {
+                            label: 'FORUM',
+                            title: 'the-code-forum',
+                            subtitle: 'Responsive web forum with Tailwind CSS and GSAP animations. Great example of frontend design, animations, and usability.',
+                            tags: ['Tailwind CSS', 'GSAP', 'Frontend', 'Forum'],
+                            stats: [
+                                { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/the-code-forum" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View</a>' }
+                            ],
+                            bgClass: 'project-bg-5'
+                        },
+                        {
+                            label: 'FULL-STACK',
+                            title: 'Letterboxd-Lifesaver',
+                            subtitle: 'A full-stack app built with Flask backend and React frontend that helps users discover movies to watch. Includes API integration, user-friendly UI, and clean separation of front and backend logic.',
+                            tags: ['Flask', 'React', 'API', 'Full-Stack'],
+                            stats: [
+                                { label: 'GitHub', value: '<a href="https://github.com/Ashfinn/Letterboxd-Lifesaver" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View</a>' }
+                            ],
+                            bgClass: 'project-bg-6'
+                        }
+                    ]
+                },
+                'certifications': {
+                    title: 'Certifications',
+                    items: [
+                        {
+                            label: 'FELLOWSHIP',
+                            title: 'Software Engineering Fellowship – Headstarter',
+                            subtitle: 'Developed five full-stack web applications using Firebase, Git, and JavaScript. Collaborated in a team of four developers, following agile methodologies to deliver projects on time.',
+                            tags: ['Headstarter', 'Full-Stack', 'Firebase', 'JavaScript', 'Agile'],
+                            stats: [
+                                { label: 'Projects', value: '5' },
+                            ],
+                            bgClass: 'project-bg-1'
+                        },
+                        {
+                            label: 'MOOC',
+                            title: 'Introduction to Programming with MATLAB – Vanderbilt University',
+                            subtitle: 'Credential ID: Z6HMC9DS5LSM — <a href="https://www.coursera.org/account/accomplishments/certificate/Z6HMC9DS5LSM" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View Credential</a>',
+                            tags: ['Vanderbilt', 'MATLAB', 'Programming'],
+                            stats: [
+                                { label: 'Completed', value: 'Jun 2024' }
+                            ],
+                            bgClass: 'project-bg-2'
+                        },
+                        {
+                            label: 'MOOC',
+                            title: 'Developing AI Applications with Python and Flask – IBM',
+                            subtitle: 'Credential ID: HV6QNTGU2KHY — <a href="https://www.coursera.org/account/accomplishments/certificate/HV6QNTGU2KHY" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View Credential</a>',
+                            tags: ['IBM', 'Python', 'Flask', 'AI'],
+                            stats: [
+                                { label: 'Completed', value: 'Jan 2024' }
+                            ],
+                            bgClass: 'project-bg-3'
+                        },
+                        {
+                            label: 'SPECIALIZATION',
+                            title: 'Programming in C++: A Hands-on Introduction – Codio',
+                            subtitle: 'Credential ID: MNYQFWD4JX4P — <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/MNYQFWD4JX4P" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View Credential</a>',
+                            tags: ['Codio', 'C++', 'Programming'],
+                            stats: [
+                                { label: 'Completed', value: 'Dec 2023' }
+                            ],
+                            bgClass: 'project-bg-4'
+                        },
+                        {
+                            label: 'MOOC',
+                            title: 'Python for Data Science, AI & Development – IBM',
+                            subtitle: 'Credential ID: 4LK9Y375MAQ7 — <a href="https://www.coursera.org/account/accomplishments/certificate/4LK9Y375MAQ7" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;">View Credential</a>',
+                            tags: ['IBM', 'Python', 'Data Science', 'AI'],
+                            stats: [
+                                { label: 'Completed', value: 'Nov 2023' }
+                            ],
+                            bgClass: 'project-bg-5'
+                        }
+                    ]
+                }
+            };
 
-        const mainGrid = document.getElementById('mainGrid');
-        const projectsSection = document.getElementById('projectsSection');
-        const projectsGrid = document.getElementById('projectsGrid');
-        const sectionTitle = document.getElementById('sectionTitle');
-        const backButton = document.getElementById('backButton');
+            const categoryCards = document.querySelectorAll('.category-card');
+            const projectDisplayArea = document.getElementById('project-display-area');
 
-        const skillsItem = document.getElementById('skillsItem');
-        const separator = document.getElementById('separator');
-        const currentSection = document.getElementById('currentSection');
+            const openProjectsFor = (cardEl, category) => {
+                // Mark the card as active and scroll to it
+                cardEl.classList.add('active');
+                cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
+                // Create containers
+                const container = document.createElement('div');
+                container.className = 'projects-container';
 
-        function showProjects(category) {
-            const data = projectData[category];
-            if (!data) return;
+                const projectsGrid = document.createElement('div');
+                projectsGrid.className = 'projects-grid';
 
-            // --- Update Breadcrumb ---
-            skillsItem.classList.remove('active');
-            currentSection.textContent = data.title;
-            currentSection.style.display = 'block';
-            separator.style.display = 'block';
-            currentSection.classList.add('active');
+                const projectItems = projectData[category].items;
 
-            // --- Animate and switch views ---
-            mainGrid.classList.add('hidden');
-            setTimeout(() => {
-                mainGrid.style.display = 'none';
-                backButton.classList.add('show');
-                sectionTitle.textContent = data.title;
-                projectsGrid.innerHTML = ''; // Clear previous projects
-
-                data.items.forEach((item, index) => {
+                // Populate with project cards
+                projectItems.forEach(item => {
                     const card = document.createElement('div');
-                    card.className = `grid-item ${item.bgClass}`;
-                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.className = `grid-item project-item ${item.bgClass}`;
                     let statsHTML = '';
                     if (item.stats && item.stats.length) {
                         statsHTML = `<div class="grid-stats">${item.stats.map(stat => `<div class="stat">${stat.label}: <span class="stat-value">${stat.value}</span></div>`).join('')}</div>`;
@@ -1160,40 +985,50 @@
                     projectsGrid.appendChild(card);
                 });
 
-                projectsSection.classList.add('show');
-                projectsGrid.classList.add('show');
-            }, 500);
-        }
+                container.appendChild(projectsGrid);
+                projectDisplayArea.appendChild(container);
 
-        function showMainGrid() {
-            if (mainGrid.style.display === 'grid') return;
+                // Animate open
+                setTimeout(() => {
+                    container.classList.add('open');
+                }, 10);
+            };
 
-            projectsSection.classList.remove('show');
-            projectsGrid.classList.remove('show');
-            backButton.classList.remove('show');
+            const closeOpenProjects = (callback) => {
+                const openContainer = projectDisplayArea.querySelector('.projects-container');
+                const activeCard = document.querySelector('.category-card.active');
 
-            // --- Update Breadcrumb ---
-            skillsItem.classList.add('active');
-            currentSection.style.display = 'none';
-            separator.style.display = 'none';
-            currentSection.classList.remove('active');
+                if (openContainer && activeCard) {
+                    activeCard.classList.remove('active');
+                    openContainer.classList.remove('open');
 
-            setTimeout(() => {
-                projectsGrid.innerHTML = '';
-                sectionTitle.textContent = 'SKILLS & EXPERTISE';
-                mainGrid.style.display = 'grid';
-                setTimeout(() => mainGrid.classList.remove('hidden'), 50); // Re-trigger fade in
-            }, 500);
-        }
+                    openContainer.addEventListener('transitionend', () => {
+                        projectDisplayArea.innerHTML = '';
+                        if (callback) callback();
+                    }, { once: true });
+                } else if (callback) {
+                    callback();
+                }
+            };
 
-        function navigateBack() {
-            showMainGrid();
-        }
+            const handleCategoryClick = (event) => {
+                const clickedCard = event.currentTarget;
+                const category = clickedCard.dataset.category;
+                const currentlyActiveCard = document.querySelector('.category-card.active');
 
-        // Make functions globally accessible
-        window.showProjects = showProjects;
-        window.showMainGrid = showMainGrid;
-        window.navigateBack = navigateBack;
+                if (currentlyActiveCard && currentlyActiveCard === clickedCard) {
+                    closeOpenProjects();
+                } else if (currentlyActiveCard) {
+                    closeOpenProjects(() => openProjectsFor(clickedCard, category));
+                } else {
+                    openProjectsFor(clickedCard, category);
+                }
+            };
+
+            categoryCards.forEach(card => {
+                card.addEventListener('click', handleCategoryClick);
+            });
+        });
 
     </script>
 </body>
